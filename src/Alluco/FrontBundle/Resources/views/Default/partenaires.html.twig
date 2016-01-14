@@ -1,0 +1,5 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_front_partenaires') }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}

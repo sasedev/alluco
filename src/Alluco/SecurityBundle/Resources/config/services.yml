@@ -1,0 +1,30 @@
+parameters:
+    Alluco.role_hierarchy.class: Alluco\DataBundle\Listener\RoleHierarchy
+    Alluco.login_success.class: Alluco\DataBundle\Listener\LoginSuccess
+    Alluco.activity.class: Alluco\DataBundle\Listener\Activity
+    lunetics_locale.allowed_locales_provider.class: Alluco\DataBundle\Listener\AllowedLocalesProvider
+
+services:
+#    alluco_security.example:
+#        class: Alluco\SecurityBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    
+    lunetics_locale.allowed_locales_provider:
+        class: "%lunetics_locale.allowed_locales_provider.class%"
+        arguments: ['@doctrine']
+
+    security.role_hierarchy:
+        class: "%Alluco.role_hierarchy.class%"
+        arguments: ['@doctrine']
+
+    Alluco.login_success:
+        class: "%Alluco.login_success.class%"
+        arguments: ['@doctrine']
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onLogin }
+
+    Alluco.activity:
+        class: "%Alluco.activity.class%"
+        arguments: ['@security.context', '@doctrine']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }

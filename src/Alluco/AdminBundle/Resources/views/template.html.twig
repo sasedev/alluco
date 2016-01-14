@@ -1,0 +1,236 @@
+{% extends 'AllucoResBundle::base.html.twig' %}
+{%if menu_active is not defined%}{%set menu_active=''%}{%endif%}
+{%if smenu_active is not defined%}{%set smenu_active=''%}{%endif%}
+{%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/theme/AdminLTE/AdminLTE.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/theme/AdminLTE/skins/_all-skins.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/theme/AdminLTE/skins/_all-skins.css')}}">
+{%endblock static_css%}
+{%block html_body%}
+<body class="skin-blue">
+    {%block html_body_content%}
+    <div class="wrapper">
+    {%block header%}
+    <header class="main-header">
+        <a href="{{ path('_front_homepage') }}" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
+            <img src="{{asset('bundles/allucores/images/logo_small.png')}}" alt="{{ sitename }}" class="icon">
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            {%block navbar_right%}
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu{% if menu_active=='profile'%} active{% endif %}">
+                        <a href="#" class="dropdown-toggle{% if menu_active=='profile'%} active{% endif %}" data-toggle="dropdown">
+                            {{ glyphIco('user') }}
+                            <span>{{render(controller('AllucoSecurityBundle:Security:whoami'))}} <i class="caret"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {%if app.user.avatar is not empty%}
+                            <li class="user-header bg-light-blue">
+                                <img src="{{asset('res/avatars/'~app.user.avatar)}}" class="img-responsive img-thumbnail img-circle" alt="{{app.user.fullName}}"/>
+                                <p>
+                                    <small>{{'User.lastLogin'|trans|raw}} :</small> {{app.user.lastLogin|localeDate('full')}} {{'_At'|trans}} {{app.user.lastLogin|localeDate('none', 'medium')}}
+                                </p>
+                            </li>
+                            {% endif %}
+                            <li class="user-footer">
+                                <div class="pull-left"><a href="{{path('_security_profile')}}" class="btn btn-default btn-flat">{{ 'Menu.profile'|trans }}</a></div>
+                                <div class="pull-right"><a href="{{path('_security_logout')}}" class="btn btn-default btn-flat">{{ 'Menu.logout'|trans }}</a></div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            {%endblock navbar_right%}
+        </nav>
+    </header>
+    {%endblock header%}
+        {%block leftside%}
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul class="sidebar-menu" id="side-menu1">
+                    <li{% if menu_active=='home'%} class="active"{% endif %}>
+                        <a href="{{ path('_admin_homepage') }}"> {{ faIco('dashboard') }} <span>{{ 'Menu.admin.home'|trans }}</span></a>
+                    </li>
+                    {%if is_granted('ROLE_SUPERSUPERADMIN')%}
+                    <li class="treeview{% if menu_active=='constantStr'%} active{% endif %}">
+                        <a href="#"> {{ faIco('gears') }} <span>{{ 'Menu.admin.constantStr'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_constantStr_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_constantStr_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='constantInt'%} active{% endif %}">
+                        <a href="#"> {{ faIco('gears') }} <span>{{ 'Menu.admin.constantInt'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_constantInt_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_constantInt_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='constantFloat'%} active{% endif %}">
+                        <a href="#"> {{ faIco('gears') }} <span>{{ 'Menu.admin.constantFloat'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_constantFloat_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_constantFloat_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='role'%} active{% endif %}">
+                        <a href="#"> {{ faIco('flash') }} <span>{{ 'Menu.admin.role'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_role_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_role_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {%if is_granted('ROLE_SUPERADMIN')%}
+                    <li class="treeview{% if menu_active=='lang'%} active{% endif %}">
+                        <a href="#"> {{ faIco('flag') }} <span>{{ 'Menu.admin.lang'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_lang_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_lang_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='translation'%} active{% endif %}">
+                        <a href="#"> {{ faIco('flag') }} <span>{{ 'Menu.admin.translation'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_translation_grid') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_translation_new') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='user'%} active{% endif %}">
+                        <a href="#"> {{ faIco('users') }} <span>{{ 'Menu.admin.user'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_user_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_user_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    <li class="treeview{% if menu_active=='job'%} active{% endif %}">
+                        <a href="#"> {{ faIco('building-o') }} <span>{{ 'Menu.admin.job'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_job_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_job_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='banner'%} active{% endif %}">
+                        <a href="#"> {{ faIco('camera-retro') }} <span>{{ 'Menu.admin.banner'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_banner_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_banner_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='staticpage'%} active{% endif %}">
+                        <a href="#"> {{ faIco('code') }} <span>{{ 'Menu.admin.staticpage'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_staticpage_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            {%if is_granted('ROLE_SUPERSUPERADMIN')%}
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_staticpage_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='sitenew'%} active{% endif %}">
+                        <a href="#"> {{ faIco('newspaper-o') }} <span>{{ 'Menu.admin.sitenew'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_sitenew_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_sitenew_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='contact'%} active{% endif %}">
+                        <a href="#"> {{ faIco('envelope-o') }} <span>{{ 'Menu.admin.contact'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_contact_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='product'%} active{% endif %}">
+                        <a href="#"> {{ faIco('archive') }} <span>{{ 'Menu.admin.product'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_product_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_product_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='productpic'%} active{% endif %}">
+                        <a href="#"> {{ faIco('picture-o') }} <span>{{ 'Menu.admin.productpic'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_productpic_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_productpic_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview{% if menu_active=='productdoc'%} active{% endif %}">
+                        <a href="#"> {{ faIco('file-o') }} <span>{{ 'Menu.admin.productdoc'|trans }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li{% if smenu_active=='list'%} class="active"{% endif %}><a href="{{ path('_admin_productdoc_list') }}">{{ faIco('angle-double-right') }} {{ 'Menu.list'|trans }}</a></li>
+                            <li{% if smenu_active=='add'%} class="active"{% endif %}><a href="{{ path('_admin_productdoc_addGet') }}">{{ faIco('angle-double-right') }} {{ 'Menu.add'|trans }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <br>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        {%endblock leftside%}
+        {%block rightside%}
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}{{sitename}}{%endif%}</h1>
+                <br>
+                {%block breadcrumb%}
+                <ol class="breadcrumb">
+                    <li class="active"><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+                </ol>
+                {%endblock breadcrumb%}
+            </section>
+            <!-- Main content -->
+            <section id="content" class="content">
+                <br>
+                {%include 'SasedevCommonsBootstrapBundle::flash.html.twig' with { 'close': true }%}
+                {%block content%}
+                {%endblock content%}
+            </section>
+        </div>
+        {%endblock rightside%}
+        {%block footer%}
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+              <b>Version</b> 2.0
+            </div>
+            <strong>Copyright &copy; {{ 'now'|date('Y') }} <a href="http://www.alluco.com">Alluco</a>.</strong> All rights reserved.
+          </footer>
+        {%endblock footer%}
+    </div>
+    {%endblock html_body_content%}
+    <script type="text/javascript">
+    <!--
+    {%block end1_dynamic_jstxt%}
+    {%endblock end1_dynamic_jstxt%}
+    -->
+    </script>
+    {%block end_static_js%} {{ parent() }}
+    <script type="text/javascript" src="{{asset('bundles/allucores/js/theme/AdminLTE/app.js')}}"></script>
+    {%endblock end_static_js%}
+    {%block end_dynamic_js%}
+        {%if end_javascripts is defined%}{%for js in end_javascripts%}
+    <script type="text/javascript" src="/{{js|raw}}"></script>
+       {%endfor%}{%endif%}
+    {%endblock end_dynamic_js%}
+    <script type="text/javascript">
+    <!--
+    {%block end2_dynamic_jstxt%}
+    {%endblock end2_dynamic_jstxt%}
+    -->
+    </script>
+    {%block endappend%}{%endblock endappend%}
+</body>
+{%endblock html_body%}
+

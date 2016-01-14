@@ -1,0 +1,469 @@
+{% extends 'AllucoResBundle::base.html.twig' %}
+{%if menu_active is not defined%}{%set menu_active=''%}{%endif%}
+{%if smenu_active is not defined%}{%set smenu_active=''%}{%endif%}
+{%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/theme/margo/style.css')}}">
+{%endblock static_css%}
+{%block end_static_js%} {{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/theme/margo/nivo-lightbox.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/theme/margo/jquery.nicescroll.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/theme/margo/script.js')}}"></script>
+{%endblock end_static_js%}
+{%block html_body_content%}
+<div id="container">
+
+
+        {% block header %}
+        <div class="hidden-header"></div>
+        <header class="clearfix">
+
+            {% block topbar %}
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ul class="contact-details">
+                                <li><a href="{{ 'site.global.mailto'|trans }}"><i class="fa fa-envelope-o"></i>{{ 'site.global.mail'|trans }}</a>
+                                </li>
+                                <li><a href="{{ 'site.global.phone1.call'|trans }}"><i class="fa fa-phone"></i> {{ 'site.global.phone1'|trans }}</a>
+                                </li>
+                                <li><a href="{{ 'site.global.fax.call'|trans }}"><i class="fa fa-fax"></i> {{ 'site.global.fax'|trans }}</a>
+                                </li>
+                                <li><a href="{{ 'site.global.phone2.call'|trans }}"><i class="fa fa-phone"></i> {{ 'site.global.phone2'|trans }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 dropdown">
+                            {{ locale_switcher() }}
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="social-list">
+                                <li>
+                                    <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="{{ 'facebook.url'|trans }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="{{ 'twitter.url'|trans }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                </li>
+								<li>
+									<a class="google itl-tooltip" data-placement="bottom" title="Google Plus" href="{{ 'googleplus.url'|trans }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+								</li>
+								<li>
+                                    <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" href="{{ 'linkedin.url'|trans }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                </li>
+								<li>
+									<a class="instgram itl-tooltip" data-placement="bottom" title="Instagram" href="{{ 'instagram.url'|trans }}" target="_blank"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a class="pinterest itl-tooltip" data-placement="bottom" title="Pinterest" href="{{ 'pinterest.url'|trans }}" target="_blank"><i class="fa fa-pinterest"></i></a>
+								</li>
+                                <li>
+                                    <a class="skype itl-tooltip" data-placement="bottom" title="Skype" href="{{ 'skype.url'|trans }}" target="_blank"><i class="fa fa-skype"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock topbar %}
+
+
+            <!-- Start  Logo & Naviagtion  -->
+            <div class="navbar navbar-default navbar-top bg-white">
+                <div class="container">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar navbar-default navbar-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Stat Toggle Nav Link For Mobiles -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <!-- End Toggle Nav Link For Mobiles -->
+                        <a class="navbar-brand" href="{{ path('_front_homepage') }}">
+                            <img alt="Alluco" src="{{asset('bundles/allucores/images/logo-top.jpg')}}">
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <!-- Stat Search -->
+                        <div class="search-side">
+                            <a href="#" class="show-search"><i class="fa fa-search"></i></a>
+                            <div class="search-form">
+                                <form autocomplete="off" role="search" method="get" class="searchform" action="{{ path('_front_productsearch') }}">
+                                    <input type="text" value="" name="q" id="q" placeholder="{{ 'placeholder.top.search'|trans }}...">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Search -->
+                        <!-- Start Navigation List -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a {% if menu_active=='home'%}class="active"{% endif %} href="{{ path('_front_homepage') }}">{{ 'menu.top.home'|trans }}</a>
+                            </li>
+                            <li>
+                                <a {% if menu_active=='product'%}class="active"{% endif %} href="{{ path('_front_productgroups') }}">{{ 'menu.top.products'|trans }}</a>
+                            </li>
+                            <li>
+                                <a {% if menu_active=='sitenews'%}class="active"{% endif %} href="{{ path('_front_sitenews') }}">{{ 'menu.top.sitenews'|trans }}</a>
+                            </li>
+                            <li>
+                                <a {% if menu_active=='docs'%}class="active"{% endif %} href="{{ path('_front_docs') }}">{{ 'menu.top.download'|trans }}</a>
+                            </li>
+                            {% if is_granted('ROLE_USER') %}
+                            <li>
+                                <a {% if menu_active=='profile'%}class="active"{% endif %} href="{{ path('_security_profile') }}">{{ 'menu.top.clientspace'|trans }}</a>
+                                <ul class="dropdown">
+                                    <li><a class="active" href="{{ path('_security_profile') }}">{{ 'menu.top.profile'|trans }}</a>
+                                    </li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('_admin_homepage') }}">{{ 'menu.top.admin'|trans }}</a>
+                                    </li>
+                                    {% endif %}
+                                    <li><a href="{{ path('_security_logout') }}">{{ 'menu.top.logout'|trans }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a {% if menu_active=='profile'%}class="active"{% endif %} href="{{ path('_security_login') }}">{{ 'menu.top.clientspace'|trans }}</a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a {% if menu_active=='quotation'%}class="active"{% endif %} href="{{ path('_front_quotation') }}">{{ 'menu.top.quotation'|trans }}</a>
+                            </li>
+                        </ul>
+                        <!-- End Navigation List -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Logo & Naviagtion -->
+
+        </header>
+        {% endblock header %}
+
+
+
+
+
+        {% block banner %}
+        {% if banners|length != 0 %}
+        <div id="home">
+            <!-- Carousel -->
+            <div id="main-slide" class="carousel slide" data-ride="carousel">
+
+                {% set i = 0 %}
+                <ol class="carousel-indicators">
+                {% for banner in banners %}
+                <li data-target="#main-slide" data-slide-to="{{ i }}"{% if i == 0 %} class="active"{% endif %}></li>
+                {%  set i = i+1 %}
+                {% endfor %}
+                </ol>
+                {% set i = 0 %}
+                <div class="carousel-inner">
+                    {% for banner in banners %}
+                    <div class="item {% if i == 0 %}active{% endif %}">
+                        <img class="img-responsive" src="/res/banners/{{ banner.filename }}" alt="{{ banner.altTrans }}" title="{{ banner.titleTrans }}">
+                    </div>
+                    {%  set i = i+1 %}
+                    {% endfor %}
+                </div>
+                <!-- Carousel inner end-->
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#main-slide" data-slide="prev">
+                    <span><i class="fa fa-angle-left"></i></span>
+                </a>
+                <a class="right carousel-control" href="#main-slide" data-slide="next">
+                    <span><i class="fa fa-angle-right"></i></span>
+                </a>
+            </div>
+            <!-- /carousel -->
+        </div>
+        {% endif %}
+        {% endblock banner %}
+
+        {% block breadcrumb %}
+        <div class="page-banner">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumbs">
+						    {%block breadcrumbcnt%}
+							<li class="active"><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ 'breadcrumb.homepage'|trans }}</a></li>
+							{%endblock breadcrumbcnt%}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endblock breadcrumb %}
+
+
+        {% block maincontainer %}
+		<div id="content">
+			<div class="container">
+			    {%block contenttop%}
+			    <div class="row sidebar-page">
+			        <div class="col-md-3 sidebar right-sidebar">
+			        {% block sidebar %}
+			            <div class="widget widget-categories">
+							<h4>{{ 'menu.left.links'|trans }} <span class="head-line"></span></h4>
+							<ul>
+                                <li>
+                                    <a href="{{ path('_front_homepage') }}">
+                                        {{ 'menu.left.home'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_contact') }}">
+                                        {{ 'menu.left.contactus'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_certificats') }}">
+                                        {{ 'menu.left.certifications'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_partenaires') }}">
+                                        {{ 'menu.left.partenaires'|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+						</div>
+
+						{% if news|length != 0 %}
+						<div class="widget widget-popular-posts">
+							<h4>{{ 'menu.left.sitenews'|trans }} <span class="head-line"></span></h4>
+							<ul>
+							    {% for sitenew in news %}
+								<li>
+								    {% if sitenew.thumb is not empty %}
+									<div class="widget-thumb">
+										<a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}"><img src="{{ (asset('res/news/')~sitenew.thumb)| imagine_filter('thumbSitenew')}}" alt="{{ sitenew.thumbAltTrans }}" title="{{ sitenew.thumbTitleTrans }}" /></a>
+									</div>
+									{% endif %}
+									<div class="widget-content">
+										<h5><a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}">{{ sitenew.pageTitleTrans }}</a></h5>
+										<span>{{ sitenew.dtCrea|localeDate('medium') }}</span>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+
+							    {% endfor %}
+							</ul>
+						</div>
+						{% endif %}
+			        {% endblock sidebar %}
+			        </div>
+			        {% block contentbody %}
+			        <div class="col-md-9 page-content">
+    					<h4 class="classic-title"><span>{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}{{sitename}}{%endif%}</span></h4>
+			            {% block content %}
+			            {{ staticpage.pageContentTrans|raw }}
+			            {% endblock content %}
+			        </div>
+			        {% endblock contentbody %}
+			    </div>
+			    {%endblock contenttop%}
+			</div>
+		</div>
+		{% endblock maincontainer %}
+
+
+
+
+        {% block footer %}
+        <!-- Start Footer Section -->
+        <footer>
+            <div class="container">
+                <div class="row footer-widgets">
+
+
+                    <div class="col-md-3 col-xs-12">
+                        <div class="footer-widget mail-subscribe-widget">
+                            <h4>{{ 'menu.bottom.links'|trans }}<span class="head-line"></span></h4>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('_front_homepage') }}">
+                                        {{ 'menu.footer.home'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_contact') }}">
+                                        {{ 'menu.footer.contact'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_certificats') }}">
+                                        {{ 'menu.footer.certificats'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_partenaires') }}">
+                                        {{ 'menu.footer.partenaires'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_sitenews') }}">
+                                        {{ 'menu.footer.sitenews'|trans }}
+                                    </a>
+                                </li>
+                                {% if is_granted('ROLE_USER') %}
+                                <li>
+                                    <a href="{{ path('_security_profile') }}">
+                                        {{ 'menu.footer.profile'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_security_logout') }}">
+                                        {{ 'menu.footer.logout'|trans }}
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="{{ path('_security_login') }}">
+                                        {{ 'menu.footer.login'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_security_register') }}">
+                                        {{ 'menu.footer.register'|trans }}
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12">
+                        <div class="footer-widget mail-subscribe-widget">
+                            <h4>{{ 'menu.bottom.ourproducts'|trans }}<span class="head-line"></span></h4>
+                            {% if groups | length != 0 %}
+                            <ul>
+                                {% for group in groups %}
+                                <li>
+                                    <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                                        {{ group.nameTrans }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                    <!-- Start Contact Widget -->
+                    <div class="col-md-3 col-xs-12">
+                        <div class="footer-widget contact-widget">
+                            <h3>{{ 'site.global.addr.moknine.title'|trans }}</h3>
+                            <br>
+                            <ul>
+                                <li><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ 'site.global.addr.moknine'|trans }}
+                                </li>
+                                <li><a href="{{ 'site.global.mailto'|trans }}"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp; {{ 'site.global.mail'|trans }}</a>
+                                </li>
+                                <li><a href="{{ 'site.global.phone1.call'|trans }}"><i class="fa fa-phone"></i>&nbsp;&nbsp; {{ 'site.global.phone1'|trans }}</a>
+                                </li>
+                                <li><a href="{{ 'site.global.fax.call'|trans }}"><i class="fa fa-fax"></i>&nbsp;&nbsp; {{ 'site.global.fax'|trans }}</a>
+                                </li>
+                            </ul>
+                            <br>
+                            <br>
+                            <h3>{{ 'site.global.addr.tunis.title'|trans }}</h3>
+                            <br>
+                            <ul>
+                                <li><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ 'site.global.addr.tunis'|trans }}
+                                </li>
+                                <li><a href="{{ 'site.global.phone2.call'|trans }}"><i class="fa fa-phone"></i>&nbsp;&nbsp; {{ 'site.global.phone2'|trans }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .col-md-3 -->
+                    <!-- End Contact Widget -->
+
+
+                    <!-- Start Subscribe & Social Links Widget -->
+                    <div class="col-md-3 col-xs-12">
+                        <div class="footer-widget social-widget">
+                            <h4><img alt="Alluco" src="{{asset('bundles/allucores/images/logo.png')}}"></h4>
+                            <br><br>
+                            <h4>{{ 'bottom.followus'|trans }}<span class="head-line"></span></h4>
+                            <ul class="social-icons">
+                                <li>
+                                    <a class="facebook itl-tooltip" data-placement="bottom" title="Facebook" href="{{ 'facebook.url'|trans }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a class="twitter itl-tooltip" data-placement="bottom" title="Twitter" href="{{ 'twitter.url'|trans }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                                </li>
+								<li>
+									<a class="google itl-tooltip" data-placement="bottom" title="Google Plus" href="{{ 'googleplus.url'|trans }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+								</li>
+								<li>
+                                    <a class="linkdin itl-tooltip" data-placement="bottom" title="Linkedin" href="{{ 'linkedin.url'|trans }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                </li>
+							</ul>
+							<ul class="social-icons">
+								<li>
+									<a class="instgram itl-tooltip" data-placement="bottom" title="Instagram" href="{{ 'instagram.url'|trans }}" target="_blank"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a class="pinterest itl-tooltip" data-placement="bottom" title="Pinterest" href="{{ 'pinterest.url'|trans }}" target="_blank"><i class="fa fa-pinterest"></i></a>
+								</li>
+                                <li>
+                                    <a class="skype itl-tooltip" data-placement="bottom" title="Skype" href="{{ 'skype.url'|trans }}" target="_blank"><i class="fa fa-skype"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- .col-md-3 -->
+                    <!-- End Subscribe & Social Links Widget -->
+
+
+                </div><!-- .row -->
+
+                <!-- Start Copyright -->
+                <div class="copyright-section">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>&nbsp; &nbsp; &nbsp; &copy; {{ 'now'|date('Y') }} Alluco.com -  All Rights Reserved <a href="http://www.alluco.com">Alluco</a> </p>
+                        </div><!-- .col-md-6 -->
+                        <div class="col-md-6">
+                            <ul class="footer-nav">
+                                <li><a href="{{ path('_front_contact') }}">{{ 'bottom.contactus'|trans }}</a>
+                                </li>
+                                <li>&nbsp;
+                                </li>
+                            </ul>
+                        </div><!-- .col-md-6 -->
+                    </div><!-- .row -->
+                </div>
+                <!-- End Copyright -->
+
+            </div>
+        </footer>
+        {% endblock footer %}
+
+
+    </div>
+    <!-- End Full Body Container -->
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+{%endblock html_body_content%}
+{%block end2_dynamic_jstxt%}
+  {{ parent() }}
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63054006-1', 'auto');
+  ga('send', 'pageview');
+{%endblock end2_dynamic_jstxt%}

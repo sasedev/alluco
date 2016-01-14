@@ -1,0 +1,134 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/chosen/1.2.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/chosen/1.2.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "nonbreaking save table contextmenu directionality", "template paste textcolor" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            menubar: false,
+            toolbar: "insertfile undo redo | styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | preview "
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+
+    $('#ContactForm_job').chosen({width: "100%", disable_search_threshold: 10});
+});
+{%endblock end2_dynamic_jstxt%}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_front_contact') }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block maincontainer %}
+		<iframe width="100%" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1864.2235752517465!2d10.931363000000003!3d35.63112100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130217011294613b%3A0x7c4c38f3eb5b9406!2sAlluco+Moknine!5e1!3m2!1sfr!2sus!4v1429533564130"></iframe>
+		<div id="content">
+			<div class="container">
+			    {%block contenttop%}
+			    <div class="row sidebar-page">
+			        <div class="col-md-3 sidebar right-sidebar">
+			        {% block sidebar %}
+			            <div class="widget widget-categories">
+							<h4>{{ 'menu.left.links'|trans }} <span class="head-line"></span></h4>
+							<ul>
+                                <li>
+                                    <a href="{{ path('_front_homepage') }}">
+                                        {{ 'menu.left.home'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_contact') }}">
+                                        {{ 'menu.left.contactus'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_certificats') }}">
+                                        {{ 'menu.left.certifications'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('_front_partenaires') }}">
+                                        {{ 'menu.left.partenaires'|trans }}
+                                    </a>
+                                </li>
+                            </ul>
+						</div>
+
+						{% if news|length != 0 %}
+						<div class="widget widget-popular-posts">
+							<h4>{{ 'menu.left.sitenews'|trans }} <span class="head-line"></span></h4>
+							<ul>
+							    {% for sitenew in news %}
+								<li>
+								    {% if sitenew.thumb is not empty %}
+									<div class="widget-thumb">
+										<a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}"><img src="{{ (asset('res/news/')~sitenew.thumb)| imagine_filter('thumbSitenew')}}" alt="{{ sitenew.thumbAltTrans }}" title="{{ sitenew.thumbTitleTrans }}" /></a>
+									</div>
+									{% endif %}
+									<div class="widget-content">
+										<h5><a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}">{{ sitenew.pageTitleTrans }}</a></h5>
+										<span>{{ sitenew.dtCrea|localeDate('medium') }}</span>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+
+							    {% endfor %}
+							</ul>
+						</div>
+						{% endif %}
+						<div class="widget widget-popular-posts">
+							<h4>{{ 'site.global.addr.tunis.title'|trans }} <span class="head-line"></span></h4>
+							<ul>
+							    <li><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ 'site.global.addr.tunis'|trans }}
+                                </li>
+                                <li><a href="{{ 'site.global.phone2.call'|trans }}"><i class="fa fa-phone"></i>&nbsp;&nbsp; {{ 'site.global.phone2'|trans }}</a>
+                                </li>
+							</ul>
+						</div>
+						<div>
+						    <iframe width="100%" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m13!1m11!1m3!1d860.3052685578093!2d10.18019338258404!3d36.90128039724526!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sfr!2sit!4v1404811797265" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+						</div>
+			        {% endblock sidebar %}
+			        </div>
+			        {% block contentbody %}
+			        <div class="col-md-9 page-content">
+                        <h4 class="classic-title"><span>{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}{{sitename}}{%endif%}</span></h4>
+			            {%include 'SasedevCommonsBootstrapBundle::flash.html.twig' with { 'close': false }%}
+                        {{form_start(ContactForm, {'method':'POST', 'action': path('_front_contact'), 'style': 'horizontal', 'attr': {'class': 'contact-form', 'role': 'form' } })}}
+                            {{form_row(ContactForm.firstName, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.lastName, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.email, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.phone, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.job, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.company, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.subject, {'label_col': 4, 'widget_col': 8 })}}
+                            {{form_row(ContactForm.msg, {'label_col': 4, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            {{form_row(ContactForm.captcha, {'label_col': 4, 'widget_col': 8 })}}
+                            <div class="form-group"><div class="col-lg-offset-4 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'action.btnSend'|trans|raw}}</button></div></div>
+                        {{form_end(ContactForm)}}
+			        </div>
+			        {% endblock contentbody %}
+			    </div>
+			    {%endblock contenttop%}
+			</div>
+		</div>
+{% endblock maincontainer %}

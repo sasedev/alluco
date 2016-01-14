@@ -1,0 +1,214 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code", "nonbreaking save table contextmenu directionality", "paste textcolor", "responsivefilemanager" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            toolbar: "insertfile undo redo | styleselect | fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | responsivefilemanager | preview ",
+            external_filemanager_path:"/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "/filemanager/plugin.min.js"},
+            content_css : "{{asset('bundles/allucores/css/theme/Bootstrap/3.3.4.css')}}, {{asset('bundles/allucores/css/theme/margo/style.css')}}"
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+
+    $("#SitenewUpdateThumbForm_thumb").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_sitenew_list') }}">{{faIco('newspaper-o')}} &nbsp; {{'Breadcrumb.admin.sitenew.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_sitenew_editGet', {'id': sitenew.id}) }}">{{glyphIco('edit')}} &nbsp; {{'Breadcrumb.admin.sitenew.edit'|trans({'%sitenew%': sitenew.pageTitle})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_sitenew_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+            <a href="{{ path('_admin_sitenew_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li {%if tabActive==1%} class="active"{%endif%}><a href="#overview" data-toggle="tab">{{'Sitenew.tab.overview'|trans|raw}}</a></li>
+                <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Sitenew.tab.edit'|trans|raw}}</a></li>
+                {% for sitenewTrans in sitenew.i18ns %}
+                <li {%if tabActive==sitenewTrans.lang.locale%} class="active"{%endif%}><a href="#{{ sitenewTrans.lang.locale }}" data-toggle="tab">{{'Sitenew.tab.trans'|trans({'%lang%': sitenewTrans.lang.name})|raw}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="overview">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'Sitenew.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'Sitenew.pageUrl'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenew.pageUrl}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenew.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.thumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{% if sitenew.thumb is not empty %}<a href="{{ asset('res/news/')~sitenew.thumb }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/news/')~sitenew.thumb)| imagine_filter('bigthumbBanner')}}" alt="{{ sitenew.thumbAlt }}" title="{{ sitenew.thumbTitle }}"></a>{% else %}{{ '_NA'|trans }}{% endif %}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.thumbAlt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.thumbAlt }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.thumbTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenew.thumbTitle }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenew.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{sitenew.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Sitenew.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenew.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{sitenew.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Sitenew.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(SitenewUpdateForm, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewUpdateForm.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateForm.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateForm.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateForm.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateForm.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateForm.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewUpdateForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Sitenew.tlabel.editThumb'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(SitenewUpdateThumbForm, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewUpdateThumbForm.thumb, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewUpdateThumbForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Sitenew.tlabel.editThumbInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(SitenewUpdateThumbInfoForm, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewUpdateThumbInfoForm.thumbAlt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewUpdateThumbInfoForm.thumbTitle, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewUpdateThumbInfoForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Sitenew.tlabel.editPageUrl'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(SitenewUpdatePageUrlForm, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewUpdatePageUrlForm.pageUrl, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewUpdatePageUrlForm)}}
+                        </div>
+                    </div>
+                </div>
+                {% for sitenewTrans in sitenew.i18ns %}
+                <div class="tab-pane fade{%if tabActive==sitenewTrans.lang.locale%} in active{%endif%}" id="{{ sitenewTrans.lang.locale }}">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'SitenewTrans.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenewTrans.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.thumbAlt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.thumbAlt }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.thumbTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ sitenewTrans.thumbTitle }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenewTrans.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{sitenew.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'SitenewTrans.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{sitenewTrans.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{sitenew.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'SitenewTrans.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set SitenewTransUpdateForm_loc = SitenewTransUpdateForm[sitenewTrans.lang.locale] %}
+                            {{form_start(SitenewTransUpdateForm_loc, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewTransUpdateForm_loc.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateForm_loc.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateForm_loc.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateForm_loc.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateForm_loc.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateForm_loc.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewTransUpdateForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'SitenewTrans.tlabel.editThumbInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set SitenewTransUpdateThumbInfoForm_loc = SitenewTransUpdateThumbInfoForm[sitenewTrans.lang.locale] %}
+                            {{form_start(SitenewTransUpdateThumbInfoForm_loc, {'method':'POST', 'action': path('_admin_sitenew_editPost', {'id': sitenew.id}), 'style': 'horizontal'})}}
+                            {{form_row(SitenewTransUpdateThumbInfoForm_loc.thumbAlt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(SitenewTransUpdateThumbInfoForm_loc.thumbTitle, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(SitenewTransUpdateThumbInfoForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

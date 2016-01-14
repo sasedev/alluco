@@ -1,0 +1,241 @@
+action: Action
+action.list: Liste
+action.add: Ajouter
+action.edit: Editer
+action.update: 'Mettre à jour'
+action.delete: Supprimer
+action.btnAdd: Ajouter
+action.btnEdit: Modifier
+action.btnUpload: Uploader
+action.btnDownload: Télécharger
+action.btnSelect: Selectionner
+action.btnCancel: Annuler
+action.btnSend: Envoyer
+action.btnLogin: Connexion
+action.btnRegister: Inscription
+action.btnLostpass: 'Mot de Passe Perdu'
+action.btnReset: Réinitialiser
+action.btnValidate: Valider
+action.btnOrder: Commander
+menu.list: Liste
+menu.add: Ajouter
+menu.logout: Déconnexion
+menu.profile: 'Mon Profil'
+menu.lostpassword: 'Mot de Passe perdu ?'
+menu.register: Inscription
+_at: à
+_yes: Oui
+_no: Non
+_na: 'Non Disponible'
+_none: Aucun
+options.choose: 'Choisissez une option'
+_mail.lostPassword.subject: '[Alluco.com] Procédure de réinitialisation de mot de passe'
+_mail.lostPassword.body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>[Alluco.com] a reçu un requête pour réinitialiser votre Mot de passe.<br><br>Pour réinitialiser votre Mot de passe [Alluco.com], veuiller cliquer sur le lien suivant <a href="%url%">%url%</a>.<br><br>Si vous n''êtes pas à l''origine de cette demande, Vous pouvez ignorer cette procédure.<br><br>Le lien fourni Expire après une heure.'
+_mail.genNewPassword.subject: '[Alluco.com] Votre nouveau mot de passe'
+_mail.genNewPassword.body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Votre Mot de passe [Alluco.com] a été réinitialisé avec succès!<br><br>Pour vous connecter en utilisant les paramètres suivants:<br><br>Identifiant : <b>%username%</b><br><br>Mot de passe: <b>%password%</b>'
+_security.username.placeholder: 'Veuillez entrer votre Identifiant'
+_security.password.placeholder: 'Veuillez entrer votre Mot de passe'
+'Bad credentials': '<b>Identifiant</b> ou <b>Mot de Passe</b> Erroné.'
+_security.register.ok: 'le Compte  "<b>%username%</b>" a été ajouté avec succès'
+_security.register.already: 'le Compte  "<b>%username%</b>" existe déjà'
+_security.lostPassword: 'Veuillez entrer votre <strong>Identifiant</strong> pour recevoir un lien de réinitalisation par Email'
+_security.lostPassword.notfound: 'Compte inconnu "<b>%username%</b>"'
+_security.lostPassword.alreadySent: 'Ce compte a déjà une procédure de réinitialisation de mot de passe en Cours!<br>Veuillez consulter votre Boite Email.'
+_security.lostPassword.mail.newpassSent: 'Un email contenant le lien de réinitalisation a été envoyé à l''adresse suivante "<b>%mail%</b>"'
+_security.genNewPassword.errorparams1: 'Compte Inconnu.'
+_security.genNewPassword.errorparams2: 'Lien Expiré.'
+_security.genNewPassword.errorparams3: 'Code Invalide.'
+_security.genNewPassword.errorparams4: 'Lien Invalide.'
+_security.genNewPassword.ok: 'Un nouveau mot de passe a été généré et vous a été envoyé par Mail'
+profile.fullName: 'Nom Complet'
+profile.username: Identifiant
+profile.email: Email
+profile.logins: 'Nbr de Connexions'
+profile.lastLogin: 'Dernière Connexion'
+profile.avatar: Avatar
+profile.lockout: Verrouillage
+profile.lockout.1: 'Compte Actif'
+profile.lockout.2: 'Compte Verrouillé'
+profile.preferedLang: 'Paramètre de Langue'
+profile.sexe: Civilité
+profile.sexe.1: Mlle
+profile.sexe.2: Mme
+profile.sexe.3: Mr
+profile.userType: Type
+profile.userType.1: Particulier
+profile.userType.2: Société
+profile.company: Société
+profile.fisc: 'Matricule Fiscale'
+profile.job: Profession
+profile.otherInfos: 'Informations Complémentaires'
+profile.firstName: Prénom
+profile.lastName: Nom
+profile.birthday: 'Date de Naissance'
+profile.streetNum: 'N° de Rue'
+profile.address: Adresse
+profile.address2: 'Adresse (bis)'
+profile.town: Ville
+profile.zipCode: 'Code Postal'
+profile.country: Pays
+profile.phone: 'Tel Fixe'
+profile.mobile: 'Tel Mobile'
+profile.fax: 'Fax'
+profile.userRoles: Privilèges
+profile.dtCrea: 'Date d''ajout'
+profile.dtUpdate: 'Date de modification'
+profile.password.label: 'Mot de passe :'
+profile.rememberme.label: 'Se souvenir de moi'
+profile.avatar.label: 'Avatar :'
+profile.fullName.label: 'Nom Complet :'
+profile.username.label: 'Identifiant :'
+profile.email.label: 'Email :'
+profile.clearPassword.label: 'Mot de passe :'
+profile.captcha.label: 'Code Anti-Robots :'
+profile.lockout.label: 'Verrouillage :'
+profile.lockout.choice.1: Activer
+profile.lockout.choice.2: Verrouiller
+profile.preferedLang.label: 'Paramètre de Langue :'
+profile.sexe.label: 'Civilité :'
+profile.sexe.choice.1: Mlle
+profile.sexe.choice.2: Mme
+profile.sexe.choice.3: Mr
+profile.userType.label: 'Type :'
+profile.userType.choice.1: Particulier
+profile.userType.choice.2: Société
+profile.company.label: 'Société :'
+profile.fisc.label: 'Matricule Fiscale :'
+profile.job.label: 'Profession :'
+profile.firstName.label: 'Prénom :'
+profile.lastName.label: 'Nom :'
+profile.birthday.label: 'Date de Naissance :'
+profile.streetNum.label: 'N° de Rue :'
+profile.address.label: 'Adresse :'
+profile.address2.label: 'Adresse (bis) :'
+profile.town.label: 'Ville :'
+profile.zipCode.label: 'Code Postal :'
+profile.country.label: 'Pays :'
+profile.phone.label: 'Tel Fixe :'
+profile.mobile.label: 'Tel Mobile :'
+profile.fax.label: 'Fax :'
+profile.userRoles.label: 'Privilèges :'
+profile.oldPassword.label: 'Ancien Mot de passe :'
+profile.newPassword.first: 'Nouveau Mot de passe :'
+profile.newPassword.second: 'Confirmation Mot de passe :'
+profile.otherInfos.label: 'Informations Complémentaires :'
+profile.tab.overview: Détails
+profile.tab.edit: Edition
+profile.tab.quotation: Devis
+profile.tlabel.overview: 'Aperçu des détails de mon Profil'
+profile.tlabel.editAvatar: 'Modification de mon Avatar'
+profile.tlabel.editAvatar.crop: 'Selectionner la partie visible'
+profile.tlabel.editProfile: 'Modification des détails de mon Profil'
+profile.tlabel.editPreferedLang: 'Modification du Paramètre de Langue'
+profile.tlabel.editEmail: 'Modification de mon Email'
+profile.tlabel.editPassword: 'Modification de mon Mot de passe'
+profile.tlabel.editJob: 'Modification de mon Emploi'
+profile.tlabel.quotation: 'Demandes de Devis'
+profile.edit.success: 'Succès de la modification de votre Profile'
+profile.edit.failure: 'Echec de la modification de votre Profile'
+site.global.mail: info@alluco.com
+site.global.mailto: 'mailto:info@alluco.com'
+site.global.phone1: '(+216) 73 416 300'
+site.global.phone1.call: 'call:+216.73416300'
+site.global.fax.call: 'call:+216.73416317'
+site.global.fax: '(+216) 73 416 317'
+site.global.phone2.call: 'call:+216.71757228'
+site.global.phone2: '(+216) 71 757 228'
+facebook.url: 'https://www.facebook.com/profile.php?id=100004326737433'
+twitter.url: 'http://www.Twitter.com'
+linkedin.url: 'http://www.Linkedin.com'
+skype.url: 'http://www.skype.com'
+bottom.followus: Suivez-nous
+bottom.contactus: Contactez-nous
+site.global.addr.moknine.title: 'Show Room Moknine'
+site.global.addr.moknine: 'ZI BP 47 5050 Moknine Tunisie'
+site.global.addr.tunis.title: 'Show Room Tunis'
+site.global.addr.tunis: 'Rte de Raoued Km 4.5 Jaafer 1'
+menu.ourproducts: 'Nos Produits'
+menu.bottom.links: Liens
+menu.bottom.ourproducts: 'Nos Produits'
+menu.footer.home: Présentation
+menu.footer.contact: Contactez-nous
+menu.footer.certificats: 'Nos Certifications'
+menu.footer.partenaires: 'Nos Partenaires'
+menu.footer.sitenews: Actualité
+menu.footer.profile: 'Mon Profil'
+menu.footer.logout: Déconnexion
+menu.footer.login: Connexion
+menu.footer.register: Inscription
+menu.top.home: Accueil
+menu.top.products: Produits
+menu.top.sitenews: Actualité
+menu.top.download: Téléchargements
+menu.top.clientspace: 'Espace Client'
+menu.top.profile: 'Mon Profil'
+menu.top.admin: Admin
+menu.top.logout: Déconnexion
+menu.top.quotation: 'Devis en ligne'
+menu.left.links: Liens
+menu.left.home: Présentation
+menu.left.contactus: Contactez-nous
+menu.left.certifications: 'Nos certifications'
+menu.left.partenaires: 'Nos Partenaires'
+menu.left.sitenews: Actualité
+menu.left.products: 'Nos Produits'
+placeholder.top.search: Rechercher
+product.childs.title: Produits
+product.description.tab: Description
+product.description.title: 'Description du Produit'
+product.docs.title: 'Documents du Produit'
+product.pics.tab: Gallerie
+product.pics.title: 'Gallerie d''images'
+contact.firstName.label: 'Prénom :'
+contact.lastName.label: 'Nom :'
+contact.email.label: 'Email :'
+contact.phone.label: 'Tél :'
+contact.job.label: 'Profession :'
+contact.company.label: 'Entreprise :'
+contact.subject.label: 'Objet :'
+contact.msg.label: 'Message :'
+contact.captcha.label: 'Code anti-robot :'
+contact.send.success: 'Votre Message a été envoyé avec succès'
+contact.send.failure: 'Une erreur s''est produite lors de la tentative d''envoie de Votre Message'
+
+_meter: Mètre
+Quotation.id: 'N°'
+Quotation.dtCrea: 'Date d''ajout'
+Quotation.form1.error: 'les valeurs entrées sont incorrectes'
+Quotation.form1.ok: 'Veuillez choisir les accessoires correspondants à votre demande de devis'
+Quotation.form2.error: 'les valeurs entrées sont incorrectes'
+Quotation.form2.ok: 'Votre demande de devis a été correctement enregistrée et sera traitée dans les plus brefs délais'
+Quotation.notfound: Aucune demande de devis trouvée
+Quotation.requirements: 'Liste des besoins'
+Quotation.requirements.ref: 'Réference / Nom de produit'
+Quotation.requirements.qte: 'Quantité'
+Quotation.requirements.dim: 'Dimensions (mètre)'
+Quotation.requirements.nbrb: 'Nombre de barre (6 mètres)'
+Quotation.height.label: 'Hauteur :'
+Quotation.widthLR.label: 'Largeur coté gauche/droit'
+Quotation.widthC.label: 'Largeur coté centre'
+Quotation.prof.label: 'Nombre de profilé'
+Quotation.f50.entervaluescm: 'Entrer les valeurs en centimètres'
+Quotation.f50.width.label: 'Largeur du Gardes Corps'
+Quotation.f50.height.label: 'Hauteur du Gardes Corps'
+Quotation.f50.prof.title: 'Profilé'
+Quotation.f50.accessories.title: 'Accessoires'
+Quotation.f50AL.profil.1: 'F50-200 Main Courante (600Cm)'
+Quotation.f50AL.profil.2: 'F50-100 Colonne'
+Quotation.f50AL.profil.3.1: 'F50-300 Profilé (600Cm)'
+Quotation.f50AL.profil.3.2: 'F50-301 Profilé (600Cm)'
+Quotation.f50AL.access.1.1: '4112 pied de support de poteau F50-100'
+Quotation.f50AL.access.1.2: '4121 pied de support de poteau F50-100'
+Quotation.f50AL.access.2: '4314 support main courante'
+Quotation.f50AL.access.3: '4312 jonction de poteau F50-100+profilé'
+Quotation.f50AL.access.4.1: '4228 90° jonction de profilé'
+Quotation.f50AL.access.4.2: '4229 135° jonction de profilé'
+Quotation.f50AL.access.4.3: '4302 jonction coudée de profilé'
+Quotation.f50AL.access.5: '4329 jonction réglable de main courant'
+Quotation.f50AL.access.6.1: '4438 Bouchon de profilé F50-300'
+Quotation.f50AL.access.6.2: '4435 Bouchon de profilé F50-301'
+Quotation.f50AL.access.7.1: '4509Z Couvre joint de main courante avec bouchon'
+Quotation.f50AL.access.7.2: '4434 Bouchon de main courante'

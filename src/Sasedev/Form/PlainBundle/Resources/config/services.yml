@@ -1,0 +1,8 @@
+parameters:
+    sasedev_form_plain.form.type.plain_text.class: Sasedev\Form\PlainBundle\Form\Type\PlainTextType
+
+services:
+    sasedev_form_plain.form.type.plain_text:
+        class: %sasedev_form_plain.form.type.plain_text.class%
+        tags:
+            - { name: form.type, alias: plain_text }

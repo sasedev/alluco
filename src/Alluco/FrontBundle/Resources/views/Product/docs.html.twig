@@ -1,0 +1,48 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_front_docs') }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block sidebar %}
+<div class="widget widget-categories">
+    <h4>{{ 'menu.left.products'|trans }}<span class="head-line"></span></h4>
+    {% if groups | length != 0 %}
+    <ul id="expList">
+        {% for group in groups %}
+        <li>
+            <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                {{ group.name }}
+            </a>
+            {% if group.childs | length != 0 %}
+                {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group })) }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{{ parent() }}
+{% endblock sidebar %}
+{%block content%}
+
+{% set groupname = '' %}
+{% set oldgroupname = '' %}
+{% for doc in docs %}
+<a href="{{ path('_front_docdownload', {'docid': doc.id}) }}">{{ faIco('download fa-3x') }} &nbsp; &nbsp; {{ doc.originalName }}
+            {% if doc.titleTrans is not empty %} - {{ doc.titleTrans }}{% endif %} - ({%if doc.size<1024%}
+                                    {{doc.size}} o
+                                {%elseif doc.size<(1024*1024)%}
+                                    {{'%.2f'|format(doc.size/1024)}} Ko
+                                {%elseif doc.size<(1024*1024*1024)%}
+                                    {{'%.2f'|format(doc.size/1024/1024)}} Mo
+                                {%else%}
+                                    {{'%.2f'|format(doc.size/1024/1024/1024)}} Go
+                                {% endif %})</a> &nbsp; &mdash; &nbsp; <a href="{{ path('_front_products', {'group': doc.product.pageUrlFull}) }}"><b>{{ doc.product.nameTrans }}</b></a>
+            <hr>
+            <br>
+{% endfor %}
+
+
+
+{%endblock content%}

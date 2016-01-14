@@ -1,0 +1,53 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/lexiktranslation/css/translation.css') }}">
+{%endblock static_css%}
+{%block end_static_js%} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/allucores/js/angularjs/1.3.15.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.js') }}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+var translationCfg = {
+            locales: {{ locales | json_encode | raw }},
+            inputType: '{{ inputType }}',
+            url: {
+                list: '{{ path('lexik_translation_list') }}',
+                update: '{{ path('lexik_translation_update', {'id': '-id-'}) }}',
+                invalidateCache: '{{ path('lexik_translation_invalidate_cache') }}'
+            },
+            label: {
+                hideCol: '{{ 'translations.show_hide_columns'|trans({}, 'LexikTranslationBundle') }}',
+                invalidateCache: '{{ 'translations.invalidate_cache'|trans({}, 'LexikTranslationBundle') }}',
+                saveRow: '{{ 'translations.save_row'|trans({}, 'LexikTranslationBundle') }}',
+                domain: '{{ 'translations.domain'|trans({}, 'LexikTranslationBundle') }}',
+                key: '{{ 'translations.key'|trans({}, 'LexikTranslationBundle') }}',
+                save: '{{ 'translations.save'|trans({}, 'LexikTranslationBundle') }}',
+                successMsg: '{{ 'translations.succesfully_updated'|trans({}, 'LexikTranslationBundle') }}',
+                errorMsg: '{{ 'translations.update_failed'|trans({}, 'LexikTranslationBundle') }}'
+            }
+        };
+{%endblock end2_dynamic_jstxt%}
+{%block endappend%}
+<script src="{{ asset('bundles/allucores/js/theme/AdminLTE/translation.js') }}"></script>
+{%endblock endappend%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_translation_grid') }}">{{faIco('flag')}} &nbsp; {{'Breadcrumb.admin.translation.list'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_translation_new') }}" role="button" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'translations.new_translation'|trans({}, 'LexikTranslationBundle') }}</a>
+        </div>
+        <div class="box">
+            <div class="box-body">
+                {% include 'LexikTranslationBundle:Translation:_ngGrid.html.twig' %}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

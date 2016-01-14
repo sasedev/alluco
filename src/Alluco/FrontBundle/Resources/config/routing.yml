@@ -1,0 +1,161 @@
+_front_homepage:
+    path:     /
+    defaults: { _controller: "AllucoFrontBundle:Default:index" }
+    
+vfs_tmp_files:
+    pattern:  /tmpVfs{file}
+    defaults: { _controller: "AllucoFrontBundle:Vfs:tempfile", file: null }
+    requirements:
+        file:  ".*"
+
+vfs_files:
+    pattern:  /Vfs{file}
+    defaults: { _controller: "AllucoFrontBundle:Vfs:file", file: null }
+    requirements:
+        file:  ".*"
+    
+_front_certificats:
+    path:     /certificats
+    defaults: { _controller: "AllucoFrontBundle:Default:certificats" }
+    
+_front_partenaires:
+    path:     /partenaires
+    defaults: { _controller: "AllucoFrontBundle:Default:partenaires" }
+    
+_front_sitemap:
+    path:     /sitemap
+    defaults: { _controller: "AllucoFrontBundle:Default:sitemap" }
+    
+_front_contact:
+    path:     /contact
+    defaults: { _controller: "AllucoFrontBundle:Contact:index" }
+    
+_front_sitenews:
+    path:     /news/{page}
+    defaults: { _controller: "AllucoFrontBundle:Sitenews:list", page: 1 }
+    requirements:
+        page:  \d+
+
+_front_sitenew:
+    path:     /news/show/{pageUrl}
+    defaults: { _controller: "AllucoFrontBundle:Sitenews:show" }
+    
+_front_productgroups:
+    path:     /prods
+    defaults: { _controller: "AllucoFrontBundle:Product:list" }
+    
+_front_products:
+    path:     /prods/{group}
+    defaults: { _controller: "AllucoFrontBundle:Product:show" }
+    requirements:
+        group:  ".*"
+    
+_front_productsearch:
+    path:     /search/{page}
+    defaults: { _controller: "AllucoFrontBundle:Product:search", page: 1 }
+    requirements:
+        page:  \d+
+    
+_front_docs:
+    path:     /docs
+    defaults: { _controller: "AllucoFrontBundle:Product:docs" }
+    
+_front_docdownload:
+    path:     /docDl/{docid}
+    defaults: { _controller: "AllucoFrontBundle:Product:download" }
+    requirements:
+        docid:  \d+
+    
+_front_quotation:
+    path:     /quotations
+    defaults: { _controller: "AllucoFrontBundle:Quotation:index" }
+    
+_front_quotationDl:
+    path:     /quotationDl/{id}
+    defaults: { _controller: "AllucoFrontBundle:Quotation:download" }
+    requirements:
+        id:  \d+
+    
+_front_quotation_f50AL:
+    path:     /quotation/F50_Accord_L
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50AL" }
+    
+_front_quotation_f50AU:
+    path:     /quotation/F50_Accord_U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50AU" }
+    
+_front_quotation_f50Aline:
+    path:     /quotation/F50_Accord_line
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50Aline" }
+    
+_front_quotation_f50HL:
+    path:     /quotation/F50_Horizon_L
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HL" }
+    
+_front_quotation_f50HU:
+    path:     /quotation/F50_Horizon_U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HU" }
+    
+_front_quotation_f50Hline:
+    path:     /quotation/F50_Horizon_line
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50Hline" }
+    
+_front_quotation_f50HQL:
+    path:     /quotation/F50_Horizon_Quattro_L
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HQL" }
+    
+_front_quotation_f50HQU:
+    path:     /quotation/F50_Horizon_Quattro_U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HQU" }
+    
+_front_quotation_f50HQline:
+    path:     /quotation/F50_Horizon_Quattro_line
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HQline" }
+    
+_front_quotation_f50SL:
+    path:     /quotation/F50_Square_L
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50SL" }
+    
+_front_quotation_f50SU:
+    path:     /quotation/F50_Square_U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50SU" }
+    
+_front_quotation_f50Sline:
+    path:     /quotation/F50_Square_line
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50Sline" }
+    
+_front_quotation_f50HL:
+    path:     /quotation/F50_Quattro_L
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HL" }
+    
+_front_quotation_f50HU:
+    path:     /quotation/F50_Quattro_U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50HU" }
+    
+_front_quotation_f50Hline:
+    path:     /quotation/F50_Quattro_line
+    defaults: { _controller: "AllucoFrontBundle:Quotation:f50Hline" }
+    
+_front_quotation_clA:
+    path:     /quotation/Crystal_line_A
+    defaults: { _controller: "AllucoFrontBundle:Quotation:clA" }
+    
+_front_quotation_clB:
+    path:     /quotation/Crystal_line_B
+    defaults: { _controller: "AllucoFrontBundle:Quotation:clB" }
+    
+_front_quotation_clD:
+    path:     /quotation/Crystal_line_D
+    defaults: { _controller: "AllucoFrontBundle:Quotation:clD" }
+    
+_front_quotation_clC2D:
+    path:     /quotation/Crystal_line_C2U
+    defaults: { _controller: "AllucoFrontBundle:Quotation:clC2D" }
+    
+_front_quotation_grid1:
+    path:     /quotation/Grid_applique
+    defaults: { _controller: "AllucoFrontBundle:Quotation:grid1" }
+    
+_front_quotation_grid2:
+    path:     /quotation/Grid_exterior_recessed
+    defaults: { _controller: "AllucoFrontBundle:Quotation:grid2" }

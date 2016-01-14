@@ -1,0 +1,48 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/chosen/1.2.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/chosen/1.2.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $("#ProductpicNewForm_filename").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+
+    $('#ProductpicNewForm_product').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_productpic_list') }}">{{faIco('picture-o')}} &nbsp; {{'Breadcrumb.admin.productpic.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_productpic_addGet') }}">{{glyphIco('plus')}} &nbsp; {{'Breadcrumb.admin.productpic.add'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_productpic_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'Productpic.tlabel.add'|trans|raw}}</h3>
+            </div>
+            <div class="box-body">
+                {{form_start(ProductpicNewForm, {'method':'POST', 'action': path('_admin_productpic_addPost'), 'style': 'horizontal'})}}
+                {{form_row(ProductpicNewForm.product, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(ProductpicNewForm.filename, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(ProductpicNewForm.alt, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(ProductpicNewForm.title, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(ProductpicNewForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnAdd'|trans|raw}}</button></div></div>
+                {{form_end(ProductpicNewForm)}}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

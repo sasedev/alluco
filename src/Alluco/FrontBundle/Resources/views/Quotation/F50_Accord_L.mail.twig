@@ -1,0 +1,142 @@
+{% extends 'AllucoResBundle::base.html.twig' %}
+{%block html_body_content%}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td><img class="img" alt="Alluco" src="{{asset('bundles/allucores/images/logo-top.jpg', null, true)}}" width="200"></td>
+                    <td>
+                        <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td class="text-right">{{'Quotation.id'|trans }} : </td>
+                                <td><b>{{quotation.id}}</b></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'Quotation.dtCrea'|trans }} : </td>
+                                <td><b>{{quotation.dtCrea|localeDate('full')}} {{'_at'|trans}} {{quotation.dtCrea|localeDate('none', 'medium')}}</b></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.username'|trans }} : </td>
+                                <td><b>{{user.username}}</b></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.email'|trans}} : </td>
+                                <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.fullName'|trans}} : </td>
+                                <td>{%if user.sexe is not null%}{{('profile.sexe.'~user.sexe)|trans|raw}}{%endif%} {{ user.fullname }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.job'|trans}} : </td>
+                                <td>{%if user.job is not null%}{{user.job.name}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.company'|trans}} : </td>
+                                <td>{%if user.company is not empty%}{{user.company}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.fisc'|trans}} : </td>
+                                <td>{%if user.fisc is not empty%}{{user.fisc}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.phone'|trans}} : </td>
+                                <td>{%if user.phone is not null%}{{user.phone}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.mobile'|trans}} : </td>
+                                <td>{%if user.mobile is not null%}{{user.mobile}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">{{'profile.fax'|trans}} : </td>
+                                <td>{%if user.fax is not null%}{{user.fax}}{%else%}{{bsLabelWarning('_NA'|trans|raw)}}{%endif%}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            <hr>
+            <h3>{{ 'breadcrumb.quotation.f50AL'|trans }}</h3>
+            <div>{{ 'Quotation.f50.height.label'|trans }} : {{ height }} {{ '_meter'|trans }}</div>
+            <div>{{ 'Quotation.f50.width.label'|trans }}: {{ width }} {{ '_meter'|trans }}</div>
+            <br>
+            <h4>{{ 'Quotation.requirements'|trans }} :</h4>
+            <h5>{{ 'Quotation.f50.prof.title'|trans }}</h5>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="55%">{{ 'Quotation.requirements.ref'|trans }}</th>
+                    <th width="15%">{{ 'Quotation.requirements.qte'|trans }}</th>
+                    <th width="15%">{{ 'Quotation.requirements.dim'|trans }}</th>
+                    <th width="15%">{{ 'Quotation.requirements.nbrb'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ profil1Name| trans }}</td>
+                    <td>{{ profil1Qte }}</td>
+                    <td>{{ profil1Dim }}</td>
+                    <td>{{ profil1Nb }}</td>
+                </tr>
+                <tr>
+                    <td>{{ profil2Name| trans }}</td>
+                    <td>{{ profil2Qte }}</td>
+                    <td>{{ profil2Dim }}</td>
+                    <td>{{ profil2Nb }}</td>
+                </tr>
+                <tr>
+                    <td>{{ ('Quotation.f50AL.profil.3.'~profil3Name)|trans }}</td>
+                    <td>{{ profil3Qte }}</td>
+                    <td>{{ profil3Dim }}</td>
+                    <td>{{ profil3Nb }}</td>
+                </tr>
+            </tbody>
+            </table>
+            <h5>{{ 'Quotation.f50.accessories.title'|trans }}</h5>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="55%">{{ 'Quotation.requirements.ref'|trans }}</th>
+                    <th width="45%">{{ 'Quotation.requirements.qte'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ ('Quotation.f50AL.access.1.'~access1Name)|trans }}</td>
+                    <td>{{ access1Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ access2Name| trans }}</td>
+                    <td>{{ access2Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ access3Name| trans }}</td>
+                    <td>{{ access3Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ ('Quotation.f50AL.access.4.'~access4Name)|trans }}</td>
+                    <td>{{ access4Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ access5Name| trans }}</td>
+                    <td>{{ access5Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ ('Quotation.f50AL.access.6.'~access6Name)|trans }}</td>
+                    <td>{{ access6Qte }}</td>
+                </tr>
+                <tr>
+                    <td>{{ ('Quotation.f50AL.access.7.'~access7Name)|trans }}</td>
+                    <td>{{ access7Qte }}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock html_body_content%}

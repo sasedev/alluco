@@ -1,0 +1,219 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{%block end_static_js%} {{ parent() }}
+{% if product.pics | length != 0 %}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/theme/margo/jssor.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/theme/margo/jssor.slider.js')}}"></script>
+{% endif %}
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+{% if product.pics | length != 0 %}
+$(function() {
+
+    var _SlideshowTransitions = [
+        //Fade Twins
+        { $Duration: 700, $Opacity: 2, $Brother: { $Duration: 1000, $Opacity: 2 } },
+        //Rotate Overlap
+        { $Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: { $Zoom: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 0.5 }, $Brother: { $Duration: 1200, $Zoom: 1, $Rotate: 1, $Easing: $JssorEasing$.$EaseSwing, $Opacity: 2, $Round: { $Rotate: 0.5 }, $Shift: 90 } },
+        //Switch
+        { $Duration: 1400, x: 0.25, $Zoom: 1.5, $Easing: { $Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1400, x: -0.25, $Zoom: 1.5, $Easing: { $Left: $JssorEasing$.$EaseInWave, $Zoom: $JssorEasing$.$EaseInSine }, $Opacity: 2, $ZIndex: -10 } },
+        //Rotate Relay
+        { $Duration: 1200, $Zoom: 11, $Rotate: 1, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 1 }, $ZIndex: -10, $Brother: { $Duration: 1200, $Zoom: 11, $Rotate: -1, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Round: { $Rotate: 1 }, $ZIndex: -10, $Shift: 600 } },
+        //Doors
+        { $Duration: 1500, x: 0.5, $Cols: 2, $ChessMode: { $Column: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutCubic }, $Opacity: 2, $Brother: { $Duration: 1500, $Opacity: 2 } },
+        //Rotate in+ out-
+        { $Duration: 1500, x: -0.3, y: 0.5, $Zoom: 1, $Rotate: 0.1, $During: { $Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4], $Zoom: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, $Zoom: 11, $Rotate: -0.5, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Shift: 200 } },
+        //Fly Twins
+        { $Duration: 1500, x: 0.3, $During: { $Left: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Outside: true, $Brother: { $Duration: 1000, x: -0.3, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+        //Rotate in- out+
+        { $Duration: 1500, $Zoom: 11, $Rotate: 0.5, $During: { $Left: [0.4, 0.6], $Top: [0.4, 0.6], $Rotate: [0.4, 0.6], $Zoom: [0.4, 0.6] }, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, $Zoom: 1, $Rotate: -0.5, $Easing: { $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Shift: 200 } },
+        //Rotate Axis up overlap
+        { $Duration: 1200, x: 0.25, y: 0.5, $Rotate: -0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1200, x: -0.1, y: -0.7, $Rotate: 0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2 } },
+        //Chess Replace TB
+        { $Duration: 1600, x: 1, $Rows: 2, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1600, x: -1, $Rows: 2, $ChessMode: { $Row: 3 }, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+        //Chess Replace LR
+        { $Duration: 1600, y: -1, $Cols: 2, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1600, y: 1, $Cols: 2, $ChessMode: { $Column: 12 }, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+        //Shift TB
+        { $Duration: 1200, y: 1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+        //Shift LR
+        { $Duration: 1200, x: 1, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $Brother: { $Duration: 1200, x: -1, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 } },
+        //Return TB
+        { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1200, y: -1, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Shift: -100 } },
+        //Return LR
+        { $Duration: 1200, x: 1, $Delay: 40, $Cols: 6, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: { $Left: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Brother: { $Duration: 1200, x: 1, $Delay: 40, $Cols: 6, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Easing: { $Top: $JssorEasing$.$EaseInOutQuart, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2, $ZIndex: -10, $Shift: -100 } },
+        //Rotate Axis down
+        { $Duration: 1500, x: -0.1, y: -0.7, $Rotate: 0.1, $During: { $Left: [0.6, 0.4], $Top: [0.6, 0.4], $Rotate: [0.6, 0.4] }, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2, $Brother: { $Duration: 1000, x: 0.2, y: 0.5, $Rotate: -0.1, $Easing: { $Left: $JssorEasing$.$EaseInQuad, $Top: $JssorEasing$.$EaseInQuad, $Opacity: $JssorEasing$.$EaseLinear, $Rotate: $JssorEasing$.$EaseInQuad }, $Opacity: 2 } },
+        //Extrude Replace
+        { $Duration: 1600, x: -0.2, $Delay: 40, $Cols: 12, $During: { $Left: [0.4, 0.6] }, $SlideOut: true, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 260, $Easing: { $Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad }, $Opacity: 2, $Outside: true, $Round: { $Top: 0.5 }, $Brother: { $Duration: 1000, x: 0.2, $Delay: 40, $Cols: 12, $Formation: $JssorSlideshowFormations$.$FormationStraight, $Assembly: 1028, $Easing: { $Left: $JssorEasing$.$EaseInOutExpo, $Opacity: $JssorEasing$.$EaseInOutQuad }, $Opacity: 2, $Round: { $Top: 0.5 } } }
+    ];
+    var options = {
+        $FillMode: 1,
+        $AutoPlay: true,
+        $AutoPlayInterval: 2500,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+        $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+            $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+            $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+            $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+            $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+        },
+        $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+            $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+            $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+            $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+            $SpacingX: 10,                                  //[Optional] Horizontal space between each item in pixel, default value is 0
+            $SpacingY: 10,                                  //[Optional] Vertical space between each item in pixel, default value is 0
+            $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+        },
+
+        $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+            $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+            $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+        }
+    };
+    var jssor_slider1 = new $JssorSlider$('slider_container', options);
+
+    //responsive code begin
+    //you can remove responsive code if you don't want the slider scales while window resizes
+    function ScaleSlider() {
+        var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+        if (parentWidth)
+            jssor_slider1.$ScaleWidth(Math.min(parentWidth, 1000));
+        else
+            window.setTimeout(ScaleSlider, 30);
+    }
+    ScaleSlider();
+
+    $(window).bind("load", ScaleSlider);
+    $(window).bind("resize", ScaleSlider);
+    $(window).bind("orientationchange", ScaleSlider);
+});
+{% endif %}
+  {{ parent() }}
+{%endblock end2_dynamic_jstxt%}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li><a href="{{ path('_front_productgroups') }}"> {{ rootprods.breadcrumbTrans }}</a></li>
+{{ render(controller('AllucoFrontBundle:Product:widgetBreadcrumb', { 'group': product , 'active': true})) }}
+{%endblock breadcrumbcnt%}
+{% block sidebar %}
+<div class="widget widget-categories">
+    <h4>{{ 'menu.left.products'|trans }}<span class="head-line"></span></h4>
+    {% if groups | length != 0 %}
+    <ul id="expList">
+        {% for group in groups %}
+        <li
+        {% if product.pageUrlFull starts with group.pageUrlFull  %}class="active"{% endif %}
+        >
+            <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                {{ group.nameTrans }}
+            </a>
+            {% if group.childs | length != 0 %}
+                {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group, 'current': product})) }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{{ parent() }}
+{% endblock sidebar %}
+{%block content%}
+    <div class="row">
+        <div class="col-12 col-xs-12 col-md-12">
+    {% if product.thumb is not empty %}
+            <a class="lightbox" data-lightbox-type="ajax" title="{{ product.nameTrans }} - {{ product.thumbTitleTrans }}" href="{{ (asset('res/prods/')~product.thumb)}}"><img class="img-thumbnail" src="{{ (asset('res/prods/')~product.thumb)| imagine_filter('thumbProd')}}" alt="{{ product.thumbAltTrans }}" title="{{ product.thumbTitleTrans }}"></a>
+            <br>
+            <br>
+    {% endif %}
+    {% if product.pageContentTrans is not empty %}
+            {{ product.pageContentTrans|raw }}
+            <br>
+            <br>
+    {% endif %}
+        </div>
+    </div>
+    {% if product.pics | length != 0 %}
+    <h4 class="classic-title"><span>{{ 'product.pics.title'|trans }}</span></h4>
+    <div class="row">
+        <div class="col-12 col-xs-12 col-md-12">
+            <div id="slider_container" class="Jssor_container">
+                <div u="loading" class="Jssor_loading">
+                    <div class="Jssor_loading0"></div>
+                    <div class="Jssor_loading1"></div>
+                </div>
+                <div u="slides" class="Jssor_slides">
+                    {% for pic in product.pics %}
+                    <div>
+                        <a class="lightbox" data-lightbox-gallery="gallery2" data-lightbox-type="ajax" title="{{ pic.titleTrans }}" href="{{ (asset('res/pics/')~pic.filename)}}">
+                            <img class="img" u="image" alt="{{ pic.altTrans }}" title="{{ pic.titleTrans }}" src="{{ (asset('res/pics/')~pic.filename)| imagine_filter('thumbPics')}}">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <style>
+
+                </style>
+                <div u="navigator" class="jssorb13" style="bottom: 16px; right: 6px;">
+                    <!-- bullet navigator item prototype -->
+                    <div u="prototype"></div>
+                </div>
+                <span u="arrowleft" class="jssora12l" style="top: 300px; left: 0px;"></span>
+                <span u="arrowright" class="jssora12r" style="top: 300px; right: 0px;"></span>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+    {% endif %}
+    {% if product.docs | length != 0 %}
+    <h4 class="classic-title"><span>{{ 'product.docs.title'|trans }}</span></h4>
+    <div class="row">
+        <div class="col-12 col-xs-12 col-md-12">
+            {% for doc in product.docs %}
+            <a href="{{ path('_front_docdownload', {'docid': doc.id}) }}">
+                {{ faIco('download fa-3x') }} &nbsp; &nbsp; {{ doc.originalName }}
+                {% if doc.titleTrans is not empty %} - {{ doc.titleTrans }}{% endif %} -
+                ({%if doc.size<1024%}
+                    {{doc.size}} o
+                {%elseif doc.size<(1024*1024)%}
+                    {{'%.2f'|format(doc.size/1024)}} Ko
+                {%elseif doc.size<(1024*1024*1024)%}
+                    {{'%.2f'|format(doc.size/1024/1024)}} Mo
+                {%else%}
+                    {{'%.2f'|format(doc.size/1024/1024/1024)}} Go
+                {% endif %})
+            </a>
+            <hr>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if product.childs | length != 0 %}
+    <br>
+    <br>
+    <h4 class="classic-title"><span>{{ 'product.childs.title'|trans }}</span></h4>
+    <div class="row">
+        {% for prod in product.childs %}
+        <div class="col-4 col-xs-12 col-md-4 service-boxed">
+        {% if prod.thumb is not empty %}
+        <br>
+        <h4><a href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}">{{ prod.nameTrans }}</a></h4>
+        <br>
+        <a href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}"><img class="img" src="{{ (asset('res/prods/')~prod.thumb)| imagine_filter('thumbProd')}}" alt="{{ prod.thumbAltTrans }}" title="{{ prod.thumbTitleTrans }}"></a>
+        {% else %}
+        <br>
+        <br>
+        <p><a class="btn-system btn-small border-btn" href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}">{{ prod.nameTrans }}</a></p>
+        {% endif %}
+        </div>
+        {% endfor %}
+
+    </div>
+    <br>
+    <br>
+    {% endif %}
+{%endblock content%}

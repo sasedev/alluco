@@ -1,0 +1,155 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $("#ProductdocUpdateContentForm_filename").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Documents", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_productdoc_list') }}">{{faIco('file-o')}} &nbsp; {{'Breadcrumb.admin.productdoc.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_productdoc_editGet', {'id': productdoc.id}) }}">{{glyphIco('edit')}} &nbsp; {{'Breadcrumb.admin.productdoc.edit'|trans({'%productdoc%': productdoc.filename})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_productdoc_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+            <a href="{{ path('_admin_productdoc_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li {%if tabActive==1%} class="active"{%endif%}><a href="#overview" data-toggle="tab">{{'Productdoc.tab.overview'|trans|raw}}</a></li>
+                <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Productdoc.tab.edit'|trans|raw}}</a></li>
+                {% for productdocTrans in productdoc.i18ns %}
+                <li {%if tabActive==productdocTrans.lang.locale%} class="active"{%endif%}><a href="#{{ productdocTrans.lang.locale }}" data-toggle="tab">{{'Productdoc.tab.trans'|trans({'%lang%': productdocTrans.lang.name})|raw}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="overview">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'Productdoc.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'Productdoc.product'|trans|raw}} :</div>
+                                <div class="col-lg-9"><a href="{{ path('_admin_product_editGet', {'id': productdoc.product.id}) }}">{{ productdoc.product.name }}</a>&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.originalName'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.originalName}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.filename'|trans|raw}} :</div>
+                                <div class="col-lg-9"><a href="{{ asset('res/docs/')~productdoc.filename }}" target="_blank">{{ productdoc.filename }}</a>&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.size'|trans|raw}} :</div>
+                                <div class="col-lg-9">{%if productdoc.size<1024%}
+                                    {{productdoc.size}} o
+                                {%elseif productdoc.size<(1024*1024)%}
+                                    {{'%.2f'|format(productdoc.size/1024)}} Ko
+                                {%elseif productdoc.size<(1024*1024*1024)%}
+                                    {{'%.2f'|format(productdoc.size/1024/1024)}} Mo
+                                {%else%}
+                                    {{'%.2f'|format(productdoc.size/1024/1024/1024)}} Go
+                                {% endif %}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.mimeType'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.mimeType}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.md5'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.md5}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.nbrDownloads'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.nbrDownloads}}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+
+                                <div class="col-lg-3 text-right">{{'Productdoc.title'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.title}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.rank'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productdoc.rank }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{productdoc.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Productdoc.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdoc.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{productdoc.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Productdoc.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductdocUpdateInfoForm, {'method':'POST', 'action': path('_admin_productdoc_editPost', {'id': productdoc.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductdocUpdateInfoForm.title, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductdocUpdateInfoForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Productdoc.tlabel.editContent'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductdocUpdateContentForm, {'method':'POST', 'action': path('_admin_productdoc_editPost', {'id': productdoc.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductdocUpdateContentForm.filename, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductdocUpdateContentForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Productdoc.tlabel.editRank'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductdocUpdateRankForm, {'method':'POST', 'action': path('_admin_productdoc_editPost', {'id': productdoc.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductdocUpdateRankForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductdocUpdateRankForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Productdoc.tlabel.editOriginalName'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductdocUpdateOriginalNameForm, {'method':'POST', 'action': path('_admin_productdoc_editPost', {'id': productdoc.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductdocUpdateOriginalNameForm.originalName, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductdocUpdateOriginalNameForm)}}
+                        </div>
+                    </div>
+                </div>
+                {% for productdocTrans in productdoc.i18ns %}
+                <div class="tab-pane fade{%if tabActive==productdocTrans.lang.locale%} in active{%endif%}" id="{{ productdocTrans.lang.locale }}">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'ProductdocTrans.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'ProductdocTrans.title'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdocTrans.title}}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductdocTrans.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdocTrans.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{productdocTrans.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductdocTrans.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productdocTrans.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{productdocTrans.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'ProductdocTrans.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set ProductdocTransUpdateInfoForm_loc = ProductdocTransUpdateInfoForm[productdocTrans.lang.locale] %}
+                            {{form_start(ProductdocTransUpdateInfoForm_loc, {'method':'POST', 'action': path('_admin_productdoc_editPost', {'id': productdoc.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductdocTransUpdateInfoForm_loc.title, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductdocTransUpdateInfoForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

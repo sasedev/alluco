@@ -1,0 +1,870 @@
+_At: à
+_Yes: Oui
+_No: Non
+_NA: 'Non Disponible'
+_NONE: Aucun
+
+Action: Action
+Action.list: Liste
+Action.add: Ajouter
+Action.edit: Editer
+Action.update: 'Mettre à jour'
+Action.delete: Supprimer
+Action.btnAdd: Ajouter
+Action.btnEdit: Modifier
+Action.btnUpload: Uploader
+Action.btnDownload: Télécharger
+Action.btnSelect: Selectionner
+Action.btnCancel: Annuler
+Action.btnSend: Envoyer
+Action.btnLogin: Connexion
+Action.btnRegister: Inscription
+Action.btnLostpass: 'Mot de Passe Perdu'
+Action.btnReset: Réinitialiser
+Action.btnExcel: 'Export Excel'
+Action.choose: 'Choisissez une option'
+
+Menu.list: Liste
+Menu.add: Ajouter
+Menu.logout: Déconnexion
+Menu.profile: 'Mon Profil'
+Menu.admin.home: Admin
+Menu.admin.constantStr: 'Constantes (Texte)'
+Menu.admin.constantInt: 'Constantes (Entier)'
+Menu.admin.constantFloat: 'Constantes (Réel)'
+Menu.admin.lang: Langues
+Menu.admin.job: Professions
+Menu.admin.role: Privilèges
+Menu.admin.user: Utilisateurs
+Menu.admin.translation: Traductions
+Menu.admin.staticpage: 'Pages à URL Fixe'
+Menu.admin.banner: Bannières
+Menu.admin.sitenew: Actualités
+Menu.admin.contact: Contacts
+Menu.admin.product: Gamme de Produits
+Menu.admin.productpic: 'Galleries d''Images'
+Menu.admin.productdoc: 'Documents Produit'
+
+Breadcrumb.admin.home: Admin
+Breadcrumb.admin.constantStr.list: 'Constantes Chaîne de caractères'
+Breadcrumb.admin.constantStr.add: 'Ajouter Constante (Texte)'
+Breadcrumb.admin.constantStr.edit: 'Constante (Texte) <b>%constantStr%</b>'
+Breadcrumb.admin.constantInt.list: 'Liste des Constantes (Entier)'
+Breadcrumb.admin.constantInt.add: 'Ajouter Constante (Entier)'
+Breadcrumb.admin.constantInt.edit: 'Constante (Entier) <b>%constantInt%</b>'
+Breadcrumb.admin.constantFloat.list: 'Liste des Constantes (Réel)'
+Breadcrumb.admin.constantFloat.add: 'Ajouter Constante (Réel)'
+Breadcrumb.admin.constantFloat.edit: 'Constante (Réel) <b>%constantFloat%</b>'
+Breadcrumb.admin.lang.list: 'Liste des Langues'
+Breadcrumb.admin.lang.add: 'Ajouter Langue'
+Breadcrumb.admin.lang.edit: 'Langue <b>%lang%</b>'
+Breadcrumb.admin.job.list: 'Liste des Professions'
+Breadcrumb.admin.job.add: 'Ajouter Profession'
+Breadcrumb.admin.job.edit: 'Profession <b>%job%</b>'
+Breadcrumb.admin.role.list: 'Liste des Privilèges'
+Breadcrumb.admin.role.add: 'Ajouter Privilège'
+Breadcrumb.admin.role.edit: 'Privilège <b>%role%</b>'
+Breadcrumb.admin.user.list: 'Liste des Utilisateurs'
+Breadcrumb.admin.user.add: 'Ajouter Utilisateur'
+Breadcrumb.admin.user.edit: 'Utilisateur <b>%user%</b>'
+Breadcrumb.admin.translation.list: 'Liste des Traductions'
+Breadcrumb.admin.translation.add: 'Ajouter une Traduction'
+Breadcrumb.admin.translation.edit: 'Traduction <b>%translation%</b>'
+Breadcrumb.admin.staticpage.list: 'Liste des Pages Statiques'
+Breadcrumb.admin.staticpage.add: 'Ajouter Page à URL Fixe'
+Breadcrumb.admin.staticpage.edit: 'Page à URL Fixe <b>%staticpage%</b>'
+Breadcrumb.admin.banner.list: 'Liste des Bannières'
+Breadcrumb.admin.banner.add: 'Ajouter Bannière'
+Breadcrumb.admin.banner.edit: 'Bannière <b>%banner%</b>'
+Breadcrumb.admin.sitenew.list: 'Liste des Actualités'
+Breadcrumb.admin.sitenew.add: 'Ajouter Actualité'
+Breadcrumb.admin.sitenew.edit: 'Actualité <b>%sitenew%</b>'
+Breadcrumb.admin.contact.list: 'Liste des Messages de Contact'
+Breadcrumb.admin.contact.edit: 'Messages de Contact N° <b>%contact%</b>'
+Breadcrumb.admin.product.list: 'Liste des Produits'
+Breadcrumb.admin.product.add: 'Ajouter Produit'
+Breadcrumb.admin.product.edit: 'Produit <b>%product%</b>'
+Breadcrumb.admin.productpic.list: 'Liste des Images de Gamme de Produits'
+Breadcrumb.admin.productpic.add: 'Ajouter Image de Gamme de Produit'
+Breadcrumb.admin.productpic.edit: 'Image de Gamme de Produit <b>%productpic%</b>'
+Breadcrumb.admin.productdoc.list: 'Liste des Documents de Gamme de Produits'
+Breadcrumb.admin.productdoc.add: 'Ajouter Document de Gamme de Produit'
+Breadcrumb.admin.productdoc.edit: 'Document de Gamme de Produit <b>%productdoc%</b>'
+
+Pagetitle.admin.homepage: Admin
+Pagetitle.admin.homepage.txt: Admin
+Pagetitle.constantStr.list: 'CST Chaîne'
+Pagetitle.constantStr.list.txt: 'CST Chaîne'
+Pagetitle.constantStr.add: 'Ajouter Constante (Texte)'
+Pagetitle.constantStr.add.txt: 'Ajouter Constante (Texte)'
+Pagetitle.constantStr.edit: 'Edition Constante (Texte) <b>%constantStr%</b>'
+Pagetitle.constantStr.edit.txt: 'Edition Constante (Texte) "%constantStr%"'
+Pagetitle.constantInt.list: 'Liste des Constantes (Entier)'
+Pagetitle.constantInt.list.txt: 'Liste des des Constantes (Entier)'
+Pagetitle.constantInt.add: 'Ajouter Constante (Entier)'
+Pagetitle.constantInt.add.txt: 'Ajouter Constante (Entier)'
+Pagetitle.constantInt.edit: 'Edition Constante (Entier) <b>%constantInt%</b>'
+Pagetitle.constantInt.edit.txt: 'Edition Constante (Entier) "%constantInt%"'
+Pagetitle.constantFloat.list: 'Liste des Constantes (Réel)'
+Pagetitle.constantFloat.list.txt: 'Liste des des Constantes (Réel)'
+Pagetitle.constantFloat.add: 'Ajouter Constante (Réel)'
+Pagetitle.constantFloat.add.txt: 'Ajouter Constante (Réel)'
+Pagetitle.constantFloat.edit: 'Edition Constante (Réel) <b>%constantFloat%</b>'
+Pagetitle.constantFloat.edit.txt: 'Edition Constante (Réel) "%constantFloat%"'
+Pagetitle.lang.list: 'Liste des Langues'
+Pagetitle.lang.list.txt: 'Liste des des Langues'
+Pagetitle.lang.add: 'Ajouter Langue'
+Pagetitle.lang.add.txt: 'Ajouter Langue'
+Pagetitle.lang.edit: 'Edition Langue <b>%lang%</b>'
+Pagetitle.lang.edit.txt: 'Edition Langue "%lang%"'
+Pagetitle.job.list: 'Liste des Professions'
+Pagetitle.job.list.txt: 'Liste des des Professions'
+Pagetitle.job.add: 'Ajouter Profession'
+Pagetitle.job.add.txt: 'Ajouter Profession'
+Pagetitle.job.edit: 'Edition Profession <b>%job%</b>'
+Pagetitle.job.edit.txt: 'Edition Profession "%job%"'
+Pagetitle.role.list: 'Liste des Privilèges'
+Pagetitle.role.list.txt: 'Liste des des Privilèges'
+Pagetitle.role.add: 'Ajouter Privilège'
+Pagetitle.role.add.txt: 'Ajouter Privilège'
+Pagetitle.role.edit: 'Edition Privilège <b>%role%</b>'
+Pagetitle.role.edit.txt: 'Edition Privilège "%role%"'
+Pagetitle.user.list: 'Liste des Utilisateurs'
+Pagetitle.user.list.txt: 'Liste des des Utilisateurs'
+Pagetitle.user.add: 'Ajouter Utilisateur'
+Pagetitle.user.add.txt: 'Ajouter Utilisateur'
+Pagetitle.user.edit: 'Edition Utilisateur <b>%user%</b>'
+Pagetitle.user.edit.txt: 'Edition Utilisateur "%user%"'
+Pagetitle.translation.list: 'Liste des Traductions'
+Pagetitle.translation.list.txt: 'Liste des des Traductions'
+Pagetitle.translation.add: 'Ajouter une Traduction'
+Pagetitle.translation.add.txt: 'Ajouter une Traduction'
+Pagetitle.staticpage.list: 'Liste des Pages Statiques'
+Pagetitle.staticpage.list.txt: 'Liste des des Pages Statiques'
+Pagetitle.staticpage.add: 'Ajouter Page à URL Fixe'
+Pagetitle.staticpage.add.txt: 'Ajouter Page à URL Fixe'
+Pagetitle.staticpage.edit: 'Edition Page à URL Fixe <b>%staticpage%</b>'
+Pagetitle.staticpage.edit.txt: 'Edition Page à URL Fixe "%staticpage%"'
+Pagetitle.banner.list: 'Liste des Bannières'
+Pagetitle.banner.list.txt: 'Liste des des Bannières'
+Pagetitle.banner.add: 'Ajouter Bannière'
+Pagetitle.banner.add.txt: 'Ajouter Bannière'
+Pagetitle.banner.edit: 'Edition Bannière <b>%banner%</b>'
+Pagetitle.banner.edit.txt: 'Edition Bannière "%banner%"'
+Pagetitle.sitenew.list: 'Liste des Actualités'
+Pagetitle.sitenew.list.txt: 'Liste des des Actualités'
+Pagetitle.sitenew.add: 'Ajouter Actualité'
+Pagetitle.sitenew.add.txt: 'Ajouter Actualité'
+Pagetitle.sitenew.edit: 'Edition Actualité <b>%sitenew%</b>'
+Pagetitle.sitenew.edit.txt: 'Edition Actualité "%sitenew%"'
+Pagetitle.contact.list: 'Liste des Messages de Contact'
+Pagetitle.contact.list.txt: 'Liste des des Messages de Contact'
+Pagetitle.contact.edit: 'Edition Message de Contact <b>%contact%</b>'
+Pagetitle.contact.edit.txt: 'Edition Message de Contact "%contact%"'
+Pagetitle.product.list: 'Liste des Produits'
+Pagetitle.product.list.txt: 'Liste des des Produits'
+Pagetitle.product.add: 'Ajouter Produit'
+Pagetitle.product.add.txt: 'Ajouter Produit'
+Pagetitle.product.edit: 'Edition Produit <b>%product%</b>'
+Pagetitle.product.edit.txt: 'Edition Produit "%product%"'
+Pagetitle.productpic.list: 'Liste des Images de Gamme de Produits'
+Pagetitle.productpic.list.txt: 'Liste des des Images de Gamme de Produits'
+Pagetitle.productpic.add: 'Ajouter Image de Gamme de Produit'
+Pagetitle.productpic.add.txt: 'Ajouter Image de Gamme de Produit'
+Pagetitle.productpic.edit: 'Edition Image de Gamme de Produit <b>%productpic%</b>'
+Pagetitle.productpic.edit.txt: 'Edition Image de Gamme de Produit "%productpic%"'
+Pagetitle.productdoc.list: 'Liste des Documents de Gamme de Produits'
+Pagetitle.productdoc.list.txt: 'Liste des des Documents de Gamme de Produits'
+Pagetitle.productdoc.add: 'Ajouter Document de Gamme de Produit'
+Pagetitle.productdoc.add.txt: 'Ajouter Document de Gamme de Produit'
+Pagetitle.productdoc.edit: 'Edition Document de Gamme de Produit <b>%productdoc%</b>'
+Pagetitle.productdoc.edit.txt: 'Edition Document de Gamme de Produit "%productdoc%"'
+
+ConstantStr.name: Nom
+ConstantStr.value: Valeur
+ConstantStr.description: Description
+ConstantStr.dtCrea: 'Date d''ajout'
+ConstantStr.dtUpdate: 'Date de modification'
+ConstantStr.name.label: 'Nom :'
+ConstantStr.value.label: 'Valeur :'
+ConstantStr.description.label: 'Description :'
+ConstantStr.tab.overview: Détails
+ConstantStr.tab.edit: Edition
+ConstantStr.tlabel.list: 'Liste des Constantes (Texte)'
+ConstantStr.tlabel.add: 'Ajouter nouvelle Constante (Texte)'
+ConstantStr.tlabel.overview: 'Aperçu des détails de la Constante (Texte)'
+ConstantStr.tlabel.edit: 'Modification des détails de la Constante (Texte)'
+ConstantStr.empty: 'Aucune Constante (Texte) trouvée dans la base de donnée'
+ConstantStr.add.success: 'Succès de l''ajout de la Constante (Texte) <b>%constantStr%</b>'
+ConstantStr.add.failure: 'Echec de l''ajout de la Constante (Texte) <b>%constantStr%</b>'
+ConstantStr.delete.confirm.title: 'Demande de Confirmation'
+ConstantStr.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cet Constante (Texte) ?<br> Cette action est irreversible!'
+ConstantStr.delete.notfound: 'Constante (Texte) inconnu'
+ConstantStr.delete.success: 'Succès de la suppression de la Constante (Texte) <b>%constantStr%</b>'
+ConstantStr.delete.failure: 'Echec de la suppression de la Constante (Texte) <b>%constantStr%</b>'
+ConstantStr.edit.notfound: 'Constante (Texte) inconnu'
+ConstantStr.edit.success: 'Succès de la modification de la Constante (Texte) <b>%constantStr%</b>'
+ConstantStr.edit.failure: 'Echec de la modification de la Constante (Texte) <b>%constantStr%</b>'
+
+ConstantInt.name: Nom
+ConstantInt.value: Valeur
+ConstantInt.description: Description
+ConstantInt.dtCrea: 'Date d''ajout'
+ConstantInt.dtUpdate: 'Date de modification'
+ConstantInt.name.label: 'Nom :'
+ConstantInt.value.label: 'Valeur :'
+ConstantInt.description.label: 'Description :'
+ConstantInt.tab.overview: Détails
+ConstantInt.tab.edit: Edition
+ConstantInt.tlabel.list: 'Liste des Constantes (Entier)'
+ConstantInt.tlabel.add: 'Ajouter nouvelle Constante (Entier)'
+ConstantInt.tlabel.overview: 'Aperçu des détails de la Constante (Entier)'
+ConstantInt.tlabel.edit: 'Modification des détails de la Constante (Entier)'
+ConstantInt.empty: 'Aucune Constante (Entier) trouvée dans la base de donnée'
+ConstantInt.add.success: 'Succès de l''ajout de la Constante (Entier) <b>%constantInt%</b>'
+ConstantInt.add.failure: 'Echec de l''ajout de la Constante (Entier) <b>%constantInt%</b>'
+ConstantInt.delete.confirm.title: 'Demande de Confirmation'
+ConstantInt.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cet Constante (Entier) ?<br> Cette action est irreversible!'
+ConstantInt.delete.notfound: 'Constante (Entier) inconnu'
+ConstantInt.delete.success: 'Succès de la suppression de la Constante (Entier) <b>%constantInt%</b>'
+ConstantInt.delete.failure: 'Echec de la suppression de la Constante (Entier) <b>%constantInt%</b>'
+ConstantInt.edit.notfound: 'Constante (Entier) inconnu'
+ConstantInt.edit.success: 'Succès de la modification de la Constante (Entier) <b>%constantInt%</b>'
+ConstantInt.edit.failure: 'Echec de la modification de la Constante (Entier) <b>%constantInt%</b>'
+
+ConstantFloat.name: Nom
+ConstantFloat.value: Valeur
+ConstantFloat.description: Description
+ConstantFloat.dtCrea: 'Date d''ajout'
+ConstantFloat.dtUpdate: 'Date de modification'
+ConstantFloat.name.label: 'Nom :'
+ConstantFloat.value.label: 'Valeur :'
+ConstantFloat.description.label: 'Description :'
+ConstantFloat.tab.overview: Détails
+ConstantFloat.tab.edit: Edition
+ConstantFloat.tlabel.list: 'Liste des Constantes (Réel)'
+ConstantFloat.tlabel.add: 'Ajouter nouvelle Constante (Réel)'
+ConstantFloat.tlabel.overview: 'Aperçu des détails de la Constante (Réel)'
+ConstantFloat.tlabel.edit: 'Modification des détails de la Constante (Réel)'
+ConstantFloat.empty: 'Aucune Constante (Réel) trouvée dans la base de donnée'
+ConstantFloat.add.success: 'Succès de l''ajout de la Constante (Réel) <b>%constantFloat%</b>'
+ConstantFloat.add.failure: 'Echec de l''ajout de la Constante (Réel) <b>%constantFloat%</b>'
+ConstantFloat.delete.confirm.title: 'Demande de Confirmation'
+ConstantFloat.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cet Constante (Réel) ?<br> Cette action est irreversible!'
+ConstantFloat.delete.notfound: 'Constante (Réel) inconnu'
+ConstantFloat.delete.success: 'Succès de la suppression de la Constante (Réel) <b>%constantFloat%</b>'
+ConstantFloat.delete.failure: 'Echec de la suppression de la Constante (Réel) <b>%constantFloat%</b>'
+ConstantFloat.edit.notfound: 'Constante (Réel) inconnu'
+ConstantFloat.edit.success: 'Succès de la modification de la Constante (Réel) <b>%constantFloat%</b>'
+ConstantFloat.edit.failure: 'Echec de la modification de la Constante (Réel) <b>%constantFloat%</b>'
+
+Lang.name: Nom
+Lang.locale: Locale
+Lang.status: Etat
+Lang.status.2: Désactivé
+Lang.status.1: Activé
+Lang.dtCrea: 'Date d''ajout'
+Lang.dtUpdate: 'Date de modification'
+Lang.name.label: 'Nom :'
+Lang.locale.label: 'Locale :'
+Lang.status.label: 'Etat :'
+Lang.status.choice.2: Désactivé
+Lang.status.choice.1: Activé
+Lang.tab.overview: Détails
+Lang.tab.edit: Edition
+Lang.tlabel.list: 'Liste des Langues'
+Lang.tlabel.add: 'Ajouter nouvelle Langue'
+Lang.tlabel.overview: 'Aperçu des détails de la Langue'
+Lang.tlabel.editStatus: 'Modification de l''Etat de la Langue'
+Lang.empty: 'Aucune Langue trouvée dans la base de donnée'
+Lang.add.success: 'Succès de l''ajout de la Langue <b>%lang%</b>'
+Lang.add.failure: 'Echec de l''ajout de la Langue <b>%lang%</b>'
+Lang.delete.confirm.title: 'Demande de Confirmation'
+Lang.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Langue ?<br> Cette action est irreversible!'
+Lang.delete.notfound: 'Langue inconnu'
+Lang.delete.success: 'Succès de la suppression de la Langue <b>%lang%</b>'
+Lang.delete.failure: 'Echec de la suppression de la Langue <b>%lang%</b>'
+Lang.edit.notfound: 'Langue inconnu'
+Lang.edit.success: 'Succès de la modification de la Langue <b>%lang%</b>'
+Lang.edit.failure: 'Echec de la modification de la Langue <b>%lang%</b>'
+
+Job.name: 'Nom (Default)'
+Job.rank: Rang
+Job.status: Etat
+Job.status.2: Désactivé
+Job.status.1: Activé
+Job.dtCrea: 'Date d''ajout'
+Job.dtUpdate: 'Date de modification'
+Job.name.label: 'Nom (Default):'
+Job.rank.label: 'Rang :'
+Job.status.label: 'Etat :'
+Job.status.choice.2: Désactivé
+Job.status.choice.1: Activé
+Job.tab.overview: Détails
+Job.tab.edit: Edition
+Job.tab.trans: Traduction %lang%
+Job.tlabel.list: 'Liste des Professions'
+Job.tlabel.add: 'Ajouter nouvelle Profession'
+Job.tlabel.overview: 'Aperçu des détails de la Profession'
+Job.tlabel.editName: 'Modification du Nom de la Profession'
+Job.tlabel.editRank: 'Modification du Rang de la Profession'
+Job.tlabel.editStatus: 'Modification de l''Etat de la Profession'
+Job.empty: 'Aucune Profession trouvée dans la base de donnée'
+Job.add.success: 'Succès de l''ajout de la Profession <b>%job%</b>'
+Job.add.failure: 'Echec de l''ajout de la Profession <b>%job%</b>'
+Job.delete.confirm.title: 'Demande de Confirmation'
+Job.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Profession ?<br> Cette action est irreversible!'
+Job.delete.notfound: 'Profession inconnu'
+Job.delete.success: 'Succès de la suppression de la Profession <b>%job%</b>'
+Job.delete.failure: 'Echec de la suppression de la Profession <b>%job%</b>'
+Job.edit.notfound: 'Profession inconnu'
+Job.edit.success: 'Succès de la modification de la Profession <b>%job%</b>'
+Job.edit.failure: 'Echec de la modification de la Profession <b>%job%</b>'
+
+JobTrans.locale: Langue
+JobTrans.name: 'Nom (Traduit)'
+JobTrans.dtCrea: 'Date d''ajout'
+JobTrans.dtUpdate: 'Date de modification'
+JobTrans.name.label: 'Nom (Traduit):'
+JobTrans.tlabel.overview: 'Aperçu des détails Traduits de la Profession'
+JobTrans.tlabel.editName: 'Modification du Nom Traduit de la Profession'
+JobTrans.edit.success: 'Succès de la modification de la Traduction de la Profession <b>%job%</b>'
+JobTrans.edit.failure: 'Echec de la modification de la Traduction de la Profession <b>%job%</b>'
+
+Role.name: Nom
+Role.description: Description
+Role.parents: Parents
+Role.childs: Enfants
+Role.users: Utilisateurs
+Role.dtCrea: 'Date d''ajout'
+Role.dtUpdate: 'Date de modification'
+Role.name.label: 'Nom :'
+Role.description.label: 'Description :'
+Role.parents.label: 'Parents :'
+Role.childs.label: 'Enfants :'
+Role.users.label: 'Utilisateurs :'
+Role.tab.overview: Détails
+Role.tab.edit: Edition
+Role.tlabel.list: 'Liste des Privilèges'
+Role.tlabel.add: 'Ajouter nouveau Privilège'
+Role.tlabel.overview: 'Aperçu des détails du Privilège'
+Role.tlabel.editDescription: 'Modification de la Description du Privilège'
+Role.tlabel.editParents: 'Modification des parents du Privilège'
+Role.empty: 'Aucune Privilège trouvé dans la base de donnée'
+Role.add.success: 'Succès de l''ajout du Privilège <b>%role%</b>'
+Role.add.failure: 'Echec de l''ajout du Privilège <b>%role%</b>'
+Role.delete.confirm.title: 'Demande de Confirmation'
+Role.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer ce Privilège ?<br> Cette action est irreversible!'
+Role.delete.notfound: 'Privilège inconnu'
+Role.delete.success: 'Succès de la suppression du Privilège <b>%role%</b>'
+Role.delete.failure: 'Echec de la suppression du Privilège <b>%role%</b>'
+Role.edit.notfound: 'Privilège inconnu'
+Role.edit.success: 'Succès de la modification du Privilège <b>%role%</b>'
+Role.edit.failure: 'Echec de la modification du Privilège <b>%role%</b>'
+
+User.fullName: 'Nom Complet'
+User.username: Identifiant
+User.email: Email
+User.logins: 'Nbr de Connexions'
+User.lastLogin: 'Dernière Connexion'
+User.avatar: Avatar
+User.lockout: Verrouillage
+User.lockout.1: 'Compte Actif'
+User.lockout.2: 'Compte Verrouillé'
+User.preferedLang: 'Paramètre de Langue'
+User.sexe: Civilité
+User.sexe.1: Mlle
+User.sexe.2: Mme
+User.sexe.3: Mr
+User.userType: Type
+User.userType.1: Particulier
+User.userType.2: Société
+User.company: Société
+User.fisc: 'Matricule Fiscale'
+User.job: Profession
+User.otherInfos: 'Informations Complémentaires'
+User.firstName: Prénom
+User.lastName: Nom
+User.birthday: 'Date de Naissance'
+User.streetNum: 'N° de Rue'
+User.address: Adresse
+User.address2: 'Adresse (bis)'
+User.town: Ville
+User.zipCode: 'Code Postal'
+User.country: Pays
+User.phone: 'Tel Fixe'
+User.mobile: 'Tel Mobile'
+User.userRoles: Privilèges
+User.dtCrea: 'Date d''ajout'
+User.dtUpdate: 'Date de modification'
+User.password.label: 'Mot de passe :'
+User.rememberme.label: 'Se souvenir de moi'
+User.avatar.label: 'Avatar :'
+User.fullName.label: 'Nom Complet :'
+User.username.label: 'Identifiant :'
+User.email.label: 'Email :'
+User.clearPassword.label: 'Mot de passe :'
+User.captcha.label: 'Code Anti-Robots :'
+User.lockout.label: 'Verrouillage :'
+User.lockout.choice.1: Activer
+User.lockout.choice.2: Verrouiller
+User.preferedLang.label: 'Paramètre de Langue :'
+User.sexe.label: 'Civilité :'
+User.sexe.choice.1: Mlle
+User.sexe.choice.2: Mme
+User.sexe.choice.3: Mr
+User.userType.label: 'Type :'
+User.userType.choice.1: Particulier
+User.userType.choice.2: Société
+User.company.label: 'Société :'
+User.fisc.label: 'Matricule Fiscale :'
+User.job.label: 'Profession :'
+User.firstName.label: 'Prénom :'
+User.lastName.label: 'Nom :'
+User.birthday.label: 'Date de Naissance :'
+User.streetNum.label: 'N° de Rue :'
+User.address.label: 'Adresse :'
+User.address2.label: 'Adresse (bis) :'
+User.town.label: 'Ville :'
+User.zipCode.label: 'Code Postal :'
+User.country.label: 'Pays :'
+User.phone.label: 'Tel Fixe :'
+User.mobile.label: 'Tel Mobile :'
+User.fax.label: 'Fax :'
+User.userRoles.label: 'Privilèges :'
+User.oldPassword.label: 'Ancien Mot de passe :'
+User.newPassword.first: 'Nouveau Mot de passe :'
+User.newPassword.second: 'Confirmation Mot de passe :'
+User.otherInfos.label: 'Informations Complémentaires :'
+User.tab.overview: Détails
+User.tab.edit: Edition
+User.tlabel.list: 'Liste des Utilisateurs'
+User.tlabel.add: 'Ajouter nouvel Utilisateur'
+User.tlabel.overview: 'Aperçu des détails de l''Utilisateur'
+User.tlabel.editAvatar: 'Modification de l''Avatar de l''Utilisateur'
+User.tlabel.editAvatar.crop: 'Selectionner la partie visible'
+User.tlabel.editProfile: 'Modification du Profil de l''Utilisateur'
+User.tlabel.editPreferedLang: 'Modification du Paramètre de Langue de l''Utilisateur'
+User.tlabel.editJob: 'Modification de l''Emploi de l''Utilisateur'
+User.tlabel.editEmail: 'Modification de l''Email de l''Utilisateur'
+User.tlabel.editPassword: 'Modification du Mot de passe de l''Utilisateur'
+User.tlabel.editLockout: 'Modification du Verrouillage de compte de l''Utilisateur'
+User.tlabel.editUserRoles: 'Modification des privilèges de l''Utilisateur'
+User.empty: 'Aucun Utilisateur trouvé dans la base de donnée'
+User.add.success: 'Succès de l''ajout de l''Utilisateur <b>%user%</b>'
+User.add.failure: 'Echec de l''ajout de l''Utilisateur <b>%user%</b>'
+User.delete.confirm.title: 'Demande de Confirmation'
+User.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cet Utilisateur ?<br> Cette action est irreversible!'
+User.delete.notfound: 'Utilisateur inconnu'
+User.delete.success: 'Succès de la suppression de l''Utilisateur <b>%user%</b>'
+User.delete.failure: 'Echec de la suppression de l''Utilisateur <b>%user%</b>'
+User.edit.notfound: 'Utilisateur inconnu'
+User.edit.success: 'Succès de la modification de l''Utilisateur <b>%user%</b>'
+User.edit.failure: 'Echec de la modification de l''Utilisateur <b>%user%</b>'
+
+Banner.filename: Image
+Banner.title: 'Titre (Default)'
+Banner.alt: 'Texte Alternatif (Default)'
+Banner.rank: Rang
+Banner.dtCrea: 'Date d''ajout'
+Banner.dtUpdate: 'Date de modification'
+Banner.filename.label: 'Image :'
+Banner.title.label: 'Titre (Default):'
+Banner.alt.label: 'Texte Alternatif (Default):'
+Banner.rank.label: 'Rang :'
+Banner.tab.overview: Détails
+Banner.tab.edit: Edition
+Banner.tab.trans: Traduction %lang%
+Banner.tlabel.list: 'Liste des Bannières'
+Banner.tlabel.add: 'Ajouter nouvelle Bannière'
+Banner.tlabel.overview: 'Aperçu des détails de la Bannière'
+Banner.tlabel.editInfo: 'Modification des Informations de la Bannière'
+Banner.tlabel.editContent: 'Modification de l''image de la Bannière'
+Banner.tlabel.editRank: 'Modification du Rang de la Bannière'
+Banner.empty: 'Aucune Bannière trouvée dans la base de donnée'
+Banner.add.success: 'Succès de l''ajout de la Bannière <b>%banner%</b>'
+Banner.add.failure: 'Echec de l''ajout de la Bannière <b>%banner%</b>'
+Banner.delete.confirm.title: 'Demande de Confirmation'
+Banner.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Bannière ?<br> Cette action est irreversible!'
+Banner.delete.notfound: 'Bannière inconnu'
+Banner.delete.success: 'Succès de la suppression de la Bannière <b>%banner%</b>'
+Banner.delete.failure: 'Echec de la suppression de la Bannière <b>%banner%</b>'
+Banner.edit.notfound: 'Bannière inconnu'
+Banner.edit.success: 'Succès de la modification de la Bannière <b>%banner%</b>'
+Banner.edit.failure: 'Echec de la modification de la Bannière <b>%banner%</b>'
+
+BannerTrans.locale: Langue
+BannerTrans.title: 'Titre (Traduit)'
+BannerTrans.alt: 'Texte Alternatif (Traduit)'
+BannerTrans.dtCrea: 'Date d''ajout'
+BannerTrans.dtUpdate: 'Date de modification'
+BannerTrans.title.label: 'Titre (Traduit):'
+BannerTrans.alt.label: 'Texte Alternatif (Traduit):'
+BannerTrans.tlabel.overview: 'Aperçu des détails Traduits de la Bannière'
+BannerTrans.tlabel.editInfo: 'Modification des Informations Traduites de la Bannière'
+BannerTrans.edit.success: 'Succès de la modification de la Traduction de la Bannière <b>%banner%</b>'
+BannerTrans.edit.failure: 'Echec de la modification de la Traduction de la Bannière <b>%banner%</b>'
+
+Staticpage.pageUrl: URL
+Staticpage.metaTitle: 'Titre Navigateur (Default)'
+Staticpage.metaKeywords: 'META Keywords (Default)'
+Staticpage.metaDescription: 'META Description (Default)'
+Staticpage.pageTitle: 'Titre (Default)'
+Staticpage.breadcrumb: 'Breadcrumb (Default)'
+Staticpage.pageContent: 'Contenu (Default)'
+Staticpage.dtCrea: 'Date d''ajout'
+Staticpage.dtUpdate: 'Date de modification'
+Staticpage.pageUrl.label: 'URL :'
+Staticpage.metaTitle.label: 'Titre Navigateur (Default):'
+Staticpage.metaKeywords.label: 'META Keywords (Default):'
+Staticpage.metaDescription.label: 'META Description (Default):'
+Staticpage.pageTitle.label: 'Titre (Default):'
+Staticpage.breadcrumb.label: 'Breadcrumb (Default):'
+Staticpage.pageContent.label: 'Contenu (Default):'
+Staticpage.tab.overview: Détails
+Staticpage.tab.edit: Edition
+Staticpage.tab.trans: Traduction %lang%
+Staticpage.tlabel.list: 'Liste des Pages Statiques'
+Staticpage.tlabel.add: 'Ajouter nouvelle Page à URL Fixe'
+Staticpage.tlabel.overview: 'Aperçu des détails de la Page à URL Fixe'
+Staticpage.tlabel.edit: 'Modification de la Page à URL Fixe'
+Staticpage.empty: 'Aucune Page à URL Fixe trouvée dans la base de donnée'
+Staticpage.add.success: 'Succès de l''ajout de la Page à URL Fixe <b>%staticpage%</b>'
+Staticpage.add.failure: 'Echec de l''ajout de la Page à URL Fixe <b>%staticpage%</b>'
+Staticpage.delete.confirm.title: 'Demande de Confirmation'
+Staticpage.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Page à URL Fixe ?<br> Cette action est irreversible!'
+Staticpage.delete.notfound: 'Page à URL Fixe inconnu'
+Staticpage.delete.success: 'Succès de la suppression de la Page à URL Fixe <b>%staticpage%</b>'
+Staticpage.delete.failure: 'Echec de la suppression de la Page à URL Fixe <b>%staticpage%</b>'
+Staticpage.edit.notfound: 'Page à URL Fixe inconnu'
+Staticpage.edit.success: 'Succès de la modification de la Page à URL Fixe <b>%staticpage%</b>'
+Staticpage.edit.failure: 'Echec de la modification de la Page à URL Fixe <b>%staticpage%</b>'
+
+StaticpageTrans.metaTitle: 'Titre Navigateur (Traduit)'
+StaticpageTrans.metaKeywords: 'META Keywords (Traduit)'
+StaticpageTrans.metaDescription: 'META Description (Traduit)'
+StaticpageTrans.pageTitle: 'Titre (Traduit)'
+StaticpageTrans.breadcrumb: 'Breadcrumb (Traduit)'
+StaticpageTrans.pageContent: 'Contenu (Traduit)'
+StaticpageTrans.dtCrea: 'Date d''ajout'
+StaticpageTrans.dtUpdate: 'Date de modification'
+StaticpageTrans.metaTitle.label: 'Titre Navigateur (Traduit):'
+StaticpageTrans.metaKeywords.label: 'META Keywords (Traduit):'
+StaticpageTrans.metaDescription.label: 'META Description (Traduit):'
+StaticpageTrans.pageTitle.label: 'Titre (Traduit):'
+StaticpageTrans.breadcrumb.label: 'Breadcrumb (Traduit):'
+StaticpageTrans.pageContent.label: 'Contenu (Traduit):'
+StaticpageTrans.tlabel.overview: 'Aperçu des détails Traduits de la Page à URL Fixe'
+StaticpageTrans.tlabel.edit: 'Modification des Informations Traduites de la Page à URL Fixe'
+StaticpageTrans.edit.success: 'Succès de la modification de la Traduction de la Page à URL Fixe <b>%staticpage%</b>'
+StaticpageTrans.edit.failure: 'Echec de la modification de la Traduction de la Page à URL Fixe <b>%staticpage%</b>'
+
+
+Sitenew.pageUrl: URL
+Sitenew.metaTitle: 'Titre Navigateur (Default)'
+Sitenew.metaKeywords: 'META Keywords (Default)'
+Sitenew.metaDescription: 'META Description (Default)'
+Sitenew.pageTitle: 'Titre (Default)'
+Sitenew.breadcrumb: 'Breadcrumb (Default)'
+Sitenew.pageContent: 'Contenu (Default)'
+Sitenew.thumb: Image
+Sitenew.thumbAlt: 'Texte Alternatif Image (Default)'
+Sitenew.thumbTitle: 'Titre Image (Default)'
+Sitenew.dtCrea: 'Date d''ajout'
+Sitenew.dtUpdate: 'Date de modification'
+Sitenew.pageUrl.label: 'URL :'
+Sitenew.metaTitle.label: 'Titre Navigateur (Default):'
+Sitenew.metaKeywords.label: 'META Keywords (Default):'
+Sitenew.metaDescription.label: 'META Description (Default):'
+Sitenew.pageTitle.label: 'Titre (Default):'
+Sitenew.breadcrumb.label: 'Breadcrumb EN :'
+Sitenew.pageContent.label: 'Contenu (Default):'
+Sitenew.thumb.label: 'Image :'
+Sitenew.thumbTitle.label: 'Titre Image (Default):'
+Sitenew.thumbAlt.label: 'Texte Alternatif Image (Default):'
+Sitenew.tab.overview: Détails
+Sitenew.tab.edit: Edition
+Sitenew.tab.trans: Traduction %lang%
+Sitenew.tlabel.list: 'Liste des Actualités'
+Sitenew.tlabel.add: 'Ajouter nouvelle Actualité'
+Sitenew.tlabel.overview: 'Aperçu des détails de l''Actualité'
+Sitenew.tlabel.editThumb: 'Modification de l''Image de l''Actualité'
+Sitenew.tlabel.editInfo: 'Modification des détails de l''Actualité'
+Sitenew.tlabel.editThumbInfo: 'Modification des informations l''Image de l''Actualité'
+Sitenew.tlabel.editPageUrl: 'Modification de l''URL de l''Actualité'
+Sitenew.empty: 'Aucune Actualité trouvée dans la base de donnée'
+Sitenew.add.success: 'Succès de l''ajout de l''Actualité <b>%sitenew%</b>'
+Sitenew.add.failure: 'Echec de l''ajout de l''Actualité <b>%sitenew%</b>'
+Sitenew.delete.confirm.title: 'Demande de Confirmation'
+Sitenew.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Actualité ?<br> Cette action est irreversible!'
+Sitenew.delete.notfound: 'Actualité inconnu'
+Sitenew.delete.success: 'Succès de la suppression de l''Actualité <b>%sitenew%</b>'
+Sitenew.delete.failure: 'Echec de la suppression de l''Actualité <b>%sitenew%</b>'
+Sitenew.edit.notfound: 'Actualité inconnu'
+Sitenew.edit.success: 'Succès de la modification de l''Actualité <b>%sitenew%</b>'
+Sitenew.edit.failure: 'Echec de la modification de l''Actualité <b>%sitenew%</b>'
+
+SitenewTrans.metaTitle: 'Titre Navigateur (Traduit)'
+SitenewTrans.metaKeywords: 'META Keywords (Traduit)'
+SitenewTrans.metaDescription: 'META Description (Traduit)'
+SitenewTrans.pageTitle: 'Titre (Traduit)'
+SitenewTrans.breadcrumb: 'Breadcrumb (Traduit)'
+SitenewTrans.pageContent: 'Contenu (Traduit)'
+SitenewTrans.thumbAlt: 'Texte Alternatif Image (Traduit)'
+SitenewTrans.thumbTitle: 'Titre Image (Traduit)'
+SitenewTrans.dtCrea: 'Date d''ajout'
+SitenewTrans.dtUpdate: 'Date de modification'
+SitenewTrans.metaTitle.label: 'Titre Navigateur (Traduit):'
+SitenewTrans.metaKeywords.label: 'META Keywords (Traduit):'
+SitenewTrans.metaDescription.label: 'META Description (Traduit):'
+SitenewTrans.pageTitle.label: 'Titre (Traduit):'
+SitenewTrans.breadcrumb.label: 'Breadcrumb (Traduit):'
+SitenewTrans.pageContent.label: 'Contenu (Traduit):'
+SitenewTrans.thumbTitle.label: 'Titre Image (Traduit):'
+SitenewTrans.thumbAlt.label: 'Texte Alternatif Image (Traduit):'
+SitenewTrans.tlabel.overview: 'Aperçu des détails Traduits de l''Actualité'
+SitenewTrans.tlabel.editInfo: 'Modification des Informations Traduites de l''Actualité'
+SitenewTrans.tlabel.editThumbInfo: 'Modification des Informations Traduites de l''Image de l''Actualité'
+SitenewTrans.edit.success: 'Succès de la modification de la Traduction de l''Actualité <b>%sitenew%</b>'
+SitenewTrans.edit.failure: 'Echec de la modification de la Traduction de l''Actualité <b>%sitenew%</b>'
+
+Contact.id: ID
+Contact.firstName: Prénom
+Contact.lastName: Nom
+Contact.email: Email
+Contact.phone: Tél
+Contact.job: Profession
+Contact.company: Entreprise
+Contact.subject: Objet
+Contact.msg: Message
+Contact.dtCrea: 'Date d''ajout'
+Contact.dtUpdate: 'Date de modification'
+Contact.id.label: 'ID :'
+Contact.firstName.label: 'Prénom :'
+Contact.lastName.label: 'Nom :'
+Contact.email.label: 'Email :'
+Contact.phone.label: 'Tél :'
+Contact.job.label: 'Profession :'
+Contact.company.label: 'Entreprise :'
+Contact.subject.label: 'Objet :'
+Contact.msg.label: 'Message :'
+Contact.captcha.label: 'Code anti-robot :'
+Contact.tab.overview: Détails
+Contact.tab.edit: Edition
+Contact.tlabel.list: 'Liste des Messages de Contact'
+Contact.tlabel.overview: 'Aperçu des détails du Message de Contact'
+Contact.empty: 'Aucun Message de Contact trouvé dans la base de donnée'
+Contact.delete.confirm.title: 'Demande de Confirmation'
+Contact.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer ce Message de Contact ?<br> Cette action est irreversible!'
+Contact.delete.notfound: 'Actualité inconnu'
+Contact.delete.success: 'Succès de la suppression du Message de Contact <b>%contact%</b>'
+Contact.delete.failure: 'Echec de la suppression du Message de Contact <b>%contact%</b>'
+
+Product.productParent: 'Gamme mère'
+Product.pageUrl: URL
+Product.pageUrlFull: URL Récursive
+Product.rank: Rang
+Product.name: 'Nom (Default)'
+Product.metaTitle: 'Titre Navigateur (Default)'
+Product.metaKeywords: 'META Keywords (Default)'
+Product.metaDescription: 'META Description (Default)'
+Product.pageTitle: 'Titre (Default)'
+Product.breadcrumb: 'Breadcrumb (Default)'
+Product.pageContent: 'Contenu (Default)'
+Product.thumb: Image
+Product.thumbAlt: 'Texte Alternatif Image (Default)'
+Product.thumbTitle: 'Titre Image (Default)'
+Product.dtCrea: 'Date d''ajout'
+Product.dtUpdate: 'Date de modification'
+Product.productParent.label: 'Gamme mère :'
+Product.pageUrl.label: 'URL :'
+Product.pageUrlFull.label: 'URL Récursive :'
+Product.rank.label: 'Rang :'
+Product.name.label: 'Nom (Default):'
+Product.metaTitle.label: 'Titre Navigateur (Default):'
+Product.metaKeywords.label: 'META Keywords (Default):'
+Product.metaDescription.label: 'META Description(Default):'
+Product.pageTitle.label: 'Titre (Default):'
+Product.breadcrumb.label: 'Breadcrumb (Default):'
+Product.pageContent.label: 'Contenu (Default):'
+Product.thumb.label: 'Image :'
+Product.thumbAlt.label: 'Texte Alternatif Image (Default):'
+Product.thumbTitle.label: 'Titre Image (Default):'
+Product.tab.overview: Détails
+Product.tab.edit: Edition
+Product.tab.pics: Images
+Product.tab.docs: Documents
+Product.tab.trans: Traduction %lang%
+Product.tlabel.list: 'Liste des Gammes de Produits'
+Product.tlabel.add: 'Ajouter nouvelle Gamme de Produit'
+Product.tlabel.overview: 'Aperçu des détails de la Gamme de Produit'
+Product.tlabel.editInfo: 'Modification les informations de la Gamme de Produit'
+Product.tlabel.editName: 'Modification du Nom de la Gamme de Produit'
+Product.tlabel.editThumb: 'Modification de l''image de la Gamme de Produit'
+Product.tlabel.editThumbInfo: 'Modification des informations de l''image de la Gamme de Produit'
+Product.tlabel.editPageUrl: 'Modification de l''URL de la Gamme de Produit'
+Product.tlabel.editParent: 'Modification du Gamme Mère'
+Product.tlabel.editRank: 'Modification du Rang'
+Product.tlabel.pics.add: 'Ajouter une Image à la Gallerie'
+Product.tlabel.pics.list: 'Liste des Images de la Gallerie'
+Product.tlabel.docs.add: 'Ajouter un Document'
+Product.tlabel.docs.list: 'Liste des Documents'
+Product.empty: 'Aucune Gamme de Produit trouvée dans la base de donnée'
+Product.add.success: 'Succès de l''ajout de la Gamme de Produit <b>%product%</b>'
+Product.add.failure: 'Echec de l''ajout de la Gamme de Produit <b>%product%</b>'
+Product.delete.confirm.title: 'Demande de Confirmation'
+Product.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Gamme de Produit ?<br> Cette action est irreversible!'
+Product.delete.notfound: 'Gamme de Produit inconnu'
+Product.delete.success: 'Succès du suppression de la Gamme de Produit <b>%product%</b>'
+Product.delete.failure: 'Echec du suppression de la Gamme de Produit <b>%product%</b>'
+Product.edit.notfound: 'Gamme de Produit inconnu'
+Product.edit.success: 'Succès du modification de la Gamme de Produit <b>%product%</b>'
+Product.edit.failure: 'Echec du modification de la Gamme de Produit <b>%product%</b>'
+
+ProductTrans.name: 'Nom (Traduit)'
+ProductTrans.metaTitle: 'Titre Navigateur (Traduit)'
+ProductTrans.metaKeywords: 'META Keywords (Traduit)'
+ProductTrans.metaDescription: 'META Description (Traduit)'
+ProductTrans.pageTitle: 'Titre (Traduit)'
+ProductTrans.breadcrumb: 'Breadcrumb (Traduit)'
+ProductTrans.pageContent: 'Contenu (Traduit)'
+ProductTrans.thumbAlt: 'Texte Alternatif Image (Traduit)'
+ProductTrans.thumbTitle: 'Titre Image (Traduit)'
+ProductTrans.dtCrea: 'Date d''ajout'
+ProductTrans.dtUpdate: 'Date de modification'
+ProductTrans.name.label: 'Nom (Traduit):'
+ProductTrans.metaTitle.label: 'Titre Navigateur (Traduit):'
+ProductTrans.metaKeywords.label: 'META Keywords (Traduit):'
+ProductTrans.metaDescription.label: 'META Description (Traduit):'
+ProductTrans.pageTitle.label: 'Titre (Traduit):'
+ProductTrans.breadcrumb.label: 'Breadcrumb (Traduit):'
+ProductTrans.pageContent.label: 'Contenu (Traduit):'
+ProductTrans.thumbTitle.label: 'Titre Image (Traduit):'
+ProductTrans.thumbAlt.label: 'Texte Alternatif Image (Traduit):'
+ProductTrans.tlabel.overview: 'Aperçu des détails Traduits de la Gamme de Produit'
+ProductTrans.tlabel.editName: 'Modification du Nom Traduit de la Gamme de Produit'
+ProductTrans.tlabel.editInfo: 'Modification des Informations Traduites de la Gamme de Produit'
+ProductTrans.tlabel.editThumbInfo: 'Modification des Informations Traduites de l''Image de la Gamme de Produit'
+ProductTrans.edit.success: 'Succès de la modification de la Traduction de la Gamme de Produit <b>%product%</b>'
+ProductTrans.edit.failure: 'Echec de la modification de la Traduction de la Gamme de Produit <b>%product%</b>'
+
+Productpic.product: Gamme de Produit
+Productpic.filename: Image
+Productpic.alt: 'Texte Alternatif (Default)'
+Productpic.title: 'Titre (Default)'
+Productpic.rank: Rang
+Productpic.dtCrea: 'Date d''ajout'
+Productpic.dtUpdate: 'Date de modification'
+Productpic.product.label: 'Gamme de Produit :'
+Productpic.filename.label: 'Image :'
+Productpic.alt.label: 'Texte Alternatif (Default):'
+Productpic.title.label: 'Titre (Default):'
+Productpic.rank.label: 'Rang :'
+Productpic.tab.overview: Détails
+Productpic.tab.edit: Edition
+Productpic.tab.trans: Traduction %lang%
+Productpic.tlabel.list: 'Liste des Images de Produits'
+Productpic.tlabel.add: 'Ajouter nouvelle Image de Produit'
+Productpic.tlabel.overview: 'Aperçu des détails de l''Image de Produit'
+Productpic.tlabel.editInfo: 'Modification des Informations de l''Image de Produit'
+Productpic.tlabel.editContent: 'Modification du Fichier de l''Image de Produit'
+Productpic.tlabel.editRank: 'Modification du Rang de l''Image de Produit'
+Productpic.empty: 'Aucune Image de Produit trouvée dans la base de donnée'
+Productpic.add.success: 'Succès de l''ajout de l''Image de Produit <b>%productpic%</b>'
+Productpic.add.failure: 'Echec de l''ajout de l''Image de Produit <b>%productpic%</b>'
+Productpic.delete.confirm.title: 'Demande de Confirmation'
+Productpic.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer cette Image de Produit ?<br> Cette action est irreversible!'
+Productpic.delete.notfound: 'Image de Produit inconnu'
+Productpic.delete.success: 'Succès de la suppression de l''Image de Produit <b>%productpic%</b>'
+Productpic.delete.failure: 'Echec de la suppression de l''Image de Produit <b>%productpic%</b>'
+Productpic.edit.notfound: 'Image de Produit inconnu'
+Productpic.edit.success: 'Succès de la modification d''Image de Produit <b>%productpic%</b>'
+Productpic.edit.failure: 'Echec de la modification d''Image de Produit <b>%productpic%</b>'
+
+ProductpicTrans.locale: Langue
+ProductpicTrans.title: 'Titre (Traduit)'
+ProductpicTrans.alt: 'Texte Alternatif (Traduit)'
+ProductpicTrans.dtCrea: 'Date d''ajout'
+ProductpicTrans.dtUpdate: 'Date de modification'
+ProductpicTrans.title.label: 'Titre (Traduit):'
+ProductpicTrans.alt.label: 'Texte Alternatif (Traduit):'
+ProductpicTrans.tlabel.overview: 'Aperçu des détails Traduits de l''Image de Produit'
+ProductpicTrans.tlabel.editInfo: 'Modification des Informations Traduites de l''Image de Produit'
+ProductpicTrans.edit.success: 'Succès de la modification de la Traduction d''Image de Produit <b>%productpic%</b>'
+ProductpicTrans.edit.failure: 'Echec de la modification de la Traduction d''Image de Produit <b>%productpic%</b>'
+
+Productdoc.product: Gamme de Produit
+Productdoc.originalName: 'Nom de fichier Original'
+Productdoc.filename: Document
+Productdoc.size: Taille
+Productdoc.mimeType: MimeType
+Productdoc.md5: 'Hash MD5'
+Productdoc.nbrDownloads: 'Nombre de téléchargements'
+Productdoc.title: 'Titre (Default)'
+Productdoc.rank: Rang
+Productdoc.dtCrea: 'Date d''ajout'
+Productdoc.dtUpdate: 'Date de modification'
+Productdoc.product.label: 'Produit :'
+Productdoc.filename.label: 'Document :'
+Productdoc.originalName.label: 'Nom de fichier Original :'
+Productdoc.title.label: 'Titre (Default):'
+Productdoc.size.label: 'Taille :'
+Productdoc.mimeType.label: 'MimeType :'
+Productdoc.md5.label: 'Hash MD5 :'
+Productdoc.rank.label: 'Rang :'
+Productdoc.tab.overview: Détails
+Productdoc.tab.edit: Edition
+Productdoc.tab.trans: Traduction %lang%
+Productdoc.tlabel.list: 'Liste des Documents de Gamme de Produits'
+Productdoc.tlabel.add: 'Ajouter nouveau Document de Gamme de Produit'
+Productdoc.tlabel.overview: 'Aperçu des détails du Document de Gamme de Produit'
+Productdoc.tlabel.editInfo: 'Modification des Informations du Document de Gamme de Produit'
+Productdoc.tlabel.editContent: 'Modification du fichier du Document de Gamme de Produit'
+Productdoc.tlabel.editRank: 'Modification du Rang du Document de Produit'
+Productdoc.tlabel.editOriginalName: 'Modification du nom du fichier du Document de Gamme de Produit'
+Productdoc.empty: 'Aucun Document de Produit trouvé dans la base de donnée'
+Productdoc.add.success: 'Succès de l''ajout du Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.add.failure: 'Echec de l''ajout du Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.delete.confirm.title: 'Demande de Confirmation'
+Productdoc.delete.confirm.txt: 'Etes-vous sûre de vouloir supprimer ce Document de Gamme de Produit ?<br> Cette action est irreversible!'
+Productdoc.delete.notfound: 'Document de Gamme de Produit inconnu'
+Productdoc.delete.success: 'Succès de la suppression du Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.delete.failure: 'Echec de la suppression du Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.edit.notfound: 'Document de Gamme de Produit inconnu'
+Productdoc.edit.success: 'Succès de la modification de Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.edit.failure: 'Echec de la modification de Document de Gamme de Produit <b>%productdoc%</b>'
+Productdoc.download.error: 'Une erreur s''est produite lors de la tentative de téléchargement d''un fichier'
+
+ProductdocTrans.locale: Langue
+ProductdocTrans.title: 'Titre (Traduit)'
+ProductdocTrans.dtCrea: 'Date d''ajout'
+ProductdocTrans.dtUpdate: 'Date de modification'
+ProductdocTrans.title.label: 'Titre (Traduit):'
+ProductdocTrans.alt.label: 'Texte Alternatif (Traduit):'
+ProductdocTrans.tlabel.overview: 'Aperçu des détails Traduits du Document de Gamme de Produit'
+ProductdocTrans.tlabel.editInfo: 'Modification des Informations Traduites du Document de Gamme de Produit'
+ProductdocTrans.edit.success: 'Succès de la modification de la Traduction de Document de Gamme de Produit <b>%productdoc%</b>'
+ProductdocTrans.edit.failure: 'Echec de la modification de la Traduction de Document de Gamme de Produit <b>%productdoc%</b>'
+
+Breadcrumb.quotation: 'Demande de Devis'
+Breadcrumb.quotation.f50AL: 'F50 Accord FormL'
+Quotation.height.label: 'Hauteur :'
+Quotation.widthLR.label: 'Largeur coté gauche/droite'
+Quotation.widthC.label: 'Largeur coté centre'
+Quotation.prof.label: 'Nombre de profilé'
+Quotation.f50AL.profil.1: 'F50-200 Main Courante (600Cm)'
+Quotation.f50AL.profil.2: 'F50-100 Colonne'
+Quotation.f50AL.profil.3.1: 'F50-300 Profilé (600Cm)'
+Quotation.f50AL.profil.3.2: 'F50-301 Profilé (600Cm)'
+Quotation.f50AL.access.1.1: '4112 pied de support de poteau F50-100'
+Quotation.f50AL.access.1.2: '4121 pied de support de poteau F50-100'
+Quotation.f50AL.access.2: '4314 support main courante'
+Quotation.f50AL.access.3: '4312 jonction de poteau F50-100+profilé'
+Quotation.f50AL.access.4.1: '4228 90° jonction de profilé'
+Quotation.f50AL.access.4.2: '4229 135° jonction de profilé'
+Quotation.f50AL.access.4.3: '4302 jonction coudée de profilé'
+Quotation.f50AL.access.5: '4329 jonction réglable de main courant'
+Quotation.f50AL.access.6.1: '4438 Bouchon de profilé F50-300'
+Quotation.f50AL.access.6.2: '4435 Bouchon de profilé F50-301'
+Quotation.f50AL.access.7.1: '4509Z Couvre joint de main courante avec bouchon'
+Quotation.f50AL.access.7.2: '4434 Bouchon de main courante'

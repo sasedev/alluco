@@ -1,0 +1,109 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/dataTables/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5-bs3patch.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/dataTables.bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5manager.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    {% if staticpages|length != 0 %}
+    $('#staticpageList').dataTable({
+        {%if app.request.locale != 'en'%}
+        "language": {"url": '{{asset('bundles/allucores/css/dataTables/i18n/')~app.request.locale~".json"}}'},
+        {% endif %}
+        "columns": [
+            null,
+            null,
+            null,
+            null,
+            { "searchable": false, "sortable": false }
+        ]
+    });
+    {% endif %}
+    $('.deleteConfirmStaticpage').click(function(e) {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmStaticpage').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmStaticpage').modal('show');
+    });
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_staticpage_list') }}">{{faIco('code')}} &nbsp; {{'Breadcrumb.admin.staticpage.list'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        {%if is_granted('ROLE_SUPERSUPERADMIN')%}
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_staticpage_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        {% endif %}
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'Staticpage.tlabel.list'|trans|raw}}</h3>
+            </div>
+            <div class="box-body table-responsive">
+                <table id="staticpageList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Staticpage.pageUrl.label'|trans|raw }}</th>
+                            <th>{{ 'Staticpage.metaTitle.label'|trans|raw }}</th>
+                            <th>{{ 'Staticpage.breadcrumb.label'|trans|raw }}</th>
+                            <th>{{ 'Staticpage.pageTitle.label'|trans|raw }}</th>
+                            <th>{{ 'Action'|trans|raw }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if staticpages|length != 0 %}
+                        {% for staticpage in staticpages %}
+                        <tr>
+                            <td>{{ staticpage.pageUrl }}</td>
+                            <td>{{ staticpage.metaTitle }}</td>
+                            <td>{{ staticpage.breadcrumb }}</td>
+                            <td>{{ staticpage.pageTitle }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{{path('_admin_staticpage_editGet',{'id':staticpage.id})}}">{{ glyphIco('edit') }} {{ 'Action.edit'|trans }}</a>
+                                {%if is_granted('ROLE_SUPERSUPERADMIN')%}
+                                <a class="btn btn-sm btn-danger deleteConfirmStaticpage" href="{{path('_admin_staticpage_delete',{'id':staticpage.id})}}">{{ glyphIco('trash') }} {{ 'Action.delete'|trans }}</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">{{ 'Staticpage.empty'|trans|raw }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmStaticpage" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Staticpage.delete.confirm.title'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">
+        {{'Staticpage.delete.confirm.txt'|trans|raw}}
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_Yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_No'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock content%}

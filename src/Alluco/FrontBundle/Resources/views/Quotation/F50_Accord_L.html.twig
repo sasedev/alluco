@@ -1,0 +1,125 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li><a href="{{ path('_front_quotation') }}"> {{ rootquot.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ app.request.uri }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block sidebar %}
+<div class="widget widget-categories">
+    <h4>{{ 'menu.left.products'|trans }}<span class="head-line"></span></h4>
+    {% if groups | length != 0 %}
+    <ul id="expList">
+        {% for group in groups %}
+        <li>
+            <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                {{ group.name }}
+            </a>
+            {% if group.childs | length != 0 %}
+                {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group })) }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{{ parent() }}
+{% endblock sidebar %}
+{%block content%}
+{{ staticpage.pageContent|raw }}
+<br><br>
+{%include 'SasedevCommonsBootstrapBundle::flash.html.twig' with { 'close': false }%}
+{% if showform1 == true %}
+{{form_start(F50ALForm, {'method':'POST', 'action': app.request.uri, 'style': 'horizontal', 'attr': {'class': 'contact-form', 'role': 'form' } })}}
+<div>({{ 'Quotation.f50.entervaluescm'|trans }})</div>
+{{form_end(F50ALForm)}}
+{% endif %}
+{% if showform2 == true %}
+<div>{{ 'Quotation.f50.height.label'|trans }} : {{ height }} {{ '_meter'|trans }}</div>
+<div>{{ 'Quotation.f50.width.label'|trans }}: {{ width }} {{ '_meter'|trans }}</div>
+<br>
+
+<div><h3>{{ 'Quotation.requirements'|trans }} : </h3></div>
+<div>
+    <br>
+    {{form_start(F50ALOrderForm, {'method':'POST', 'action': app.request.uri, 'style': 'horizontal', 'attr': {'class': 'contact-form', 'role': 'form' } })}}
+    <h4>{{ 'Quotation.f50.prof.title'|trans }}</h4>
+    <br>
+    <table class="table table-hover table-striped table-condensed">
+    <thead>
+        <tr>
+            <th width="55%">{{ 'Quotation.requirements.ref'|trans }}</th>
+            <th width="15%">{{ 'Quotation.requirements.qte'|trans }}</th>
+            <th width="15%">{{ 'Quotation.requirements.dim'|trans }}</th>
+            <th width="15%">{{ 'Quotation.requirements.nbrb'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ profil1Name| trans }}</td>
+            <td>{{ profil1Qte }}</td>
+            <td>{{ profil1Dim }}</td>
+            <td>{{ profil1Nb }}</td>
+        </tr>
+        <tr>
+            <td>{{ profil2Name| trans }}</td>
+            <td>{{ profil2Qte }}</td>
+            <td>{{ profil2Dim }}</td>
+            <td>{{ profil2Nb }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(F50ALOrderForm.profil3Name, {'label_col': 0, 'widget_col': 11 })}}</td>
+            <td>{{ profil3Qte }}</td>
+            <td>{{ profil3Dim }}</td>
+            <td>{{ profil3Nb }}</td>
+        </tr>
+    </tbody>
+    </table>
+    <br>
+    <br>
+
+    <h4>{{ 'Quotation.f50.accessories.title'|trans }}</h4>
+    <br>
+    <table class="table table-hover table-striped table-condensed">
+    <thead>
+        <tr>
+            <th width="55%">{{ 'Quotation.requirements.ref'|trans }}</th>
+            <th width="45%">{{ 'Quotation.requirements.qte'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ form_row(F50ALOrderForm.access1Name, {'label_col': 0, 'widget_col': 11 })}}</td>
+            <td>{{ access1Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ access2Name| trans }}</td>
+            <td>{{ access2Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ access3Name| trans }}</td>
+            <td>{{ access3Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(F50ALOrderForm.access4Name, {'label_col': 0, 'widget_col': 11 })}}</td>
+            <td>{{ access4Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ access5Name| trans }}</td>
+            <td>{{ access5Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(F50ALOrderForm.access6Name, {'label_col': 0, 'widget_col': 11 })}}</td>
+            <td>{{ access6Qte }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_row(F50ALOrderForm.access7Name, {'label_col': 0, 'widget_col': 11 })}}</td>
+            <td>{{ access7Qte }}</td>
+        </tr>
+    </tbody>
+    </table>
+    <div class="text-center">{{ form_row(F50ALOrderForm.submit) }}</div>
+    {{form_end(F50ALOrderForm)}}
+</div>
+{% endif %}
+{%endblock content%}

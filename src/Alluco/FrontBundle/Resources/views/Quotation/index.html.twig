@@ -1,0 +1,39 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_front_quotation') }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block sidebar %}
+<div class="widget widget-categories">
+    <h4>{{ 'menu.left.products'|trans }}<span class="head-line"></span></h4>
+    {% if groups | length != 0 %}
+    <ul id="expList">
+        {% for group in groups %}
+        <li>
+            <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                {{ group.name }}
+            </a>
+            {% if group.childs | length != 0 %}
+                {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group })) }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{{ parent() }}
+{% endblock sidebar %}
+{% block content %}
+{% if staticpage.pageContentTrans is not empty  %}
+{{ staticpage.pageContentTrans|raw }}
+{% else %}
+<br>
+<br>
+<ul>
+{% for route in quotation_routes %}
+ <li><a href="{{ path(route.name) }}">{{ route.name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}

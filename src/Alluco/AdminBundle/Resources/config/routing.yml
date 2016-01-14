@@ -1,0 +1,520 @@
+_admin_translation_grid:
+    pattern:      /translations
+    defaults:     { _controller: "AllucoAdminBundle:Translation:grid" }
+    requirements: { _method: GET }
+
+_admin_translation_new:
+    pattern:      /translation/add
+    defaults: { _controller: "AllucoAdminBundle:Translation:new" }
+
+lexik_translation_grid:
+    pattern:      /lxktranslations
+    defaults:     { _controller: "LexikTranslationBundle:Translation:grid" }
+    requirements: { _method: GET }
+
+lexik_translation_new:
+    pattern:      /lxktranslation/add
+    defaults: { _controller: "LexikTranslationBundle:Translation:new" }
+
+lexik_translation_list:
+    pattern:      /translations/rest
+    defaults:     { _controller: "LexikTranslationBundle:Rest:list" }
+    requirements: { _method: GET }
+
+lexik_translation_update:
+    pattern:      /translation/{id}
+    defaults:     { _controller: "LexikTranslationBundle:Rest:update" }
+    requirements: { _method: PUT }
+
+lexik_translation_invalidate_cache:
+    pattern:      /translations/invalidate-cache
+    defaults: { _controller: "LexikTranslationBundle:Translation:invalidateCache" }
+
+_admin_homepage:
+    path:     /
+    defaults: { _controller: "AllucoAdminBundle:Default:index" }
+
+_admin_constantStr_list:
+    path:     /constantStrs
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:list" }
+
+_admin_constantStr_addGet:
+    path:     /constantStr/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:addGet" }
+    requirements:
+        _method: GET
+
+_admin_constantStr_addPost:
+    path:     /constantStr/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:addPost" }
+    requirements:
+        _method: POST
+
+_admin_constantStr_delete:
+    path:     /constantStr/delete/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:delete" }
+    requirements:
+        id: \d+
+
+_admin_constantStr_editGet:
+    path:     /constantStr/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_constantStr_editPost:
+    path:     /constantStr/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantStr:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_constantInt_list:
+    path:     /constantInts
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:list" }
+
+_admin_constantInt_addGet:
+    path:     /constantInt/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:addGet" }
+    requirements:
+        _method: GET
+
+_admin_constantInt_addPost:
+    path:     /constantInt/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:addPost" }
+    requirements:
+        _method: POST
+
+_admin_constantInt_delete:
+    path:     /constantInt/delete/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:delete" }
+    requirements:
+        id: \d+
+
+_admin_constantInt_editGet:
+    path:     /constantInt/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_constantInt_editPost:
+    path:     /constantInt/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantInt:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_constantFloat_list:
+    path:     /constantFloats
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:list" }
+
+_admin_constantFloat_addGet:
+    path:     /constantFloat/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:addGet" }
+    requirements:
+        _method: GET
+
+_admin_constantFloat_addPost:
+    path:     /constantFloat/add
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:addPost" }
+    requirements:
+        _method: POST
+
+_admin_constantFloat_delete:
+    path:     /constantFloat/delete/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:delete" }
+    requirements:
+        id: \d+
+
+_admin_constantFloat_editGet:
+    path:     /constantFloat/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_constantFloat_editPost:
+    path:     /constantFloat/edit/{uid}
+    defaults: { _controller: "AllucoAdminBundle:ConstantFloat:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_lang_list:
+    path:     /langs
+    defaults: { _controller: "AllucoAdminBundle:Lang:list" }
+
+_admin_lang_addGet:
+    path:     /lang/add
+    defaults: { _controller: "AllucoAdminBundle:Lang:addGet" }
+    requirements:
+        _method: GET
+
+_admin_lang_addPost:
+    path:     /lang/add
+    defaults: { _controller: "AllucoAdminBundle:Lang:addPost" }
+    requirements:
+        _method: POST
+
+_admin_lang_delete:
+    path:     /lang/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Lang:delete" }
+    requirements:
+        id: \d+
+
+_admin_lang_editGet:
+    path:     /lang/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Lang:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_lang_editPost:
+    path:     /lang/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Lang:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_role_list:
+    path:     /roles
+    defaults: { _controller: "AllucoAdminBundle:Role:list" }
+
+_admin_role_addGet:
+    path:     /role/add
+    defaults: { _controller: "AllucoAdminBundle:Role:addGet" }
+    requirements:
+        _method: GET
+
+_admin_role_addPost:
+    path:     /role/add
+    defaults: { _controller: "AllucoAdminBundle:Role:addPost" }
+    requirements:
+        _method: POST
+
+_admin_role_delete:
+    path:     /role/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Role:delete" }
+    requirements:
+        id: \d+
+
+_admin_role_editGet:
+    path:     /role/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Role:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_role_editPost:
+    path:     /role/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Role:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_job_list:
+    path:     /jobs
+    defaults: { _controller: "AllucoAdminBundle:Job:list" }
+
+_admin_job_addGet:
+    path:     /job/add
+    defaults: { _controller: "AllucoAdminBundle:Job:addGet" }
+    requirements:
+        _method: GET
+
+_admin_job_addPost:
+    path:     /job/add
+    defaults: { _controller: "AllucoAdminBundle:Job:addPost" }
+    requirements:
+        _method: POST
+
+_admin_job_delete:
+    path:     /job/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Job:delete" }
+    requirements:
+        id: \d+
+
+_admin_job_editGet:
+    path:     /job/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Job:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_job_editPost:
+    path:     /job/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Job:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_user_list:
+    path:     /users
+    defaults: { _controller: "AllucoAdminBundle:User:list" }
+
+_admin_user_addGet:
+    path:     /user/add
+    defaults: { _controller: "AllucoAdminBundle:User:addGet" }
+    requirements:
+        _method: GET
+
+_admin_user_addPost:
+    path:     /user/add
+    defaults: { _controller: "AllucoAdminBundle:User:addPost" }
+    requirements:
+        _method: POST
+
+_admin_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:User:delete" }
+    requirements:
+        id: \d+
+
+_admin_user_editGet:
+    path:     /user/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:User:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_user_editPost:
+    path:     /user/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:User:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_staticpage_list:
+    path:     /staticpages
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:list" }
+
+_admin_staticpage_addGet:
+    path:     /staticpage/add
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:addGet" }
+    requirements:
+        _method: GET
+
+_admin_staticpage_addPost:
+    path:     /staticpage/add
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:addPost" }
+    requirements:
+        _method: POST
+
+_admin_staticpage_delete:
+    path:     /staticpage/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:delete" }
+    requirements:
+        id: \d+
+
+_admin_staticpage_editGet:
+    path:     /staticpage/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_staticpage_editPost:
+    path:     /staticpage/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Staticpage:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_banner_list:
+    path:     /banners
+    defaults: { _controller: "AllucoAdminBundle:Banner:list" }
+
+_admin_banner_addGet:
+    path:     /banner/add
+    defaults: { _controller: "AllucoAdminBundle:Banner:addGet" }
+    requirements:
+        _method: GET
+
+_admin_banner_addPost:
+    path:     /banner/add
+    defaults: { _controller: "AllucoAdminBundle:Banner:addPost" }
+    requirements:
+        _method: POST
+
+_admin_banner_delete:
+    path:     /banner/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Banner:delete" }
+    requirements:
+        id: \d+
+
+_admin_banner_editGet:
+    path:     /banner/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Banner:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_banner_editPost:
+    path:     /banner/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Banner:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_sitenew_list:
+    path:     /sitenews
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:list" }
+
+_admin_sitenew_addGet:
+    path:     /sitenew/add
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:addGet" }
+    requirements:
+        _method: GET
+
+_admin_sitenew_addPost:
+    path:     /sitenew/add
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:addPost" }
+    requirements:
+        _method: POST
+
+_admin_sitenew_delete:
+    path:     /sitenew/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:delete" }
+    requirements:
+        id: \d+
+
+_admin_sitenew_editGet:
+    path:     /sitenew/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_sitenew_editPost:
+    path:     /sitenew/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Sitenew:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_contact_list:
+    path:     /contacts
+    defaults: { _controller: "AllucoAdminBundle:Contact:list" }
+
+_admin_contact_delete:
+    path:     /contact/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Contact:delete" }
+    requirements:
+        id: \d+
+
+_admin_contact_editGet:
+    path:     /contact/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Contact:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_product_list:
+    path:     /products
+    defaults: { _controller: "AllucoAdminBundle:Product:list" }
+
+_admin_product_addGet:
+    path:     /product/add
+    defaults: { _controller: "AllucoAdminBundle:Product:addGet" }
+    requirements:
+        _method: GET
+
+_admin_product_addPost:
+    path:     /product/add
+    defaults: { _controller: "AllucoAdminBundle:Product:addPost" }
+    requirements:
+        _method: POST
+
+_admin_product_delete:
+    path:     /product/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Product:delete" }
+    requirements:
+        id: \d+
+
+_admin_product_editGet:
+    path:     /product/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Product:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_product_editPost:
+    path:     /product/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Product:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_productpic_list:
+    path:     /productpics
+    defaults: { _controller: "AllucoAdminBundle:Productpic:list" }
+
+_admin_productpic_addGet:
+    path:     /productpic/add
+    defaults: { _controller: "AllucoAdminBundle:Productpic:addGet" }
+    requirements:
+        _method: GET
+
+_admin_productpic_addPost:
+    path:     /productpic/add
+    defaults: { _controller: "AllucoAdminBundle:Productpic:addPost" }
+    requirements:
+        _method: POST
+
+_admin_productpic_delete:
+    path:     /productpic/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productpic:delete" }
+    requirements:
+        id: \d+
+
+_admin_productpic_editGet:
+    path:     /productpic/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productpic:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_productpic_editPost:
+    path:     /productpic/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productpic:editPost" }
+    requirements:
+        _method: POST
+        id: \d+
+
+_admin_productdoc_list:
+    path:     /productdocs
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:list" }
+
+_admin_productdoc_addGet:
+    path:     /productdoc/add
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:addGet" }
+    requirements:
+        _method: GET
+
+_admin_productdoc_addPost:
+    path:     /productdoc/add
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:addPost" }
+    requirements:
+        _method: POST
+
+_admin_productdoc_delete:
+    path:     /productdoc/delete/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:delete" }
+    requirements:
+        id: \d+
+
+_admin_productdoc_editGet:
+    path:     /productdoc/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:editGet" }
+    requirements:
+        _method: GET
+        id: \d+
+
+_admin_productdoc_editPost:
+    path:     /productdoc/edit/{id}
+    defaults: { _controller: "AllucoAdminBundle:Productdoc:editPost" }
+    requirements:
+        _method: POST
+        id: \d+

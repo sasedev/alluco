@@ -1,0 +1,105 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/dataTables/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5-bs3patch.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/dataTables.bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5manager.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    {% if banners|length != 0 %}
+    $('#bannerList').dataTable({
+        {%if app.request.locale != 'en'%}
+        "language": {"url": '{{asset('bundles/allucores/css/dataTables/i18n/')~app.request.locale~".json"}}'},
+        {% endif %}
+        "columns": [
+            null,
+            null,
+            null,
+            { "searchable": false, "sortable": false },
+            { "searchable": false, "sortable": false }
+        ]
+    });
+    {% endif %}
+    $('.deleteConfirmBanner').click(function(e) {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmBanner').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmBanner').modal('show');
+    });
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_banner_list') }}">{{faIco('camera-retro')}} &nbsp; {{'Breadcrumb.admin.banner.list'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_banner_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'Banner.tlabel.list'|trans|raw}}</h3>
+            </div>
+            <div class="box-body table-responsive">
+                <table id="bannerList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Banner.rank.label'|trans|raw }}</th>
+                            <th>{{ 'Banner.alt.label'|trans|raw }}</th>
+                            <th>{{ 'Banner.title.label'|trans|raw }}</th>
+                            <th>{{ 'Banner.filename.label'|trans|raw }}</th>
+                            <th>{{ 'Action'|trans|raw }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if banners|length != 0 %}
+                        {% for banner in banners %}
+                        <tr>
+                            <td>{{ banner.rank }}</td>
+                            <td>{{ banner.alt }}</td>
+                            <td>{{ banner.title }}</td>
+                            <td><a href="{{ asset('res/banners/')~banner.filename }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/banners/')~banner.filename)| imagine_filter('thumbBanner')}}" alt="{{ banner.alt }}" title="{{ banner.title }}"></a></td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{{path('_admin_banner_editGet',{'id':banner.id})}}">{{ glyphIco('edit') }} {{ 'Action.edit'|trans }}</a>
+                                <a class="btn btn-sm btn-danger deleteConfirmBanner" href="{{path('_admin_banner_delete',{'id':banner.id})}}">{{ glyphIco('trash') }} {{ 'Action.delete'|trans }}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">{{ 'Banner.empty'|trans|raw }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmBanner" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Banner.delete.confirm.title'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">
+        {{'Banner.delete.confirm.txt'|trans|raw}}
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_Yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_No'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock content%}

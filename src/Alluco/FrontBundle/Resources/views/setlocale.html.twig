@@ -1,0 +1,10 @@
+<button class="btn dropdown-toggle" type="button" id="lngselect" data-toggle="dropdown" aria-expanded="true">
+    <i class="fa fa-language"></i> {{ current_locale|upper }} <span class="caret"></span>
+</button>
+<ul class="text-right dropdown-menu" role="menu" aria-labelledby="lngselect">
+        {% for locale in locales %}
+            <li{% if current_locale == locale.locale %} class="locale_current"{% endif %}>
+                <a role="menuitem" tabindex="-1"  href="{{ locale.link }}" title="{{ locale.locale_current_language }}"> {{ locale.locale_current_language|capitalize }}</a>
+            </li>
+        {% endfor %}
+</ul>

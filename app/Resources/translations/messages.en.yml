@@ -1,0 +1,197 @@
+action: Action
+action.list: List
+action.add: Add
+action.edit: Edit
+action.update: 'Update'
+action.delete: Delete
+action.btnAdd: Add
+action.btnEdit: Update
+action.btnUpload: Upload
+action.btnDownload: Download
+action.btnSelect: Select
+action.btnCancel: Cancel
+action.btnSend: Send
+action.btnLogin: Connexion
+action.btnRegister: Registration
+action.btnLostpass: 'Lost Password'
+action.btnReset: Reset
+menu.list: List
+menu.add: Add
+menu.logout: Logout
+menu.profile: 'My Profile'
+menu.lostpassword: 'Lost Password ?'
+menu.register: Registration
+_at: at
+_yes: Yes
+_no: No
+_na: 'Not Available'
+_none: None
+options.choose: 'Choose an option'
+_mail.lostPassword.subject: '[Alluco.com] request for password reset'
+_mail.lostPassword.body: 'Hi <u><i>%fullname%</i></u>,<br><br>[Alluco.com] has recived à request to reset your password.<br><br>for resetting your [Alluco.com] password, please click on the current link <a href="%url%">%url%</a>.<br><br>If you have not requested this change, you can ignore this mail.<br><br>The link provided Expire in One hour.'
+_mail.genNewPassword.subject: '[Alluco.com] Votre nouveau mot de passe'
+_mail.genNewPassword.body: 'Hello <u><i>%fullname%</i></u>,<br><br>Your [Alluco.com] password has been reseted with success!<br><br>You can Login using the currents parameters:<br><br>Login : <b>%username%</b><br><br>Password: <b>%password%</b>'
+_security.username.placeholder: 'Please enter your Login'
+_security.password.placeholder: 'Please enter your Password'
+'Bad credentials': '<b>Login</b> or <b>Password</b> Incorrect.'
+_security.register.ok: 'The Account "<b>%username%</b>" have been successfully added'
+_security.register.already: 'The Account "<b>%username%</b>" already exist'
+_security.lostPassword: 'Please enter your <strong>Login</strong> to recive the reset link by e-mail'
+_security.lostPassword.notfound: 'Account Unknown "<b>%username%</b>"'
+_security.lostPassword.alreadySent: 'This Account has already a pending reset request!<br>Please read you emails.'
+_security.lostPassword.mail.newpassSent: 'An e-mail with the reset link have been sent to the current address "<b>%mail%</b>"'
+_security.genNewPassword.errorparams1: 'Account Unknown.'
+_security.genNewPassword.errorparams2: 'Link Expired.'
+_security.genNewPassword.errorparams3: 'Invalid Code.'
+_security.genNewPassword.errorparams4: 'Invalid Link'
+_security.genNewPassword.ok: 'A new Password have been generated and sended to your MailBox'
+profile.fullName: 'FullName'
+profile.username: User Name
+profile.email: Email
+profile.logins: 'Nbr Connexions'
+profile.lastLogin: 'Last Connexion'
+profile.avatar: Avatar
+profile.lockout: Lockout
+profile.lockout.1: 'Actif Account'
+profile.lockout.2: 'Locked Account'
+profile.preferedLang: 'Prefered Language'
+profile.sexe: Civility
+profile.sexe.1: Miss
+profile.sexe.2: Mme
+profile.sexe.3: Mr
+profile.userType: Type
+profile.userType.1: Self
+profile.userType.2: Company
+profile.company: Company
+profile.fisc: 'Fiscale Matricule'
+profile.job: Job
+profile.otherInfos: 'Other Informations'
+profile.firstName: First Name
+profile.lastName: Last Name
+profile.birthday: 'BirthDay'
+profile.streetNum: 'Street Num'
+profile.address: Address
+profile.address2: 'Address (bis)'
+profile.town: Town
+profile.zipCode: 'Zip Code'
+profile.country: Country
+profile.phone: 'Phone'
+profile.mobile: 'Mobile'
+profile.userRoles: Roles
+profile.dtCrea: 'Creation Date'
+profile.dtUpdate: 'Updated at'
+profile.password.label: 'Password :'
+profile.rememberme.label: 'Remember me'
+profile.avatar.label: 'Avatar :'
+profile.fullName.label: 'Full Name :'
+profile.username.label: 'Login :'
+profile.email.label: 'Email :'
+profile.clearPassword.label: 'Password :'
+profile.captcha.label: 'Captcha Code :'
+profile.lockout.label: 'Lockout :'
+profile.lockout.choice.1: Activate
+profile.lockout.choice.2: Lock
+profile.preferedLang.label: 'Prefered Language :'
+profile.sexe.label: 'Civily :'
+profile.sexe.choice.1: Miss
+profile.sexe.choice.2: Mme
+profile.sexe.choice.3: Mr
+profile.userType.label: 'Type :'
+profile.userType.choice.1: Self
+profile.userType.choice.2: Company
+profile.company.label: 'Company :'
+profile.fisc.label: 'Fiscale Matricule :'
+profile.job.label: 'Job :'
+profile.firstName.label: 'First Name :'
+profile.lastName.label: 'Last Name :'
+profile.birthday.label: 'BirthDay :'
+profile.streetNum.label: 'Street Num :'
+profile.address.label: 'Address :'
+profile.address2.label: 'Address (bis) :'
+profile.town.label: 'Town :'
+profile.zipCode.label: 'Zip Code :'
+profile.country.label: 'Country :'
+profile.phone.label: 'Phone :'
+profile.mobile.label: 'Mobile :'
+profile.fax.label: 'Fax :'
+profile.userRoles.label: 'Roles :'
+profile.oldPassword.label: 'Old Password :'
+profile.newPassword.first: 'New Password :'
+profile.newPassword.second: 'Confirmation Password :'
+profile.otherInfos.label: 'Other Informations :'
+profile.tab.overview: Overview
+profile.tab.edit: Edit
+profile.tlabel.overview: 'Profile Overview'
+profile.tlabel.editAvatar: 'Update my Avatar'
+profile.tlabel.editAvatar.crop: 'Select visible part'
+profile.tlabel.editProfile: 'Update my Profile informations'
+profile.tlabel.editPreferedLang: 'Update my prefered Language'
+profile.tlabel.editEmail: 'Update my Email'
+profile.tlabel.editPassword: 'Update my Password'
+profile.tlabel.editJob: 'Update my Job'
+profile.edit.success: 'Profile Update Success'
+profile.edit.failure: 'Profile Update Failure'
+site.global.mail: info@alluco.com
+site.global.mailto: 'mailto:info@alluco.com'
+site.global.phone1: '(+216) 73 416 300'
+site.global.phone1.call: 'call:+216.73416300'
+site.global.fax.call: 'call:+216.73416317'
+site.global.fax: '(+216) 73 416 317'
+site.global.phone2.call: 'call:+216.71757228'
+site.global.phone2: '(+216) 71 757 228'
+facebook.url: 'https://www.facebook.com/profile.php?id=100004326737433'
+twitter.url: 'http://www.Twitter.com'
+linkedin.url: 'http://www.Linkedin.com'
+skype.url: 'http://www.skype.com'
+bottom.followus: 'Follow Us'
+bottom.contactus: Contact-us
+site.global.addr.moknine.title: 'Show Room Moknine'
+site.global.addr.moknine: 'ZI BP 47 5050 Moknine Tunisie'
+site.global.addr.tunis.title: 'Show Room Tunis'
+site.global.addr.tunis: 'Rte de Raoued Km 4.5 Jaafer 1'
+menu.ourproducts: 'Our Products'
+menu.bottom.links: Links
+menu.bottom.ourproducts: 'Our Products'
+menu.footer.home: Home
+menu.footer.contact: 'Contact Us'
+menu.footer.certificats: 'Our Certifications'
+menu.footer.partenaires: 'Our Partners'
+menu.footer.sitenews: News
+menu.footer.profile: 'My Profile'
+menu.footer.logout: Logout
+menu.footer.login: Login
+menu.footer.register: Register
+menu.top.home: Home
+menu.top.products: Products
+menu.top.sitenews: News
+menu.top.download: Downloads
+menu.top.clientspace: 'Client Space'
+menu.top.profile: 'My Profile'
+menu.top.admin: Admin
+menu.top.logout: Logout
+menu.top.quotation: 'Quotation online'
+menu.left.links: Links
+menu.left.home: Home
+menu.left.contactus: 'Contact Us'
+menu.left.certifications: 'Our certifications'
+menu.left.partenaires: 'Our Partners'
+menu.left.sitenews: News
+menu.left.products: 'Our Products'
+placeholder.top.search: Search
+product.childs.title: Products
+product.description.tab: Description
+product.description.title: 'Product Description'
+product.docs.title: 'Product Documents'
+product.pics.tab: Galery
+product.pics.title: 'Image Galery'
+contact.firstName.label: 'First Name :'
+contact.lastName.label: 'Last Name :'
+contact.email.label: 'Email :'
+contact.phone.label: 'Phone :'
+contact.job.label: 'Job :'
+contact.company.label: 'Company :'
+contact.subject.label: 'Object :'
+contact.msg.label: 'Message :'
+contact.captcha.label: 'Captcha Code :'
+contact.send.success: 'Message sent successfully'
+contact.send.failure: 'An Error occured while trying to send Message'

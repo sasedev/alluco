@@ -1,0 +1,27 @@
+parameters:
+    sasedev_commons_bootstrap.extension.twigbasic.class: Sasedev\Commons\BootstrapBundle\Extension\TwigBasicExtension
+    sasedev_commons_bootstrap.extension.twigform.class: Sasedev\Commons\BootstrapBundle\Extension\TwigFormExtension
+    sasedev_commons_bootstrap.form.extension.typesetter_extension.class: Sasedev\Commons\BootstrapBundle\Form\Extension\TypeSetterExtension
+    sasedev_commons_bootstrap.form.type.collection.class: Sasedev\Commons\BootstrapBundle\Form\Type\BootstrapCollectionType
+
+services:
+    sasedev_commons_bootstrap.extension.twigbasic:
+        class: %sasedev_commons_bootstrap.extension.twigbasic.class%
+        tags:
+            - { name: twig.extension }
+    sasedev_commons_bootstrap.extension.twigform:
+        class: %sasedev_commons_bootstrap.extension.twigform.class%
+        tags:
+            - { name: twig.extension }
+    sasedev_commons_bootstrap.extension.twigform:
+        class: %sasedev_commons_bootstrap.extension.twigform.class%
+        tags:
+            - { name: twig.extension }
+    sasedev_commons_bootstrap.form.extension.typesetter_extension:
+        class: %sasedev_commons_bootstrap.form.extension.typesetter_extension.class%
+        tags:
+            - { name: form.type_extension, alias: form }
+    sasedev_commons_bootstrap.form.type.collection:
+        class: %sasedev_commons_bootstrap.form.type.collection.class%
+        tags:
+            - { name: form.type, alias: bootstrap_collection }

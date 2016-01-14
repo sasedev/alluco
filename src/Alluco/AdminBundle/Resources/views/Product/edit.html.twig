@@ -1,0 +1,478 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/dataTables/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5-bs3patch.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/chosen/1.2.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/dataTables.bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5manager.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/chosen/1.2.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code", "nonbreaking save table contextmenu directionality", "paste textcolor", "responsivefilemanager" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            toolbar: "insertfile undo redo | styleselect | fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | responsivefilemanager | preview ",
+            external_filemanager_path:"/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "/filemanager/plugin.min.js"},
+            content_css : "{{asset('bundles/allucores/css/theme/Bootstrap/3.3.4.css')}}, {{asset('bundles/allucores/css/theme/margo/style.css')}}"
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+
+    $("#ProductUpdateThumbForm_thumb").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+
+    $('#ProductUpdateParentForm_productParent').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+
+
+    $("#ProductpicNewForm_filename").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+
+    {% if product.pics|length != 0 %}
+    $('#productpicList').dataTable({
+        {%if app.request.locale != 'en'%}
+        "language": {"url": '{{asset('bundles/allucores/css/dataTables/i18n/')~app.request.locale~".json"}}'},
+        {% endif %}
+        "columns": [
+            null,
+            { "searchable": false, "sortable": false },
+            { "searchable": false, "sortable": false }
+        ]
+    });
+    {% endif %}
+    $('.deleteConfirmProductpic').click(function(e) {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmProductpic').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmProductpic').modal('show');
+    });
+
+    $("#ProductdocNewForm_filename").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Documents", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+
+    {% if product.docs|length != 0 %}
+    $('#productdocList').dataTable({
+        {%if app.request.locale != 'en'%}
+        "language": {"url": '{{asset('bundles/allucores/css/dataTables/i18n/')~app.request.locale~".json"}}'},
+        {% endif %}
+        "columns": [
+            null,
+            null,
+            null,
+            null,
+            { "searchable": false, "sortable": false }
+        ]
+    });
+    {% endif %}
+    $('.deleteConfirmProductdoc').click(function(e) {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmProductdoc').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmProductdoc').modal('show');
+    });
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_product_list') }}">{{faIco('archive')}} &nbsp; {{'Breadcrumb.admin.product.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_product_editGet', {'id': product.id}) }}">{{glyphIco('edit')}} &nbsp; {{'Breadcrumb.admin.product.edit'|trans({'%product%': product.pageTitle})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_product_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+            <a href="{{ path('_admin_product_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li {%if tabActive==1%} class="active"{%endif%}><a href="#overview" data-toggle="tab">{{'Product.tab.overview'|trans|raw}}</a></li>
+                <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Product.tab.edit'|trans|raw}}</a></li>
+                <li {%if tabActive==3%} class="active"{%endif%}><a href="#pics" data-toggle="tab">{{'Product.tab.pics'|trans|raw}}</a></li>
+                <li {%if tabActive==4%} class="active"{%endif%}><a href="#docs" data-toggle="tab">{{'Product.tab.docs'|trans|raw}}</a></li>
+                {% for productTrans in product.i18ns %}
+                <li {%if tabActive==productTrans.lang.locale%} class="active"{%endif%}><a href="#{{ productTrans.lang.locale }}" data-toggle="tab">{{'Product.tab.trans'|trans({'%lang%': productTrans.lang.name})|raw}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="overview">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                {% if null != product.productParent %}
+                                <div class="col-lg-3 text-right">{{'Product.productParent'|trans|raw}} :</div>
+                                <div class="col-lg-9"><a href="{{ path('_admin_product_editGet', {'id': product.productParent.id}) }}">{{product.productParent.name}}</a>&nbsp;</div>
+                                {% endif %}
+                                <div class="col-lg-3 text-right">{{'Product.pageUrl'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.pageUrl}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.pageUrlFull'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.pageUrlFull}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.name'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.name}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.thumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{% if product.thumb is not empty %}<a href="{{ asset('res/prods/')~product.thumb }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/prods/')~product.thumb)| imagine_filter('thumbProd')}}" alt="{{ product.thumbAlt }}" title="{{ product.thumbTitle }}"></a>{% else %}{{ '_NA'|trans }}{% endif %}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.thumbAlt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.thumbAlt }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.thumbTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.thumbTitle }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.rank'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ product.rank }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{product.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Product.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{product.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{product.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateForm.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateForm.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateForm.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateForm.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateForm.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateForm.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editParent'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateParentForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateParentForm.productParent, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateParentForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editName'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateNameForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateNameForm.name, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateNameForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editRank'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateRankForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateRankForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateRankForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editThumb'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateThumbForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateThumbForm.thumb, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateThumbForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editThumbInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdateThumbInfoForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdateThumbInfoForm.thumbAlt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductUpdateThumbInfoForm.thumbTitle, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdateThumbInfoForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Product.tlabel.editPageUrl'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(ProductUpdatePageUrlForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductUpdatePageUrlForm.pageUrl, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductUpdatePageUrlForm)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="pics">
+                    <div id="accordion01" class="box-group">
+                        <div class="panel box box-danger">
+                            <div class="box-header">
+                                <h4 class="box-title"><a href="#collapse11" data-parent="#accordion01" data-toggle="collapse">{{'Product.tlabel.pics.add'|trans}}</a></h4>
+                            </div>
+                            <div id="collapse11" class="panel-collapse collapse{%if tabActive==3%} in{%endif%}">
+                                <div class="box-body">
+                                    {{form_start(ProductpicNewForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                                    {{form_row(ProductpicNewForm.product, {'label_col': 3, 'widget_col': 8, 'attr': {'row_class': 'hidden'} })}}
+                                    {{form_row(ProductpicNewForm.filename, {'label_col': 3, 'widget_col': 8})}}
+                                    {{form_row(ProductpicNewForm.alt, {'label_col': 3, 'widget_col': 8})}}
+                                    {{form_row(ProductpicNewForm.title, {'label_col': 3, 'widget_col': 8})}}
+                                    {{form_row(ProductpicNewForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                                    <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnAdd'|trans|raw}}</button></div></div>
+                                    {{form_end(ProductpicNewForm)}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel box">
+                            <div class="box-header">
+                                <h4 class="box-title"><a href="#collapse12" data-parent="#accordion01" data-toggle="collapse">{{'Product.tlabel.pics.list'|trans}}</a></h4>
+                            </div>
+                            <div id="collapse12" class="panel-collapse collapse{%if tabActive!=3%} in{%endif%}">
+                                <div class="box-body table-responsive">
+                                    <table id="productpicList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'Productpic.rank.label'|trans|raw }}</th>
+                                                <th>{{ 'Productpic.filename.label'|trans|raw }}</th>
+                                                <th>{{ 'Action'|trans|raw }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if product.pics|length != 0 %}
+                                            {% for productpic in product.pics %}
+                                            <tr>
+                                                <td>{{ productpic.rank }}</td>
+                                                <td><a href="{{ asset('res/pics/')~productpic.filename }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/pics/')~productpic.filename)| imagine_filter('thumbProductpic')}}" alt="{{ productpic.alt }}" title="{{ productpic.title }}"></a></td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-info" href="{{path('_admin_productpic_editGet',{'id':productpic.id})}}">{{ glyphIco('edit') }} {{ 'Action.edit'|trans }}</a>
+                                                    <a class="btn btn-sm btn-danger deleteConfirmProductpic" href="{{path('_admin_productpic_delete',{'id':productpic.id})}}">{{ glyphIco('trash') }} {{ 'Action.delete'|trans }}</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3">{{ 'Productpic.empty'|trans|raw }}</td>
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==4%} in active{%endif%}" id="docs">
+                    <div id="accordion02" class="box-group">
+                        <div class="panel box box-danger">
+                            <div class="box-header">
+                                <h4 class="box-title"><a href="#collapse21" data-parent="#accordion02" data-toggle="collapse">{{'Product.tlabel.docs.add'|trans}}</a></h4>
+                            </div>
+                            <div id="collapse21" class="panel-collapse collapse{%if tabActive==4%} in{%endif%}">
+                                <div class="box-body">
+                                    {{form_start(ProductdocNewForm, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                                    {{form_row(ProductdocNewForm.product, {'label_col': 3, 'widget_col': 8, 'attr': {'row_class': 'hidden'} })}}
+                                    {{form_row(ProductdocNewForm.filename, {'label_col': 3, 'widget_col': 8})}}
+                                    {{form_row(ProductdocNewForm.title, {'label_col': 3, 'widget_col': 8})}}
+                                    {{form_row(ProductdocNewForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                                    <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnAdd'|trans|raw}}</button></div></div>
+                                    {{form_end(ProductdocNewForm)}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel box">
+                            <div class="box-header">
+                                <h4 class="box-title"><a href="#collapse22" data-parent="#accordion02" data-toggle="collapse">{{'Product.tlabel.docs.list'|trans}}</a></h4>
+                            </div>
+                            <div id="collapse22" class="panel-collapse collapse{%if tabActive!=4%} in{%endif%}">
+                                <div class="box-body table-responsive">
+                                    <table id="productdocList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'Productdoc.rank.label'|trans|raw }}</th>
+                                                <th>{{ 'Productdoc.filename.label'|trans|raw }}</th>
+                                                <th>{{ 'Productdoc.size.label'|trans|raw }}</th>
+                                                <th>{{ 'Productdoc.mimeType.label'|trans|raw }}</th>
+                                                <th>{{ 'Action'|trans|raw }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if product.docs|length != 0 %}
+                                            {% for productdoc in product.docs %}
+                                            <tr>
+                                                <td>{{ productdoc.rank }}</td>
+                                                <td><a href="{{ asset('res/docs/')~productdoc.filename }}" target="_blank">{{ productdoc.originalName}}</a></td>
+                                                <td>{%if productdoc.size<1024%}
+                                                        {{productdoc.size}} o
+                                                    {%elseif productdoc.size<(1024*1024)%}
+                                                        {{'%.2f'|format(productdoc.size/1024)}} Ko
+                                                    {%elseif productdoc.size<(1024*1024*1024)%}
+                                                        {{'%.2f'|format(productdoc.size/1024/1024)}} Mo
+                                                    {%else%}
+                                                        {{'%.2f'|format(productdoc.size/1024/1024/1024)}} Go
+                                                    {% endif %}</td>
+                                                <td>{{ productdoc.mimeType }}</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-info" href="{{path('_admin_productdoc_editGet',{'id':productdoc.id})}}">{{ glyphIco('edit') }} {{ 'Action.edit'|trans }}</a>
+                                                    <a class="btn btn-sm btn-danger deleteConfirmProductdoc" href="{{path('_admin_productdoc_delete',{'id':productdoc.id})}}">{{ glyphIco('trash') }} {{ 'Action.delete'|trans }}</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="5">{{ 'Productdoc.empty'|trans|raw }}</td>
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for productTrans in product.i18ns %}
+                <div class="tab-pane fade{%if tabActive==productTrans.lang.locale%} in active{%endif%}" id="{{ productTrans.lang.locale }}">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'ProductTrans.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'ProductTrans.name'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productTrans.name}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productTrans.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.thumbAlt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.thumbAlt }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.thumbTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ productTrans.thumbTitle }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productTrans.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{product.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'ProductTrans.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{productTrans.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{product.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'ProductTrans.tlabel.editName'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set ProductTransUpdateNameForm_loc = ProductTransUpdateNameForm[productTrans.lang.locale] %}
+                            {{form_start(ProductTransUpdateNameForm_loc, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductTransUpdateNameForm_loc.name, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductTransUpdateNameForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'ProductTrans.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set ProductTransUpdateForm_loc = ProductTransUpdateForm[productTrans.lang.locale] %}
+                            {{form_start(ProductTransUpdateForm_loc, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductTransUpdateForm_loc.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateForm_loc.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateForm_loc.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateForm_loc.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateForm_loc.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateForm_loc.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductTransUpdateForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'ProductTrans.tlabel.editThumbInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set ProductTransUpdateThumbInfoForm_loc = ProductTransUpdateThumbInfoForm[productTrans.lang.locale] %}
+                            {{form_start(ProductTransUpdateThumbInfoForm_loc, {'method':'POST', 'action': path('_admin_product_editPost', {'id': product.id}), 'style': 'horizontal'})}}
+                            {{form_row(ProductTransUpdateThumbInfoForm_loc.thumbAlt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(ProductTransUpdateThumbInfoForm_loc.thumbTitle, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(ProductTransUpdateThumbInfoForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmProductpic" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Productpic.delete.confirm.title'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">
+        {{'Productpic.delete.confirm.txt'|trans|raw}}
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_Yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_No'|trans|raw}}</button>
+    </div>
+</div>
+<div id="deleteConfirmProductdoc" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Productdoc.delete.confirm.title'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">
+        {{'Productdoc.delete.confirm.txt'|trans|raw}}
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_Yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_No'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock content%}

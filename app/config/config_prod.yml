@@ -1,0 +1,43 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    validation:
+        cache: apc
+
+doctrine:
+    orm:
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
+
+monolog:
+    handlers:
+        syslog_error:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_error.log"
+            level: error
+        syslog_info:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_info.log"
+            level: info
+        syslog_debug:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_debug.log"
+            level: debug
+        console:
+            type:   console
+            bubble: false
+#        main:
+#            type:         fingers_crossed
+#            action_level: error
+#            handler:      nested
+#        nested:
+#            type:  stream
+#            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+#            level: debug
+#        console:
+#            type:  console
+
+swiftmailer:
+    delivery_address: seif@sasedev.net

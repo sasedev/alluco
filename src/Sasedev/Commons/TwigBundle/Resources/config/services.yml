@@ -1,0 +1,57 @@
+parameters:
+    sasedev_commons_twig.CallPhp.class: Sasedev\Commons\TwigBundle\Extension\PhpExtension
+    sasedev_commons_twig.FontAwesomeIcon.class: Sasedev\Commons\TwigBundle\Extension\FontAwesomeIconExtension
+    sasedev_commons_twig.FoundationIcon.class: Sasedev\Commons\TwigBundle\Extension\FoundationIconExtension
+    sasedev_commons_twig.GlyphIcon.class: Sasedev\Commons\TwigBundle\Extension\GlyphIconExtension
+    sasedev_commons_twig.IonIcon.class: Sasedev\Commons\TwigBundle\Extension\IonIconExtension
+    sasedev_commons_twig.ElusiveIcon.class: Sasedev\Commons\TwigBundle\Extension\ElusiveIconExtension
+    sasedev_commons_twig.OctIcon.class: Sasedev\Commons\TwigBundle\Extension\OctIconExtension
+    sasedev_commons_twig.MegaOctIcon.class: Sasedev\Commons\TwigBundle\Extension\MegaOctIconExtension
+
+services:
+
+#    sasedev_commons_twig.string_loader:
+#        class: "Twig_Loader_String"
+#    sasedev_commons_twig.string:
+#        class:        "%twig.class%"
+#        arguments:    ["@sasedev_commons_twig.string_loader", "%twig.options%" ]
+
+    sasedev_commons_twig.CallPhp:
+        class: "%sasedev_commons_twig.CallPhp.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.FontAwesomeIcon:
+        class: "%sasedev_commons_twig.FontAwesomeIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.FoundationIcon:
+        class: "%sasedev_commons_twig.FoundationIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.GlyphIcon:
+        class: "%sasedev_commons_twig.GlyphIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.IonIcon:
+        class: "%sasedev_commons_twig.IonIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.ElusiveIcon:
+        class: "%sasedev_commons_twig.ElusiveIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.OctIcon:
+        class: "%sasedev_commons_twig.OctIcon.class%"
+        tags:
+            - { name: twig.extension }
+
+    sasedev_commons_twig.MegaOctIcon:
+        class: "%sasedev_commons_twig.MegaOctIcon.class%"
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,35 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li><a href="{{ path('_front_sitenews') }}"> {{ rootnews.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}">{{ sitenew.pageTitleTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block contentbody %}
+<div class="col-md-9 blog-box">
+	<div class="blog-post standard-post">
+
+
+		{% if sitenew.thumb is not empty %}
+		<div class="post-head">
+			<a class="lightbox" href="/res/news/{{ sitenew.thumb }}" title="{{ sitenew.pageTitleTrans }}">
+				<div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
+				<img src="/res/news/{{ sitenew.thumb }}" alt="{{ sitenew.thumbAltTrans }}" title="{{ sitenew.thumbTitleTrans }}">
+			</a>
+		</div>
+		{% endif %}
+		<div class="post-content">
+			<div class="post-type">
+				<i class="fa fa-pencil"></i>
+			</div>
+			<h2>
+				<a href="{{ path('_front_sitenew', {'pageUrl': sitenew.pageUrl}) }}">{{ sitenew.pageTitleTrans }}</a>
+			</h2>
+			{{ sitenew.pageContentTrans|raw }}
+			<ul class="post-meta">
+				<li>{{ sitenew.dtCrea|localeDate('long') }}</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{%endblock contentbody%}

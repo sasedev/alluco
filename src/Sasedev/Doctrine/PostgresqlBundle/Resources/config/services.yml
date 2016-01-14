@@ -1,0 +1,4 @@
+services:
+#    sasedev_doctrine_postgresql.example:
+#        class: Sasedev\Doctrine\PostgresqlBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

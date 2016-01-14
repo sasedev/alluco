@@ -1,0 +1,110 @@
+{%extends 'AllucoSecurityBundle::security.html.twig'%}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/datetimepicker/2.3.1.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/chosen/1.2.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/datetimepicker/2.3.1.js')}}"></script>
+{%if app.request.locale != 'en'%}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/datetimepicker/locales/2.3.1.'~app.request.locale~'.js')}}"></script>
+{% endif %}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/chosen/1.2.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "nonbreaking save table contextmenu directionality", "template paste textcolor" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            menubar: false,
+            toolbar: "insertfile undo redo | styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | preview "
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+
+    $('#RegisterForm_birthday').datetimepicker({
+        weekStart: 1,
+        startView: 4,
+        minView: 2,
+        autoclose: true,
+        todayHighlight: true,
+        language: "{{app.request.locale}}",
+        format: 'yyyy-mm-dd'
+    });
+
+    $('#RegisterForm_sexe').chosen({width: "100%", disable_search_threshold: 10});
+
+    $('#RegisterForm_country').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+    $('#RegisterForm_preferedLang').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+    $('#RegisterForm_preferedLang').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+    $('#RegisterForm_job').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+    $('#RegisterForm_userType').chosen({width: "100%", disable_search_threshold: 10, allow_single_deselect:true});
+
+
+
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{ path('_security_register') }}"> {{ staticpage.breadcrumbTrans }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block banner %}{% endblock banner %}
+{%block content%}
+{%include 'SasedevCommonsBootstrapBundle::flash.html.twig' with { 'close': false }%}
+{{form_start(RegisterForm, {'method':'POST', 'action': path('_security_register'), 'style': 'horizontal', 'attr': {'class': 'contact-form', 'role': 'form' } })}}
+{{form_row(RegisterForm.username, {'label_col': 3, 'widget_col': 8, 'attr': {'placeholder': '_security.username.placeholder'}})}}
+{{form_row(RegisterForm.email, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.clearPassword, { 'label_col': 3, 'widget_col': 5})}}
+{{form_row(RegisterForm.sexe, {'label_col': 3, 'widget_col': 3})}}
+{{form_row(RegisterForm.firstName, {'label_col': 3, 'widget_col': 5})}}
+{{form_row(RegisterForm.lastName, {'label_col': 3, 'widget_col': 5})}}
+{{form_row(RegisterForm.birthday, {'label_col': 3, 'widget_col': 3})}}
+{{form_row(RegisterForm.streetNum, {'label_col': 3, 'widget_col': 3})}}
+{{form_row(RegisterForm.address, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+{{form_row(RegisterForm.address2, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+{{form_row(RegisterForm.town, {'label_col': 3, 'widget_col': 5})}}
+{{form_row(RegisterForm.zipCode, {'label_col': 3, 'widget_col': 3})}}
+{{form_row(RegisterForm.country, {'label_col': 3, 'widget_col': 6})}}
+{{form_row(RegisterForm.phone, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.mobile, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.fax, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.company, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.fisc, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.job, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.userType, {'label_col': 3, 'widget_col': 5 })}}
+{{form_row(RegisterForm.job, {'label_col': 3, 'widget_col': 5 })}}
+
+{{form_row(RegisterForm.preferedLang, {'label_col': 3, 'widget_col': 5 })}}
+
+{{form_row(RegisterForm.otherInfos, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+{{form_row(RegisterForm.captcha, {'label_col': 3, 'widget_col': 8 })}}
+
+
+<br>
+{{form_row(RegisterForm.submit, {'label_col': 3, 'widget_col': 4, 'attr': {'class': 'btn-block btn-primary'} })}}
+
+
+  <hr>
+    <div class="form-group"><div class="col-lg-offset-3 col-lg-4"><a href="{{path('_security_login')}}" class="btn-block btn btn-primary">{{glyphIco('user')}} {{ 'action.btnLogin'|trans }}</a></div></div>
+    <div class="form-group"><div class="col-lg-offset-3 col-lg-4"><a href="{{path('_security_lost_password')}}" class="btn-block btn btn-primary">{{ 'action.btnLostpass'|trans }}</a></div></div>
+</div>
+{{form_end(RegisterForm)}}
+{%endblock content%}

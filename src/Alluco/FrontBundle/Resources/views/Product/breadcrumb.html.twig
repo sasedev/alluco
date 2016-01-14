@@ -1,0 +1,4 @@
+{% if group.productParent is not null %}
+{{ render(controller('AllucoFrontBundle:Product:widgetBreadcrumb', { 'group': group.productParent , 'active': false})) }}
+{% endif %}
+<li{% if active == true %} class="active"{% endif %}><a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}"> {{ group.breadcrumbTrans }}</a></li>

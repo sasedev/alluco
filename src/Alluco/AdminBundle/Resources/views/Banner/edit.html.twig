@@ -1,0 +1,129 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $("#BannerUpdateContentForm_filename").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_banner_list') }}">{{faIco('camera-retro')}} &nbsp; {{'Breadcrumb.admin.banner.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_banner_editGet', {'id': banner.id}) }}">{{glyphIco('edit')}} &nbsp; {{'Breadcrumb.admin.banner.edit'|trans({'%banner%': banner.filename})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_banner_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+            <a href="{{ path('_admin_banner_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li {%if tabActive==1%} class="active"{%endif%}><a href="#overview" data-toggle="tab">{{'Banner.tab.overview'|trans|raw}}</a></li>
+                <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Banner.tab.edit'|trans|raw}}</a></li>
+                {% for bannerTrans in banner.i18ns %}
+                <li {%if tabActive==bannerTrans.lang.locale%} class="active"{%endif%}><a href="#{{ bannerTrans.lang.locale }}" data-toggle="tab">{{'Banner.tab.trans'|trans({'%lang%': bannerTrans.lang.name})|raw}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="overview">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'Banner.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'Banner.filename'|trans|raw}} :</div>
+                                <div class="col-lg-9"><a href="{{ asset('res/banners/')~banner.filename }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/banners/')~banner.filename)| imagine_filter('bigthumbBanner')}}" alt="{{ banner.alt }}" title="{{ banner.title }}"></a>&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Banner.alt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ banner.alt }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Banner.title'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{banner.title}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Banner.rank'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ banner.rank }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Banner.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{banner.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{banner.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Banner.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{banner.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{banner.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Banner.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(BannerUpdateInfoForm, {'method':'POST', 'action': path('_admin_banner_editPost', {'id': banner.id}), 'style': 'horizontal'})}}
+                            {{form_row(BannerUpdateInfoForm.alt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(BannerUpdateInfoForm.title, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(BannerUpdateInfoForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Banner.tlabel.editContent'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(BannerUpdateContentForm, {'method':'POST', 'action': path('_admin_banner_editPost', {'id': banner.id}), 'style': 'horizontal'})}}
+                            {{form_row(BannerUpdateContentForm.filename, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(BannerUpdateContentForm)}}
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Banner.tlabel.editRank'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(BannerUpdateRankForm, {'method':'POST', 'action': path('_admin_banner_editPost', {'id': banner.id}), 'style': 'horizontal'})}}
+                            {{form_row(BannerUpdateRankForm.rank, {'label_col': 3, 'widget_col': 3})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(BannerUpdateRankForm)}}
+                        </div>
+                    </div>
+                </div>
+                {% for bannerTrans in banner.i18ns %}
+                <div class="tab-pane fade{%if tabActive==bannerTrans.lang.locale%} in active{%endif%}" id="{{ bannerTrans.lang.locale }}">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'BannerTrans.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'BannerTrans.alt'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{bannerTrans.alt}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'BannerTrans.title'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{bannerTrans.title}}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'BannerTrans.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{bannerTrans.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{bannerTrans.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'BannerTrans.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{bannerTrans.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{bannerTrans.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'BannerTrans.tlabel.editInfo'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set BannerTransUpdateInfoForm_loc = BannerTransUpdateInfoForm[bannerTrans.lang.locale] %}
+                            {{form_start(BannerTransUpdateInfoForm_loc, {'method':'POST', 'action': path('_admin_banner_editPost', {'id': banner.id}), 'style': 'horizontal'})}}
+                            {{form_row(BannerTransUpdateInfoForm_loc.alt, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(BannerTransUpdateInfoForm_loc.title, {'label_col': 3, 'widget_col': 8})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(BannerTransUpdateInfoForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

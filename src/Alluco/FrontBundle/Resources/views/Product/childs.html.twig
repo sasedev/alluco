@@ -1,0 +1,16 @@
+{% if groups | length != 0 %}
+<ul>
+    {% for group in groups %}
+    <li
+    {% if current is not null and current.pageUrlFull starts with group.pageUrlFull %}class="active"{% endif %}
+    >
+        <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+            {{ group.nameTrans }}
+        </a>
+        {% if group.childs | length != 0 %}
+        {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group })) }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

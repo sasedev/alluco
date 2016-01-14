@@ -1,0 +1,102 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/dataTables/dataTables.bootstrap.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5-bs3patch.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/modal/2.2.5.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/jquery.dataTables.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/dataTables/dataTables.bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5manager.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/modal/2.2.5.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    {% if productpics|length != 0 %}
+    $('#productpicList').dataTable({
+        {%if app.request.locale != 'en'%}
+        "language": {"url": '{{asset('bundles/allucores/css/dataTables/i18n/')~app.request.locale~".json"}}'},
+        {% endif %}
+        "columns": [
+            null,
+            null,
+            { "searchable": false, "sortable": false },
+            { "searchable": false, "sortable": false }
+        ]
+    });
+    {% endif %}
+    $('.deleteConfirmProductpic').click(function(e) {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmProductpic').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmProductpic').modal('show');
+    });
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_productpic_list') }}">{{faIco('picture-o')}} &nbsp; {{'Breadcrumb.admin.productpic.list'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_productpic_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'Productpic.tlabel.list'|trans|raw}}</h3>
+            </div>
+            <div class="box-body table-responsive">
+                <table id="productpicList" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Productpic.product.label'|trans|raw }}</th>
+                            <th>{{ 'Productpic.rank.label'|trans|raw }}</th>
+                            <th>{{ 'Productpic.filename.label'|trans|raw }}</th>
+                            <th>{{ 'Action'|trans|raw }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if productpics|length != 0 %}
+                        {% for productpic in productpics %}
+                        <tr>
+                            <td><a href="{{ path('_admin_product_editGet', {'id': productpic.product.id}) }}" target="_blank">{{ productpic.product.name }}</a></td>
+                            <td>{{ productpic.rank }}</td>
+                            <td><a href="{{ asset('res/pics/')~productpic.filename }}" target="_blank"><img class="img-thumbnail" src="{{ (asset('res/pics/')~productpic.filename)| imagine_filter('thumbProductpic')}}" alt="{{ productpic.alt }}" title="{{ productpic.title }}"></a></td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{{path('_admin_productpic_editGet',{'id':productpic.id})}}">{{ glyphIco('edit') }} {{ 'Action.edit'|trans }}</a>
+                                <a class="btn btn-sm btn-danger deleteConfirmProductpic" href="{{path('_admin_productpic_delete',{'id':productpic.id})}}">{{ glyphIco('trash') }} {{ 'Action.delete'|trans }}</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4">{{ 'Productpic.empty'|trans|raw }}</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmProductpic" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Productpic.delete.confirm.title'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">
+        {{'Productpic.delete.confirm.txt'|trans|raw}}
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_Yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_No'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock content%}

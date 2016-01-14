@@ -1,0 +1,156 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code", "nonbreaking save table contextmenu directionality", "paste textcolor", "responsivefilemanager" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            toolbar: "insertfile undo redo | styleselect | fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | responsivefilemanager | preview ",
+            external_filemanager_path:"/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "/filemanager/plugin.min.js"},
+            content_css : "{{asset('bundles/allucores/css/theme/Bootstrap/3.3.4.css')}}, {{asset('bundles/allucores/css/theme/margo/style.css')}}"
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_staticpage_list') }}">{{faIco('code')}} &nbsp; {{'Breadcrumb.admin.staticpage.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_staticpage_editGet', {'id': staticpage.id}) }}">{{glyphIco('edit')}} &nbsp; {{'Breadcrumb.admin.staticpage.edit'|trans({'%staticpage%': staticpage.pageTitle})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_staticpage_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+            {%if is_granted('ROLE_SUPERSUPERADMIN')%}
+            <a href="{{ path('_admin_staticpage_addGet') }}" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'Action.add'|trans }}</a>
+            {% endif %}
+        </div>
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li {%if tabActive==1%} class="active"{%endif%}><a href="#overview" data-toggle="tab">{{'Staticpage.tab.overview'|trans|raw}}</a></li>
+                <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Staticpage.tab.edit'|trans|raw}}</a></li>
+                {% for staticpageTrans in staticpage.i18ns %}
+                <li {%if tabActive==staticpageTrans.lang.locale%} class="active"{%endif%}><a href="#{{ staticpageTrans.lang.locale }}" data-toggle="tab">{{'Staticpage.tab.trans'|trans({'%lang%': staticpageTrans.lang.name})|raw}}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="overview">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'Staticpage.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'Staticpage.pageUrl'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpage.pageUrl}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpage.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpage.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpage.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpage.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpage.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpage.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpage.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{staticpage.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'Staticpage.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpage.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{staticpage.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'Staticpage.tlabel.edit'|trans}}</h3></div>
+                        <div class="box-body">
+                            {{form_start(StaticpageUpdateForm, {'method':'POST', 'action': path('_admin_staticpage_editPost', {'id': staticpage.id}), 'style': 'horizontal'})}}
+                            {{form_row(StaticpageUpdateForm.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageUpdateForm.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageUpdateForm.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageUpdateForm.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageUpdateForm.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageUpdateForm.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(StaticpageUpdateForm)}}
+                        </div>
+                    </div>
+                </div>
+                {% for staticpageTrans in staticpage.i18ns %}
+                <div class="tab-pane fade{%if tabActive==staticpageTrans.lang.locale%} in active{%endif%}" id="{{ staticpageTrans.lang.locale }}">
+                    <div class="panel box box-primary">
+                        <div class="box-header"><h3 class="box-title">{{'StaticpageTrans.tlabel.overview'|trans}}</h3></div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.metaTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpageTrans.metaTitle}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.metaKeywords'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpageTrans.metaKeywords }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.metaDescription'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpageTrans.metaDescription }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.pageTitle'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpageTrans.pageTitle }}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.breadcrumb'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpageTrans.breadcrumb }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.pageContent'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{ staticpageTrans.pageContent|raw }}&nbsp;</div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.dtCrea'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpageTrans.dtCrea|localeDate('medium')}} {{'_At'|trans}} {{staticpage.dtCrea|localeDate('none', 'short')}}&nbsp;</div>
+                                <div class="col-lg-3 text-right">{{'StaticpageTrans.dtUpdate'|trans|raw}} :</div>
+                                <div class="col-lg-9">{{staticpageTrans.dtUpdate|localeDate('medium')}} {{'_At'|trans}} {{staticpage.dtUpdate|localeDate('none', 'short')}}&nbsp;</div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel box box-danger">
+                        <div class="box-header"><h3 class="box-title">{{'StaticpageTrans.tlabel.edit'|trans}}</h3></div>
+                        <div class="box-body">
+                            {% set StaticpageTransUpdateForm_loc = StaticpageTransUpdateForm[staticpageTrans.lang.locale] %}
+                            {{form_start(StaticpageTransUpdateForm_loc, {'method':'POST', 'action': path('_admin_staticpage_editPost', {'id': staticpage.id}), 'style': 'horizontal'})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                            {{form_row(StaticpageTransUpdateForm_loc.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnEdit'|trans|raw}}</button></div></div>
+                            {{form_end(StaticpageTransUpdateForm_loc)}}
+                            {#
+                            #}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

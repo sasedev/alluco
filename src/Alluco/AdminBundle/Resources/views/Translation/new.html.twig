@@ -1,0 +1,67 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
+{%endblock static_css%}
+{%block end_static_js%} {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/allucores/js/angularjs/1.3.15.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.js') }}"></script>
+{%endblock end_static_js%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_translation_grid') }}">{{faIco('flag')}} &nbsp; {{'Breadcrumb.admin.translation.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_translation_new') }}">{{glyphIco('plus')}} &nbsp; {{'Breadcrumb.admin.translation.add'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_translation_new') }}" role="button" class="btn btn-primary">{{ glyphIco('plus') }} {{ 'translations.new_translation'|trans({}, 'LexikTranslationBundle') }}</a>
+        </div>
+        <div class="box">
+            <div class="box-body">
+{{ form_start(form, {'action': path('_admin_translation_new'), 'method': 'POST', 'attr': {'class': 'form form-vertical'}}) }}
+
+                <div class="form-group">
+                    {{ form_label(form.key) }}
+                    {{ form_widget(form.key, { 'attr': {'class': 'form-control'} }) }}
+                    <span class="text-danger">{{ form_errors(form.key) }}</span>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.domain) }}
+                    {{ form_widget(form.domain, { 'attr': {'class': 'form-control'} }) }}
+                    <span class="text-danger">{{ form_errors(form.domain) }}</span>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.translations) }}
+                </div>
+
+                <div class="form-group">
+                    {% for translation in form.translations %}
+                        {{ form_label(translation) }}
+                        {{ form_widget(translation.content, { 'attr': {'class': 'form-control'} }) }}
+                        <span class="text-danger">{{ form_errors(translation.content) }}</span>
+                        {{ form_widget(translation.locale) }}
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <a href="{{ path('_admin_translation_grid') }}" class="btn btn-link">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        {{ 'translations.back_to_list'|trans({}, 'LexikTranslationBundle') }}
+                    </a>
+
+                    {{ form_widget(form.save, { 'attr': {'id': 'trans-unit-submit', 'name': 'trans-unit-submit', 'class': 'btn btn-primary pull-right'} }) }}
+                    &nbsp; &nbsp; &nbsp;
+                    {{ form_widget(form.save_add, { 'attr': {'id': 'trans-unit-submit-2', 'name': 'trans-unit-submit-2', 'class': 'btn btn-primary pull-right'} }) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}

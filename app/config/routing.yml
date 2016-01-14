@@ -1,0 +1,14 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+alluco_admin:
+    resource: "@AllucoAdminBundle/Resources/config/routing.yml"
+    prefix:   /Admin
+
+alluco_front:
+    resource: "@AllucoFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+alluco_security:
+    resource: "@AllucoSecurityBundle/Resources/config/routing.yml"
+    prefix:   /

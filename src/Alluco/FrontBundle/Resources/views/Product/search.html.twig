@@ -1,0 +1,46 @@
+{% extends 'AllucoFrontBundle::template.html.twig' %}
+{% block banner %}{% endblock banner %}
+{%block breadcrumbcnt%}
+<li><a href="{{ path('_front_homepage') }}">{{ faIco('home') }} &nbsp; {{ root.breadcrumbTrans }}</a></li>
+<li><a href="{{ path('_front_productgroups') }}"> {{ rootprods.breadcrumbTrans }}</a></li>
+<li class="active"><a href="{{app.request.uri}}">{{ faIco('search') }} {{ staticpage.breadcrumbTrans }} : {{ q }}</a></li>
+{%endblock breadcrumbcnt%}
+{% block sidebar %}
+<div class="widget widget-categories">
+    <h4>{{ 'menu.left.products'|trans }}<span class="head-line"></span></h4>
+    {% if groups | length != 0 %}
+    <ul id="expList">
+        {% for group in groups %}
+        <li>
+            <a href="{{ path('_front_products', {'group': group.pageUrlFull}) }}">
+                {{ group.nameTrans }}
+            </a>
+            {% if group.childs | length != 0 %}
+                {{ render(controller('AllucoFrontBundle:Product:widgetChilds', { 'parent': group })) }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{{ parent() }}
+{% endblock sidebar %}
+{%block content%}
+<div class="row">
+{% for prod in searchProds %}
+<div class="col-4 col-xs-12 col-md-4 service-boxed">
+{% if prod.thumb is not empty %}
+<br>
+<h4><a href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}">{{ prod.nameTrans }}</a></h4>
+<br>
+<a href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}"><img class="img" src="{{ (asset('res/prods/')~prod.thumb)| imagine_filter('thumbProd')}}" alt="{{ prod.thumbAltTrans }}" title="{{ prod.thumbTitleTrans }}"></a>
+{% else %}
+<br>
+<br>
+<p><a class="btn-system btn-small border-btn" href="{{ path('_front_products', {'group': prod.pageUrlFull}) }}">{{ prod.nameTrans }}</a></p>
+{% endif %}
+</div>
+{% endfor %}
+<div class="text-center">{{knp_pagination_render(searchProds)}}</div>
+</div>
+{%endblock content%}

@@ -1,0 +1,5 @@
+{% block plain_text_widget %}
+    <div {{ block('container_attributes') }}>
+        <div {{ block('widget_attributes') }}>{{ value|escape }}</div>
+    </div>
+{% endblock plain_text_widget %}

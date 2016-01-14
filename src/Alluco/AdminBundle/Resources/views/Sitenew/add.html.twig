@@ -1,0 +1,75 @@
+{% extends 'AllucoAdminBundle::template.html.twig' %}
+{%block static_css%} {{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{asset('bundles/allucores/css/bootstrap/fileinput/2.4.0.css')}}">
+{%endblock static_css%}
+{%block end_static_js%}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('bundles/allucores/js/tinymce/jquery.tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/allucores/js/bootstrap/fileinput/2.4.0.js')}}"></script>
+{%endblock end_static_js%}
+{%block end2_dynamic_jstxt%}
+$(function() {
+    $('textarea.wysiwyg').each(function() {
+        var options = {
+            script_url : '{{asset('bundles/allucores/js/tinymce/tinymce.min.js')}}',
+            theme: "modern",
+            plugins: [ "advlist autolink lists link image charmap preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code", "nonbreaking save table contextmenu directionality", "paste textcolor", "responsivefilemanager" ],
+            {%if app.request.locale != 'en'%}
+            language : '{{ app.request.locale }}',
+            {% endif %}
+            toolbar: "insertfile undo redo | styleselect | fontselect fontsizeselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | responsivefilemanager | preview ",
+            external_filemanager_path:"/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "/filemanager/plugin.min.js"},
+            content_css : "{{asset('bundles/allucores/css/theme/Bootstrap/3.3.4.css')}}, {{asset('bundles/allucores/css/theme/margo/style.css')}}"
+        };
+        $this = $(this);
+        if($this.is('[required]')) {
+            options.oninit = function(editor) {
+                editor.on('change', function(e) {
+                    editor.save();
+                });
+            }
+        }
+        $this.tinymce(options);
+    });
+
+    $("#SitenewNewForm_thumb").fileinput({'showUpload':false, browseClass: "btn btn-success", browseLabel: " Images", browseIcon: '{{faIco('folder-open')}}', removeClass: "btn btn-danger", removeLabel: "Delete", removeIcon: '{{glyphIco('trash')}}'});
+});
+{%endblock end2_dynamic_jstxt%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{ path('_admin_homepage') }}">{{ faIco('dashboard') }} &nbsp; {{'Breadcrumb.admin.home'|trans|raw}}</a></li>
+    <li><a href="{{ path('_admin_sitenew_list') }}">{{faIco('newspaper-o')}} &nbsp; {{'Breadcrumb.admin.sitenew.list'|trans|raw}}</a></li>
+    <li class="active"><a href="{{ path('_admin_sitenew_addGet') }}">{{glyphIco('plus')}} &nbsp; {{'Breadcrumb.admin.sitenew.add'|trans|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm text-right">
+            <a href="{{ path('_admin_sitenew_list') }}" class="btn btn-primary">{{ faIco('th') }} {{ 'Action.list'|trans }}</a>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">{{ 'Sitenew.tlabel.add'|trans|raw}}</h3>
+            </div>
+            <div class="box-body">
+                {{form_start(SitenewNewForm, {'method':'POST', 'action': path('_admin_sitenew_addPost'), 'style': 'horizontal'})}}
+                {{form_row(SitenewNewForm.pageUrl, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.metaTitle, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.metaKeywords, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.metaDescription, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.pageTitle, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.breadcrumb, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.pageContent, {'label_col': 3, 'widget_col': 8, 'attr': {'class': 'wysiwyg'} })}}
+                {{form_row(SitenewNewForm.thumb, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.thumbAlt, {'label_col': 3, 'widget_col': 8})}}
+                {{form_row(SitenewNewForm.thumbTitle, {'label_col': 3, 'widget_col': 8})}}
+                <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{glyphIco('save')}} {{'Action.btnAdd'|trans|raw}}</button></div></div>
+                {{form_end(SitenewNewForm)}}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}
