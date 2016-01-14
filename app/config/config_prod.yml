@@ -38,6 +38,3 @@ monolog:
 #            level: debug
 #        console:
 #            type:  console
-
-swiftmailer:
-    delivery_address: seif@sasedev.net
